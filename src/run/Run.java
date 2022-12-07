@@ -1,19 +1,10 @@
 package run;
 
 import java.awt.EventQueue;
-import java.util.ArrayList;
 
-import javax.swing.JFrame;
-
+import clase.AgenciaEmpleadora;
 import util.MetodosUtiles;
 import visual.Login;
-import clase.AgenciaEmpleadora;
-import clase.Candidato;
-import clase.Documento;
-import clase.Empresa;
-import clase.Oferta;
-import clase.Rama;
-import clase.Sector;
 
 public class Run {
 	public static void main(String[] args) {

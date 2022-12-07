@@ -4,7 +4,6 @@ public class Documento {
 	private String documento;
 	private Boolean obligatorio;
 	public Documento(String documento, Boolean obligatorio) {
-		super();
 		this.documento = documento;
 		this.obligatorio = obligatorio;
 	}

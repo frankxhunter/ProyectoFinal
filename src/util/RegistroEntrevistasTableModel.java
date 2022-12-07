@@ -15,7 +15,7 @@ public class RegistroEntrevistasTableModel extends DefaultTableModel{
 	public void refresh(ArrayList<Entrevista> arrayList){
 		this.setRowCount(0);
 		for (Entrevista x : arrayList) 
-			this.addRow(new Object[]{x.getFecha(),x.getOferta().getEmpresaPerteneciente(),x.getOferta().getNumeroId(),
+			this.addRow(new Object[]{x.getFecha(),x.getOferta().getEmpresaPerteneciente().getNombre(),x.getOferta().getNumeroId(),
 					x.getOferta().getRama().getNombre()});
 	}
 

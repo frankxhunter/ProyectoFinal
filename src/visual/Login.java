@@ -1,32 +1,34 @@
 package visual;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JPasswordField;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.UIManager;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 public class Login extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private JPanel panel;
 	private JPanel panel_1;
@@ -76,6 +78,11 @@ public class Login extends JFrame{
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel(){
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
 				public void paintComponent(Graphics g){
 					Image img= Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/Imagen/imagenp.png"));
 					g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
@@ -174,6 +181,7 @@ public class Login extends JFrame{
 	private JPasswordField getPasswordF() {
 		if (passwordF == null) {
 			passwordF = new JPasswordField();
+			passwordF.setEchoChar('*');
 			passwordF.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyReleased(KeyEvent e) {
@@ -212,8 +220,8 @@ public class Login extends JFrame{
 	}
 	
 	public void siguiente(){
-	    VisualAgenciaEmpleadora v = new VisualAgenciaEmpleadora();
-	    v.frmSistemaDeGestion.setVisible(true);
+	    VisualAgencia v = new VisualAgencia();
+	    v.setVisible(true);
 	    dispose();
 	}
 	private JButton getBtnX() {
@@ -287,6 +295,7 @@ public class Login extends JFrame{
 	
 	public void validaeUyC(){
 		String usuario = Tusuario.getText();
+		@SuppressWarnings("deprecation")
 		String password = passwordF.getText();
 		boolean valido = validaUsuario(usuario);
 		boolean result = validaContrasenna(password);
@@ -312,10 +321,10 @@ public class Login extends JFrame{
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
-			btnNewButton.setPressedIcon(new ImageIcon("C:\\UNIVERSIDAD\\DPOO\\DPOO\\Invisible_32px.png"));
+			btnNewButton.setPressedIcon(new ImageIcon("C:\\UNIVERSIDAD\\DPOO\\DPOO\\AgenciaEmpleado_ProyectoFinal\\Invisible_32px.png"));
 			btnNewButton.setBounds(275, 17, 33, 23);
 			btnNewButton.setBackground(new Color(237, 234, 229));
-			btnNewButton.setIcon(new ImageIcon("C:\\UNIVERSIDAD\\DPOO\\DPOO\\Eye_32px.png"));
+			btnNewButton.setIcon(new ImageIcon("C:\\UNIVERSIDAD\\DPOO\\DPOO\\AgenciaEmpleado_ProyectoFinal\\Eye_32px.png"));
 			btnNewButton.setBorder(null);
 			btnNewButton.addMouseListener(new MouseAdapter() {
 				@Override

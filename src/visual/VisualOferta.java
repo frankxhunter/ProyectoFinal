@@ -2,44 +2,45 @@ package visual;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import util.MetodosUtiles;
 import util.OfertaTableModel;
-
-import javax.swing.JTextField;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.DefaultComboBoxModel;
-
 import clase.AgenciaEmpleadora;
 import clase.Empresa;
 import clase.Oferta;
 import clase.Rama;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
-import java.awt.Font;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
 public class VisualOferta extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	private JLabel lblSeleccioneLaEmpresa;
-	private JComboBox coEmpresa;
+	private JComboBox<String> coEmpresa;
 	private JPanel panel_1;
 	private JScrollPane scrollPane;
 	private JButton btnCancelar;
@@ -57,7 +58,7 @@ public class VisualOferta extends JDialog {
 	private JButton btnEliminar;
 	private Empresa empresa;
 	private JLabel lblRama;
-	private JComboBox coRama;
+	private JComboBox<String> coRama;
 	private JButton button;
 
 	/**
@@ -110,16 +111,16 @@ public class VisualOferta extends JDialog {
 		}
 		return lblSeleccioneLaEmpresa;
 	}
-	private JComboBox getCoEmpresa() {
+	private JComboBox<String> getCoEmpresa() {
 		if (coEmpresa == null) {
-			coEmpresa = new JComboBox();
+			coEmpresa = new JComboBox<String>();
 			coEmpresa.addItemListener(new ItemListener() {
 				public void itemStateChanged(ItemEvent e) {
 					empresa= AgenciaEmpleadora.getInstancia().obtenerEmpresa(coEmpresa.getSelectedItem().toString());
 					tableModel.refresh(empresa.getListaOfertas());
 				}
 			});
-			coEmpresa.setModel(new DefaultComboBoxModel(obtenerEmpresas()));
+			coEmpresa.setModel(new DefaultComboBoxModel<String>(obtenerEmpresas()));
 			coEmpresa.setBounds(189, 20, 131, 20);
 		}
 		return coEmpresa;
@@ -323,10 +324,10 @@ public class VisualOferta extends JDialog {
 		}
 		return lblRama;
 	}
-	private JComboBox getCoRama() {
+	private JComboBox<String> getCoRama() {
 		if (coRama == null) {
-			coRama = new JComboBox();
-			coRama.setModel(new DefaultComboBoxModel(crearComboBox()));
+			coRama = new JComboBox<String>();
+			coRama.setModel(new DefaultComboBoxModel<String>(crearComboBox()));
 			coRama.setBounds(114, 159, 160, 20);
 		}
 		return coRama;

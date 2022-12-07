@@ -1,50 +1,42 @@
 package visual;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.LineBorder;
-
 import java.awt.Color;
-import java.awt.CardLayout;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
-import util.EmpresaTableModel;
-import util.MetodosUtiles;
-import util.PersonaTableModel;
-
-import java.awt.event.ActionListener;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
-
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
-
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.Font;
-
-import javax.swing.ImageIcon;
-
-import clase.*;
-
-import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+import util.EmpresaTableModel;
+import util.MetodosUtiles;
+import clase.AgenciaEmpleadora;
+import clase.Empresa;
+import clase.Sector;
+
 public class VisualEmpresa extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JPanel panel;
 	private JScrollPane scrollPane;
@@ -58,7 +50,7 @@ public class VisualEmpresa extends JDialog {
 	private JLabel label_2;
 	private JLabel label_3;
 	private JTextField txTelefono;
-	private JComboBox coSector;
+	private JComboBox<String> coSector;
 	private JButton btAgregar;
 	private JButton btEliminar;
 	private JButton btModificar;
@@ -231,10 +223,10 @@ public class VisualEmpresa extends JDialog {
 		}
 		return txTelefono;
 	}
-	private JComboBox getCoSector() {
+	private JComboBox<String> getCoSector() {
 		if (coSector == null) {
-			coSector = new JComboBox();
-			coSector.setModel(new DefaultComboBoxModel(crearComboBox()));
+			coSector = new JComboBox<String>();
+			coSector.setModel(new DefaultComboBoxModel<String>(crearComboBox()));
 			coSector.setBounds(425, 64, 212, 20);
 		}
 		return coSector;

@@ -3,17 +3,19 @@ package visual;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -29,10 +31,13 @@ import util.MetodosUtiles;
 import clase.AgenciaEmpleadora;
 import clase.Candidato;
 import clase.Rama;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import excepcionesPropias.YaExisteExceptions;
 
 public class VisualModificaCandidato extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private DocumentosCandidatoTableModel tableModel=new DocumentosCandidatoTableModel();
 	private Candidato candidato;
 	private int position;
@@ -43,7 +48,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JLabel label_1;
 	private JTextField txCarnet;
 	private JLabel label_2;
-	private JComboBox coSexo;
+	private JComboBox<String> coSexo;
 	private JLabel label_3;
 	private JTextField txDireccion;
 	private JTextField txTelefono;
@@ -58,7 +63,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JLabel label_8;
 	private JButton btnAceptar;
 	private JButton btnCancelar;
-	private DefaultComboBoxModel defaultComboBoxModel;
+	private DefaultComboBoxModel<String> defaultComboBoxModel;
 	private JPanel panel_2;
 	private JPanel panel_3;
 	private JScrollPane scrollPane;
@@ -206,14 +211,14 @@ public class VisualModificaCandidato extends JDialog {
 		}
 		return label_2;
 	}
-	private JComboBox getCoSexo() {
+	private JComboBox<String> getCoSexo() {
 		if (coSexo == null) {
-			coSexo = new JComboBox();
+			coSexo = new JComboBox<String>();
 			coSexo.setBounds(150, 124, 86, 20);
 			Object[] sexos = new Object[2];
 			sexos[0]="Masculino";
 			sexos[1]="Femenino";
-			this.defaultComboBoxModel=new DefaultComboBoxModel(sexos);
+			this.defaultComboBoxModel=new DefaultComboBoxModel<String>((String[]) sexos);
 			this.coSexo.setModel(defaultComboBoxModel);
 		}
 		return coSexo;
@@ -274,7 +279,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JComboBox<String> getCoRama() {
 		if (coRama == null) {
 			coRama = new JComboBox<String>();
-			coRama.setModel(new DefaultComboBoxModel(crearComboBox()));
+			coRama.setModel(new DefaultComboBoxModel<String>(crearComboBox()));
 			coRama.setBounds(150, 220, 86, 20);
 		}
 		return coRama;
@@ -467,10 +472,14 @@ public class VisualModificaCandidato extends JDialog {
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(txDocumento.getText().trim().length()>0){
+						try{
 						candidato.addDocumento(txDocumento.getText().trim());
 						tableModel.refresh(candidato.getDocumentos());
 						txDocumento.setText("");
 						btnEliminar.setEnabled(false);
+						}catch(YaExisteExceptions y){
+						JOptionPane.showMessageDialog(null, y.getMessage());
+						}
 					}
 					
 				}

@@ -1,8 +1,7 @@
 package clase;
 
-import java.util.Collection;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Empresa {
 	private String nombre;
@@ -103,19 +102,18 @@ public class Empresa {
 					i++;
 		return salida;
 	}
-	public void addOferta(String numeroId, float salario, int cantCandidatos, Rama rama){
-		listaOfertas.add(new Oferta(numeroId, salario, cantCandidatos, rama,this));
+	public void addOferta(Oferta oferta){
+		listaOfertas.add(oferta);
 	}
-	public void addEntrevista(Date date, Candidato candidato,
-			Oferta oferta) {
-		listaEntrevistas.add(new Entrevista(date,candidato,oferta));
+	public void addEntrevista(Entrevista entrevista) {
+		listaEntrevistas.add(entrevista);
 	}
+	@SuppressWarnings("deprecation")
 	public ArrayList<Entrevista> obtenerEntrevista(int year, int month) {
 		ArrayList<Entrevista> out=new ArrayList<Entrevista>();
 		for(Entrevista x: listaEntrevistas)
-			if(x.getFecha().getYear()==year && x.getFecha().getMonth()==month)
+			if(x.getFecha().getYear()==year-1900 && x.getFecha().getMonth()==month-1)
 				out.add(x);
 		return out;
 	}
-
 }

@@ -2,6 +2,8 @@ package clase;
 
 import java.util.ArrayList;
 
+import excepcionesPropias.YaExisteExceptions;
+
 public class Candidato {
 	private String carnet;
 	private String nombre;
@@ -30,24 +32,24 @@ public class Candidato {
 		documentos = new ArrayList<String>();
 	}
 
-public Candidato() {
-	documentos = new ArrayList<String>();
+	public Candidato() {
+		documentos = new ArrayList<String>();
 	}
 
 	//	public Candidato(String carnet, String nombre, String sexo,
-//			String direccion, String telefono, String nivelEscolaridad,
-//			String especialidad, int yearsExp) {
-//		setCarnet(carnet);
-//		setNombre(nombre);
-//		setSexo(sexo);
-//		setDireccion(direccion);
-//		setTelefono(telefono);
-//		setNivelEscolaridad(nivelEscolaridad);
-//		setEspecialidad(especialidad);
-//		setYearsExp(yearsExp);
-//		setYearsExp(yearsExp);
-//		setRama(rama);
-//	}
+	//			String direccion, String telefono, String nivelEscolaridad,
+	//			String especialidad, int yearsExp) {
+	//		setCarnet(carnet);
+	//		setNombre(nombre);
+	//		setSexo(sexo);
+	//		setDireccion(direccion);
+	//		setTelefono(telefono);
+	//		setNivelEscolaridad(nivelEscolaridad);
+	//		setEspecialidad(especialidad);
+	//		setYearsExp(yearsExp);
+	//		setYearsExp(yearsExp);
+	//		setRama(rama);
+	//	}
 	public String getCarnet() {
 		return carnet;
 	}
@@ -146,21 +148,21 @@ public Candidato() {
 		boolean salida=false;
 		if(rama.getNombre()==oferta.getRama().getNombre()){
 			salida=true;
-//		int i=0;
-//		while(salida && i<oferta.getRama().getListaCondiciones().size()){
-//			int j=0;
-//			boolean condicion=false;
-//			while(!condicion && j<documentos.size()){
-//				if(oferta.getRama().getListaCondiciones().get(i).equals(documentos.get(j)))
-//					condicion=true;
-//				else
-//					j++;
-//			}
-//			if(j==documentos.size())
-//				salida=false;
-//			else
-//				i++;
-//		}
+			//		int i=0;
+			//		while(salida && i<oferta.getRama().getListaCondiciones().size()){
+			//			int j=0;
+			//			boolean condicion=false;
+			//			while(!condicion && j<documentos.size()){
+			//				if(oferta.getRama().getListaCondiciones().get(i).equals(documentos.get(j)))
+			//					condicion=true;
+			//				else
+			//					j++;
+			//			}
+			//			if(j==documentos.size())
+			//				salida=false;
+			//			else
+			//				i++;
+			//		}
 		}
 		return salida;
 	}
@@ -172,8 +174,18 @@ public Candidato() {
 					salida.add(x);
 		return salida;
 	}
-	public void addDocumento(String documento){
+	public void addDocumento(String documento) throws YaExisteExceptions{
+		boolean razon=true;
+		int i=0;
+		while(i<documentos.size() && razon)
+			if(documentos.get(i).equalsIgnoreCase(documento))
+				razon=false;
+			else 
+				i++;
+		if(razon)
 		documentos.add(documento);
+		else
+		throw new YaExisteExceptions("Ya existe");
 	}
 
 

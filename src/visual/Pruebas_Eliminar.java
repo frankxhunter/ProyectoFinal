@@ -1,30 +1,19 @@
 package visual;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import java.awt.Color;
-
-import javax.swing.JTextField;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.JScrollPane;
-
-import java.awt.CardLayout;
 import java.util.Date;
 
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JCalendar;
-import javax.swing.DebugGraphics;
 
 public class Pruebas_Eliminar extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	private JCalendar calendar;
 

@@ -1,52 +1,37 @@
 package visual;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
+import util.CandidatoEntrevistaTableModel;
+import util.RegistroEntrevistasTableModel;
 import clase.AgenciaEmpleadora;
 import clase.Entrevista;
 
 import com.toedter.calendar.JMonthChooser;
-
-import javax.swing.JSlider;
-import javax.swing.JSeparator;
-import javax.swing.JProgressBar;
-import javax.swing.JTree;
-import javax.swing.JLabel;
-
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-
-import javax.swing.border.TitledBorder;
-import javax.swing.border.LineBorder;
-
-import util.CandidatoEntrevistaTableModel;
-import util.MetodosUtiles;
-import util.RegistroEntrevistasTableModel;
-
-import java.awt.Color;
-
 import com.toedter.calendar.JYearChooser;
 
-import javax.swing.JScrollPane;
-
-import java.awt.CardLayout;
-
-import javax.swing.JTable;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.JTextField;
-
 public class VisualCalendario extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private RegistroEntrevistasTableModel tableModel=new RegistroEntrevistasTableModel();
 	private CandidatoEntrevistaTableModel tableModel2= new CandidatoEntrevistaTableModel();
 	private ArrayList<Entrevista> listaEntrevistas;
@@ -167,9 +152,9 @@ public class VisualCalendario extends JDialog {
 			btnActualizar = new JButton("Actualizar");
 			btnActualizar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-//					listaEntrevistas=AgenciaEmpleadora.getInstancia().obtenerEntrevista(yearChooser.getYear(), monthChooser.getMonth());
-					Collections.sort(AgenciaEmpleadora.getInstancia().getListaEmpresas().get(0).getListaEntrevistas());
-					tableModel.refresh(AgenciaEmpleadora.getInstancia().getListaEmpresas().get(0).getListaEntrevistas());
+					listaEntrevistas=AgenciaEmpleadora.getInstancia().obtenerEntrevista(yearChooser.getYear(),Integer.parseInt( textField.getText()));
+					Collections.sort(listaEntrevistas);
+					tableModel.refresh(listaEntrevistas);
 					tableModel2.setRowCount(0);
 				}
 			});

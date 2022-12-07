@@ -14,6 +14,10 @@ public class Especialidad {
 		nombre=null;
 		listaDocumentos= new ArrayList<Documento>();
 	}
+	public Especialidad(String string) {
+		setNombre(string);
+		listaDocumentos= new ArrayList<Documento>();
+	}
 	public void setListaDocumentos(ArrayList<Documento> listaDocumentos) {
 		this.listaDocumentos = listaDocumentos;
 	}

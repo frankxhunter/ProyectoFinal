@@ -1,7 +1,7 @@
 package clase;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Entrevista implements Comparable<Entrevista> {
 	private Date fecha; //Dia de la entrevista
@@ -37,12 +37,13 @@ public class Entrevista implements Comparable<Entrevista> {
 	public void setListaCandidatos(ArrayList<Candidato> listaCandidatos) {
 		this.listaCandidatos = listaCandidatos;
 	}
+	@SuppressWarnings("deprecation")
 	public int compareTo(Entrevista o) {
 		int out=0;
 		if(o.getFecha().getDate()>fecha.getDate())
-			out=1;
-		else if(o.getFecha().getDate()<fecha.getDate())
 			out=-1;
+		else if(o.getFecha().getDate()<fecha.getDate())
+			out=1;
 		return out;
 	}
 	

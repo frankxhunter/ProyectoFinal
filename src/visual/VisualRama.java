@@ -24,6 +24,10 @@ import clase.Rama;
 
 public class VisualRama extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private EspecialidadTableModel tableModel;
 	private JPanel panel;

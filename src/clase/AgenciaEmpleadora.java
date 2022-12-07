@@ -121,22 +121,23 @@ public class AgenciaEmpleadora {
 		}
 		return salida;
 	}
-	public void addEmpresa(String nombre, String direccion, String telefono, Sector sector){
-		listaEmpresas.add(new Empresa(nombre, direccion, telefono, sector));
+	public void addEmpresa(Empresa empresa){
+		listaEmpresas.add(empresa);
 	}
-	public void addSector(String nombre, ArrayList<Documento> listaCondiciones){
-		listaEspecialidades.add(new Sector(nombre, listaCondiciones));
+	public void addSector(Sector sector){
+		listaEspecialidades.add(sector);
 	}
-	public void addRama(String nombre, ArrayList<Documento> listaCondiciones){
-		listaEspecialidades.add(new Rama(nombre, listaCondiciones));
+	public void addRama(Rama rama){
+		listaEspecialidades.add(rama);
 	}
 	public void addCandidato(Candidato candidato){
 		listaCandidatos.add(candidato);
 	}
 	public ArrayList<Entrevista> obtenerEntrevista(int year, int month){
 		ArrayList<Entrevista> out=new ArrayList<Entrevista>();
-		for(Empresa x:listaEmpresas)
-			out.addAll(x.obtenerEntrevista(year,month));
+		for(Empresa x: listaEmpresas)
+			out.addAll(x.getListaEntrevistas());
+//			out.addAll(x.obtenerEntrevista(year, month));
 		return out;
 	}
 

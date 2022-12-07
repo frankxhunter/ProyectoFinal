@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -26,12 +25,15 @@ import clase.Oferta;
 import clase.Rama;
 
 public class VisualCandidato extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JPanel panel_1;
 	private JScrollPane scrollPane;
 	private JButton btModificar;
 	private JButton btEliminar;
-	private DefaultComboBoxModel defaultComboBoxModel;
 	private PersonaTableModel tableModel=new PersonaTableModel() ;
 	private OfertaCandidatoTableModel tableModel2=new OfertaCandidatoTableModel();
 	private JPanel panel_2;
@@ -158,7 +160,6 @@ public class VisualCandidato extends JDialog {
 			table.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent arg0) {
-					int pos = table.getSelectedRow();
 					btEliminar.setEnabled(true);
 					btModificar.setEnabled(true);
 					tableModel2.refresh(AgenciaEmpleadora.getInstancia().getListaCandidatos().get

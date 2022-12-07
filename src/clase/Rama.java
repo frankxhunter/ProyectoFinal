@@ -10,5 +10,8 @@ public class Rama extends Especialidad{
 	public Rama(){
 		super();
 	}
+	public Rama(String string) {
+		super(string);
+	}
 
 }

@@ -23,9 +23,15 @@ import javax.swing.border.TitledBorder;
 
 import util.DocumentosTableModel;
 import util.MetodosUtiles;
-import clase.*;
+import clase.AgenciaEmpleadora;
+import clase.Documento;
+import clase.Rama;
 
 public class ModificarRama extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Rama rama;
 	private int posicion;
 	private JPanel panel;
