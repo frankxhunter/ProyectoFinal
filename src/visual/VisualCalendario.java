@@ -152,8 +152,10 @@ public class VisualCalendario extends JDialog {
 			btnActualizar = new JButton("Actualizar");
 			btnActualizar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					listaEntrevistas=AgenciaEmpleadora.getInstancia().obtenerEntrevista(yearChooser.getYear(),Integer.parseInt( textField.getText()));
-					Collections.sort(listaEntrevistas);
+//					listaEntrevistas=AgenciaEmpleadora.getInstancia().obtenerEntrevista(yearChooser.getYear(),Integer.parseInt( textField.getText()));
+					listaEntrevistas=AgenciaEmpleadora.getInstancia().obtenerEntrevista(0,0);
+					
+//					Collections.sort(listaEntrevistas);
 					tableModel.refresh(listaEntrevistas);
 					tableModel2.setRowCount(0);
 				}

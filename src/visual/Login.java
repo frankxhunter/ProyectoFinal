@@ -1,7 +1,6 @@
 package visual;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -15,6 +14,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,13 +23,8 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-public class Login extends JFrame{
-
-	/**
-	 * 
-	 */
+public class Login extends JDialog {
 	private static final long serialVersionUID = 1L;
-	private JFrame frame;
 	private JPanel panel;
 	private JPanel panel_1;
 	private JTextField Tusuario;
@@ -47,32 +42,28 @@ public class Login extends JFrame{
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Login window = new Login();
-					window.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		try {
+			Login dialog = new Login();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
-	 * Create the application.
+	 * Create the dialog.
 	 */
 	public Login() {
 		setUndecorated(true);
-		frame = new JFrame();
-		frame.setUndecorated(true);
-		frame.setBounds(100, 100, 961, 600);
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getPanel());
-		frame.getContentPane().add(getPanel_1());
-		frame.setVisible(true);	
+		 setUndecorated(true);
+		 setBounds(100, 100, 961, 600);
+		 setLocationRelativeTo(null);
+		 setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		 getContentPane().setLayout(null);
+		 getContentPane().add(getPanel());
+		 getContentPane().add(getPanel_1());
+		 setVisible(true);	
 		Tusuario.requestFocusInWindow();
 	}
 	private JPanel getPanel() {
@@ -220,9 +211,11 @@ public class Login extends JFrame{
 	}
 	
 	public void siguiente(){
+		dispose();
 	    VisualAgencia v = new VisualAgencia();
+	    
 	    v.setVisible(true);
-	    dispose();
+	    
 	}
 	private JButton getBtnX() {
 		if (btnX == null) {
@@ -340,5 +333,5 @@ public class Login extends JFrame{
 		}
 		return btnNewButton;
 	}
-}
 
+}

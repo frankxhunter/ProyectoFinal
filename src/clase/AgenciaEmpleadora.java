@@ -136,8 +136,10 @@ public class AgenciaEmpleadora {
 	public ArrayList<Entrevista> obtenerEntrevista(int year, int month){
 		ArrayList<Entrevista> out=new ArrayList<Entrevista>();
 		for(Empresa x: listaEmpresas)
-			out.addAll(x.getListaEntrevistas());
-//			out.addAll(x.obtenerEntrevista(year, month));
+			for(Entrevista e: x.getListaEntrevistas())
+//				if(e.getFecha().getYear()==year )
+//					if(e.getFecha().getMonth()==month)
+						out.add(e);
 		return out;
 	}
 

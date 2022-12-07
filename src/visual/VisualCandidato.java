@@ -61,12 +61,6 @@ public class VisualCandidato extends JDialog {
 	 * Create the dialog.
 	 */
 	public VisualCandidato() {
-		/*AgenciaEmpleadora.CrearInstancia("Hola");
-		AgenciaEmpleadora.getInstancia().addCandidato(new Candidato("2342", "2342", "2342", "2342", "2342", "2342", "2342", 12));
-		AgenciaEmpleadora.getInstancia().addCandidato(new Candidato("1", "2342", "2342", "2342", "2342", "2342", "2342", 12));
-		AgenciaEmpleadora.getInstancia().addCandidato(new Candidato("2", "2342", "2342", "2342", "2342", "2342", "2342", 12));
-		AgenciaEmpleadora.getInstancia().addCandidato(new Candidato("3", "2342", "2342", "2342", "2342", "2342", "2342", 12));
-		*/
 		setBounds(100, 100, 1067, 463);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(0, 0, 0));
@@ -186,11 +180,10 @@ public class VisualCandidato extends JDialog {
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					VisualModificaCandidato x=new VisualModificaCandidato(-1);
-					x.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dispose();
-					x.setLocationRelativeTo(null);
-					x.setVisible(true);	
 					x.setModal(true);
+					x.setLocationRelativeTo(null);
+					x.setVisible(true);
 				}
 			});
 			btnAgregar.setBounds(347, 349, 89, 23);

@@ -12,9 +12,9 @@ public class RegistroEntrevistasTableModel extends DefaultTableModel{
 		String[] columnNames = {"Fecha","Empresa","Oferta ID","Rama"};
 		this.setColumnIdentifiers(columnNames);
 	}
-	public void refresh(ArrayList<Entrevista> arrayList){
+	public void refresh(ArrayList<Entrevista> list){
 		this.setRowCount(0);
-		for (Entrevista x : arrayList) 
+		for (Entrevista x : list) 
 			this.addRow(new Object[]{x.getFecha(),x.getOferta().getEmpresaPerteneciente().getNombre(),x.getOferta().getNumeroId(),
 					x.getOferta().getRama().getNombre()});
 	}

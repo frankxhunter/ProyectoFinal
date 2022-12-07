@@ -48,12 +48,12 @@ public class VisualModificaCandidato extends JDialog {
 	private JLabel label_1;
 	private JTextField txCarnet;
 	private JLabel label_2;
-	private JComboBox<String> coSexo;
+	private JComboBox  coSexo;
 	private JLabel label_3;
 	private JTextField txDireccion;
 	private JTextField txTelefono;
 	private JLabel label_4;
-	private JComboBox<String> coRama;
+	private JComboBox  coRama;
 	private JLabel label_5;
 	private JSpinner spAnnos;
 	private JTextField txEspecialidad;
@@ -63,7 +63,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JLabel label_8;
 	private JButton btnAceptar;
 	private JButton btnCancelar;
-	private DefaultComboBoxModel<String> defaultComboBoxModel;
+	private DefaultComboBoxModel  defaultComboBoxModel;
 	private JPanel panel_2;
 	private JPanel panel_3;
 	private JScrollPane scrollPane;
@@ -79,7 +79,6 @@ public class VisualModificaCandidato extends JDialog {
 	public static void main(String[] args) {
 		try {
 			VisualModificaCandidato dialog = new VisualModificaCandidato(-1);
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -211,14 +210,14 @@ public class VisualModificaCandidato extends JDialog {
 		}
 		return label_2;
 	}
-	private JComboBox<String> getCoSexo() {
+	private JComboBox  getCoSexo() {
 		if (coSexo == null) {
-			coSexo = new JComboBox<String>();
+			coSexo = new JComboBox();
 			coSexo.setBounds(150, 124, 86, 20);
 			Object[] sexos = new Object[2];
 			sexos[0]="Masculino";
 			sexos[1]="Femenino";
-			this.defaultComboBoxModel=new DefaultComboBoxModel<String>((String[]) sexos);
+			this.defaultComboBoxModel=new DefaultComboBoxModel(sexos);
 			this.coSexo.setModel(defaultComboBoxModel);
 		}
 		return coSexo;
@@ -276,10 +275,10 @@ public class VisualModificaCandidato extends JDialog {
 		}
 		return label_4;
 	}
-	private JComboBox<String> getCoRama() {
+	private JComboBox  getCoRama() {
 		if (coRama == null) {
-			coRama = new JComboBox<String>();
-			coRama.setModel(new DefaultComboBoxModel<String>(crearComboBox()));
+			coRama = new JComboBox ();
+			coRama.setModel(new DefaultComboBoxModel (crearComboBox()));
 			coRama.setBounds(150, 220, 86, 20);
 		}
 		return coRama;
