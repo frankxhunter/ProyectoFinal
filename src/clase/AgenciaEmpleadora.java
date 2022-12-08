@@ -181,5 +181,12 @@ public class AgenciaEmpleadora {
 			out.addAll(x.obtenerEntrevista(year, month));
 		return out;
 	}
+	public ArrayList<Candidato> devolverCandidatoSegunOferta(Oferta oferta){
+		ArrayList<Candidato> out=new ArrayList<Candidato>();
+		for(Candidato x: listaCandidatos)
+			if(x.verificarSiCumpleOferta(oferta))
+				out.add(x);
+		return out;
+	}
 
 }

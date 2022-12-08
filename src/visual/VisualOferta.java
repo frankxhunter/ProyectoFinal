@@ -11,6 +11,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -26,9 +28,11 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import util.CandidatoEntrevistaTableModel;
 import util.MetodosUtiles;
 import util.OfertaTableModel;
 import clase.AgenciaEmpleadora;
+import clase.Candidato;
 import clase.Empresa;
 import clase.Oferta;
 import clase.Rama;
@@ -48,6 +52,7 @@ public class VisualOferta extends JDialog {
 	private JButton btnAgregar;
 	private JTable table;
 	private OfertaTableModel tableModel=new OfertaTableModel();
+	private CandidatoEntrevistaTableModel tableModel2=new CandidatoEntrevistaTableModel();
 	private JPanel panel_2;
 	private JLabel lblNewLabel;
 	private JTextField txID;
@@ -57,9 +62,15 @@ public class VisualOferta extends JDialog {
 	private JSpinner spCantidad;
 	private JButton btnEliminar;
 	private Empresa empresa;
+	private ArrayList<Candidato> lista;
 	private JLabel lblRama;
 	private JComboBox<String> coRama;
 	private JButton button;
+	private JPanel panel_3;
+	private JButton btnProgramarEntrevista;
+	private JPanel panel_4;
+	private JScrollPane scrollPane_1;
+	private JTable table_1;
 
 	/**
 	 * Launch the application.
@@ -79,9 +90,10 @@ public class VisualOferta extends JDialog {
 	 */
 	public VisualOferta() {
 		getContentPane().setBackground(Color.DARK_GRAY);
-		setBounds(100, 100, 764, 402);
+		setBounds(100, 100, 1097, 402);
 		getContentPane().setLayout(null);
 		getContentPane().add(getPanel());
+		getContentPane().add(getPanel_3());
 		if(AgenciaEmpleadora.getInstancia().getListaEmpresas().get(0)!=null){
 		empresa=AgenciaEmpleadora.getInstancia().getListaEmpresas().get(0);
 		tableModel.refresh(empresa.getListaOfertas());
@@ -204,6 +216,10 @@ public class VisualOferta extends JDialog {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					rellenar();
+					Oferta oferta=empresa.getListaOfertas().get(table.getSelectedRow());
+					lista=AgenciaEmpleadora.getInstancia().devolverCandidatoSegunOferta(oferta);
+					Collections.sort(lista);
+					tableModel2.refresh(lista);
 				}
 			});
 			table.setModel(tableModel);
@@ -361,5 +377,70 @@ public class VisualOferta extends JDialog {
 		txID.setText(empresa.getListaOfertas().get(table.getSelectedRow()).getNumeroId());
 		btnModificar.setEnabled(true);
 		btnEliminar.setEnabled(true);
+	}
+	private JPanel getPanel_3() {
+		if (panel_3 == null) {
+			panel_3 = new JPanel();
+			panel_3.setBackground(Color.LIGHT_GRAY);
+			panel_3.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Candidatos disponibles", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel_3.setBounds(748, 11, 323, 341);
+			panel_3.setLayout(null);
+			panel_3.add(getBtnProgramarEntrevista());
+			panel_3.add(getPanel_4());
+		}
+		return panel_3;
+	}
+	private JButton getBtnProgramarEntrevista() {
+		if (btnProgramarEntrevista == null) {
+			btnProgramarEntrevista = new JButton("Programar Entrevista");
+			btnProgramarEntrevista.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Oferta oferta=empresa.getListaOfertas().get(table.getSelectedRow());
+					VisualEntrevista x=new VisualEntrevista(lista.get(table.getSelectedRow()), oferta,getThis());
+					tableModel2.setRowCount(0);
+					getThis().setVisible(false);
+					x.setLocationRelativeTo(null);
+					x.setModal(true);
+					x.setVisible(true);
+					
+					
+				}
+			});
+			btnProgramarEntrevista.setEnabled(false);
+			btnProgramarEntrevista.setBounds(104, 307, 146, 23);
+		}
+		return btnProgramarEntrevista;
+	}
+	private JPanel getPanel_4() {
+		if (panel_4 == null) {
+			panel_4 = new JPanel();
+			panel_4.setBounds(10, 21, 303, 271);
+			panel_4.setLayout(new CardLayout(0, 0));
+			panel_4.add(getScrollPane_1(), "name_564395980841573");
+		}
+		return panel_4;
+	}
+	private JScrollPane getScrollPane_1() {
+		if (scrollPane_1 == null) {
+			scrollPane_1 = new JScrollPane();
+			scrollPane_1.setViewportView(getTable_1());
+		}
+		return scrollPane_1;
+	}
+	private JTable getTable_1() {
+		if (table_1 == null) {
+			table_1 = new JTable();
+			table_1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					btnProgramarEntrevista.setEnabled(true);
+				}
+			});
+			table_1.setModel(tableModel2);
+		}
+		return table_1;
+	}
+	public JDialog getThis(){
+		return this;
 	}
 }

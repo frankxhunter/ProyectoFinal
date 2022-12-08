@@ -13,7 +13,11 @@ import javax.swing.JLabel;
 
 import com.toedter.calendar.JCalendar;
 
+import excepcionesPropias.YaExisteExceptions;
+
 import javax.swing.JButton;
+
+import util.MetodosUtiles;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -26,6 +30,7 @@ public class VisualEntrevista extends JDialog {
 	private JPanel panel; 
 	private Candidato candidato;
 	private Oferta oferta;
+	private JDialog pantalla;
 	private JCalendar calendar;
 	private JButton btnAgregar;
 	private JButton btnCancelar;
@@ -36,7 +41,7 @@ public class VisualEntrevista extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			VisualEntrevista dialog = new VisualEntrevista(null, null);
+			VisualEntrevista dialog = new VisualEntrevista(null, null,null);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -46,10 +51,12 @@ public class VisualEntrevista extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @param jDialog 
 	 */
-	public VisualEntrevista(Candidato candidato, Oferta oferta) {
+	public VisualEntrevista(Candidato candidato, Oferta oferta, JDialog jDialog) {
 		this.candidato=candidato;
 		this.oferta=oferta;
+		pantalla=jDialog;
 		setBounds(100, 100, 478, 324);
 		getContentPane().setLayout(null);
 		getContentPane().add(getPanel());
@@ -89,6 +96,7 @@ public class VisualEntrevista extends JDialog {
 						oferta.getEmpresaPerteneciente().buscarEntrevistaPorFecha(calendar.getDate(),oferta)
 						.getListaCandidatos().add(candidato);
 					}
+					oferta.getListaCandidatos().add(candidato);
 					cambiaPantalla();
 				}
 			});
@@ -109,11 +117,10 @@ public class VisualEntrevista extends JDialog {
 		return btnCancelar;
 	}
 	public void cambiaPantalla(){
-		VisualCandidato x=new VisualCandidato();
-		x.setVisible(true);
+		
 		dispose();
-		x.setModal(true);
-		x.setLocationRelativeTo(null);
+		pantalla.setModal(true);
+		pantalla.setVisible(true);
 	}
 	private JLabel getLblInformacion() {
 		if (lblInformacion == null) {

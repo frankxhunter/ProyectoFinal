@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import excepcionesPropias.YaExisteExceptions;
 
-public class Candidato {
+public class Candidato implements Comparable<Candidato>{
 	private String carnet;
 	private String nombre;
 	private String sexo;
@@ -148,24 +148,15 @@ public class Candidato {
 		boolean salida=false;
 		if(rama.getNombre()==oferta.getRama().getNombre()){
 			salida=true;
-			//		int i=0;
-			//		while(salida && i<oferta.getRama().getListaCondiciones().size()){
-			//			int j=0;
-			//			boolean condicion=false;
-			//			while(!condicion && j<documentos.size()){
-			//				if(oferta.getRama().getListaCondiciones().get(i).equals(documentos.get(j)))
-			//					condicion=true;
-			//				else
-			//					j++;
-			//			}
-			//			if(j==documentos.size())
-			//				salida=false;
-			//			else
-			//				i++;
-			//		}
+			int i=0;
+			while(i<oferta.getListaCandidatos().size() && salida)
+				if(oferta.getListaCandidatos().get(i).equals(this))
+					salida=false;
+				else i++;
 		}
 		return salida;
 	}
+
 	public ArrayList<Oferta> DevolverListaDeOfertasDisponibles(ArrayList<Empresa> lista){
 		ArrayList<Oferta> salida= new ArrayList<Oferta>();
 		for(Empresa y: lista)
@@ -183,9 +174,17 @@ public class Candidato {
 			else 
 				i++;
 		if(!encontrado)
-		documentos.add(documento);
+			documentos.add(documento);
 		else
-		throw new YaExisteExceptions("Ya existe");
+			throw new YaExisteExceptions("Ya existe");
+	}
+	public int compareTo(Candidato o) {
+		int out=0;
+		if(documentos.size()>o.getDocumentos().size())
+			out=-1;
+		else if(documentos.size()<o.getDocumentos().size())
+			out=1;
+		return out;
 	}
 
 

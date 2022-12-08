@@ -366,6 +366,7 @@ public class VisualModificaCandidato extends JDialog {
 			btnAceptar = new JButton("Aceptar");
 			btnAceptar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					try{
 					candidato.setCarnet(txCarnet.getText().trim());
 					candidato.setNombre(txCarnet.getText().trim());
 					candidato.setDireccion(txDireccion.getText().trim());
@@ -376,8 +377,11 @@ public class VisualModificaCandidato extends JDialog {
 					candidato.setRama(AgenciaEmpleadora.getInstancia().obtenerRama(coRama.getSelectedItem().toString()));
 					candidato.setYearsExp(Integer.parseInt(spAnnos.getValue().toString()));
 					if(position==-1)
-						AgenciaEmpleadora.getInstancia().getListaCandidatos().add(candidato);
-					siguientePantalla();			
+						AgenciaEmpleadora.getInstancia().addCandidato(candidato);
+					siguientePantalla();	
+					}catch(YaExisteExceptions e2){
+						MetodosUtiles.mostrarMensaje(e2);
+					}
 				}
 			});
 			btnAceptar.setBounds(425, 470, 89, 23);

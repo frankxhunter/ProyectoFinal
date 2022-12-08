@@ -228,11 +228,12 @@ public class VisualCandidato extends JDialog {
 					Candidato candidato=AgenciaEmpleadora.getInstancia().getListaCandidatos().get(table.getSelectedRow());
 					Oferta oferta=candidato.DevolverListaDeOfertasDisponibles(AgenciaEmpleadora.getInstancia().
 							getListaEmpresas()).get(table_1.getSelectedRow());
-					VisualEntrevista x=new VisualEntrevista(candidato,oferta);
-					dispose();
-					x.setVisible(true);
-					x.setModal(true);
+					tableModel2.setRowCount(0);
+					VisualEntrevista x=new VisualEntrevista(candidato,oferta,getThis());
+					getThis().setVisible(false);
 					x.setLocationRelativeTo(null);
+					x.setModal(true);
+					x.setVisible(true);
 				}
 			});
 			btnProgramarEntrevista.setEnabled(false);
@@ -254,6 +255,9 @@ public class VisualCandidato extends JDialog {
 			table.getTableHeader().setReorderingAllowed(false);
 		}
 		return table_1;
+	}
+	public JDialog getThis(){
+		return this;
 	}
 }
 

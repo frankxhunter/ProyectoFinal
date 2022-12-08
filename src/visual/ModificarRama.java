@@ -26,6 +26,9 @@ import util.MetodosUtiles;
 import clase.AgenciaEmpleadora;
 import clase.Documento;
 import clase.Rama;
+
+import javax.swing.UIManager;
+
 import excepcionesPropias.YaExisteExceptions;
 
 public class ModificarRama extends JDialog {
@@ -51,6 +54,10 @@ public class ModificarRama extends JDialog {
 	private JButton btnEliminar;
 	private JButton btModificar;
 	private JLabel label;
+	private JButton btnX;
+	private JScrollPane scrollPane_1;
+	private JPanel panel_4;
+	private JLabel lblCreacinDeRama;
 
 	/**
 	 * Launch the application.
@@ -69,15 +76,19 @@ public class ModificarRama extends JDialog {
 	 * Create the dialog.
 	 */
 	public ModificarRama(int pos) {
+		getContentPane().setForeground(Color.WHITE);
+		setUndecorated(true);
 		setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
-		getContentPane().setBackground(Color.DARK_GRAY);
+		getContentPane().setBackground(new Color(158, 130, 116));
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 727, 540);
+		setBounds(100, 100, 714, 542);
 		getContentPane().setLayout(null);
+		getContentPane().add(getScrollPane_1());
+		getContentPane().add(getPanel_4());
 		getContentPane().add(getPanel());
-		getContentPane().add(getBtnAceptar());
-		getContentPane().add(getBtnCancelar());
 		getContentPane().add(getBtModificar());
+		getContentPane().add(getBtnCancelar());
+		getContentPane().add(getBtnAceptar());
 		if(pos!=-1){
 			posicion=pos;
 			rama=AgenciaEmpleadora.getInstancia().getlistaRama().get(posicion);
@@ -91,9 +102,9 @@ public class ModificarRama extends JDialog {
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-			panel.setBackground(Color.LIGHT_GRAY);
+			panel.setBounds(7, 45, 699, 458);
+			panel.setBackground(new Color(158, 130, 116));
 			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Rama", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel.setBounds(10, 11, 691, 455);
 			panel.setLayout(null);
 			panel.add(getLblNombreDelaRama());
 			panel.add(getTxNombre());
@@ -104,7 +115,8 @@ public class ModificarRama extends JDialog {
 	private JLabel getLblNombreDelaRama() {
 		if (lblNombreDelaRama == null) {
 			lblNombreDelaRama = new JLabel("Nombre de la Rama");
-			lblNombreDelaRama.setBounds(42, 38, 116, 14);
+			lblNombreDelaRama.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblNombreDelaRama.setBounds(44, 35, 145, 14);
 		}
 		return lblNombreDelaRama;
 	}
@@ -121,7 +133,7 @@ public class ModificarRama extends JDialog {
 					MetodosUtiles.validacionJTextLetra(txNombre.getText().trim().length(), e);
 				}
 			});
-			txNombre.setBounds(189, 35, 116, 20);
+			txNombre.setBounds(189, 32, 116, 20);
 			txNombre.setColumns(10);
 		}
 		return txNombre;
@@ -129,9 +141,9 @@ public class ModificarRama extends JDialog {
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
-			panel_1.setBackground(Color.LIGHT_GRAY);
+			panel_1.setBackground(new Color(151, 119, 104));
 			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Documentos Necesarios", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_1.setBounds(20, 78, 661, 366);
+			panel_1.setBounds(19, 65, 661, 374);
 			panel_1.setLayout(null);
 			panel_1.add(getLblDocumentoParaAgregar());
 			panel_1.add(getTxDocumento());
@@ -145,8 +157,9 @@ public class ModificarRama extends JDialog {
 	private JLabel getLblDocumentoParaAgregar() {
 		if (lblDocumentoParaAgregar == null) {
 			lblDocumentoParaAgregar = new JLabel("Documento para agregar");
+			lblDocumentoParaAgregar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblDocumentoParaAgregar.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblDocumentoParaAgregar.setBounds(10, 32, 149, 14);
+			lblDocumentoParaAgregar.setBounds(-16, 30, 201, 17);
 		}
 		return lblDocumentoParaAgregar;
 	}
@@ -164,7 +177,7 @@ public class ModificarRama extends JDialog {
 					label.setVisible(false);
 				}
 			});
-			txDocumento.setBounds(183, 29, 195, 20);
+			txDocumento.setBounds(215, 29, 206, 20);
 			txDocumento.setColumns(10);
 		}
 		return txDocumento;
@@ -174,21 +187,23 @@ public class ModificarRama extends JDialog {
 			btnAgregar = new JButton("Agregar");
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					if(txDocumento.getText().trim().length()>0){
-						try{
+					try {
+						if(txDocumento.getText().trim().length()>0){
+
 							rama.addDocumento(new Documento(txDocumento.getText(),false));
+
 							tableModel.refresh(rama.getListaDocumentos());
 							txDocumento.setText("");
-						}catch(YaExisteExceptions e){
-							MetodosUtiles.mostrarMensaje(e);
 						}
-					}
-					else{
-						label.setVisible(true);
+						else{
+							label.setVisible(true);
+						}
+					} catch (YaExisteExceptions e) {
+						MetodosUtiles.mostrarMensaje(e);
 					}
 				}
 			});
-			btnAgregar.setBounds(407, 28, 89, 23);
+			btnAgregar.setBounds(459, 28, 89, 23);
 		}
 		return btnAgregar;
 	}
@@ -227,6 +242,7 @@ public class ModificarRama extends JDialog {
 	private JButton getBtnAceptar() {
 		if (btnAceptar == null) {
 			btnAceptar = new JButton("Aceptar");
+			btnAceptar.setBounds(493, 509, 89, 23);
 			btnAceptar.setEnabled(false);
 			btnAceptar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -239,21 +255,22 @@ public class ModificarRama extends JDialog {
 					x.setLocationRelativeTo(null);
 				}
 			});
-			btnAceptar.setBounds(455, 467, 89, 23);
 		}
 		return btnAceptar;
 	}
 	private JButton getBtnCancelar() {
 		if (btnCancelar == null) {
 			btnCancelar = new JButton("Cancelar");
+			btnCancelar.setBounds(617, 509, 89, 23);
 			btnCancelar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					VisualRama x= new VisualRama();
-					x.setVisible(true);
+					VisualRama y= new VisualRama();
 					dispose();
+					y.setVisible(true);
+					y.setModal(true);
+					y.setLocationRelativeTo(null);
 				}
 			});
-			btnCancelar.setBounds(592, 467, 89, 23);
 		}
 		return btnCancelar;
 	}
@@ -269,7 +286,7 @@ public class ModificarRama extends JDialog {
 					btnEliminar.setEnabled(false);
 				}
 			});
-			btnEliminar.setBounds(526, 28, 89, 23);
+			btnEliminar.setBounds(560, 28, 89, 23);
 		}
 		return btnEliminar;
 	}
@@ -281,6 +298,7 @@ public class ModificarRama extends JDialog {
 	private JButton getBtModificar() {
 		if (btModificar == null) {
 			btModificar = new JButton("Modificar");
+			btModificar.setBounds(507, 509, 89, 23);
 			btModificar.setVisible(false);
 			btModificar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -292,7 +310,6 @@ public class ModificarRama extends JDialog {
 					y.setLocationRelativeTo(null);
 				}
 			});
-			btModificar.setBounds(472, 467, 89, 23);
 		}
 		return btModificar;
 	}
@@ -309,11 +326,56 @@ public class ModificarRama extends JDialog {
 	private JLabel getLabel() {
 		if (label == null) {
 			label = new JLabel("->");
-			label.setVisible(false);
+			label.setVisible(true);
 			label.setForeground(Color.RED);
 			label.setFont(new Font("Tahoma", Font.BOLD, 12));
-			label.setBounds(169, 32, 17, 14);
+			label.setBounds(197, 32, 17, 14);
 		}
 		return label;
+	}
+	private JButton getBtnX() {
+		if (btnX == null) {
+			btnX = new JButton("X");
+			btnX.setBounds(665, 0, 49, 32);
+			btnX.setForeground(Color.WHITE);
+			btnX.setBackground(Color.RED);
+			btnX.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					VisualRama y= new VisualRama();
+					dispose();
+					y.setVisible(true);
+					y.setModal(true);
+					y.setLocationRelativeTo(null);
+				}
+			});
+			btnX.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		}
+		return btnX;
+	}
+	private JScrollPane getScrollPane_1() {
+		if (scrollPane_1 == null) {
+			scrollPane_1 = new JScrollPane();
+			scrollPane_1.setBounds(22, 29, 2, 2);
+		}
+		return scrollPane_1;
+	}
+	private JPanel getPanel_4() {
+		if (panel_4 == null) {
+			panel_4 = new JPanel();
+			panel_4.setBackground(new Color(219, 219, 219));
+			panel_4.setBounds(0, 0, 714, 32);
+			panel_4.setLayout(null);
+			panel_4.add(getLblCreacinDeRama());
+			panel_4.add(getBtnX());
+		}
+		return panel_4;
+	}
+	private JLabel getLblCreacinDeRama() {
+		if (lblCreacinDeRama == null) {
+			lblCreacinDeRama = new JLabel("Creaci\u00F3n de Rama");
+			lblCreacinDeRama.setBounds(265, 5, 183, 21);
+			lblCreacinDeRama.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		}
+		return lblCreacinDeRama;
 	}
 }

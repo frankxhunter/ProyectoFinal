@@ -182,9 +182,9 @@ public class VisualAgencia extends JFrame {
 			mntmA.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					VisualOferta v = new VisualOferta();
-					v.setVisible(true);
-					v.setModal(true);
 					v.setLocationRelativeTo(null);
+					v.setModal(true);
+					v.setVisible(true);
 				}
 			});
 			mntmA.setFont(new Font("Tahoma", Font.PLAIN, 16));

@@ -30,6 +30,7 @@ import util.MetodosUtiles;
 import clase.AgenciaEmpleadora;
 import clase.Empresa;
 import clase.Sector;
+import excepcionesPropias.YaExisteExceptions;
 
 public class VisualEmpresa extends JDialog {
 
@@ -236,13 +237,17 @@ public class VisualEmpresa extends JDialog {
 			btAgregar = new JButton("Agregar");
 			btAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					try{
 					Empresa empresa= new Empresa(txNombre.getText().trim(),txDireccion.getText().trim(), txTelefono.getText().trim(),
 							AgenciaEmpleadora.getInstancia().obtenerSector(coSector.getSelectedItem().toString().trim()));
-					AgenciaEmpleadora.getInstancia().getListaEmpresas().add(empresa);
+					AgenciaEmpleadora.getInstancia().addEmpresa(empresa);
 					tableModel.refresh(AgenciaEmpleadora.getInstancia().getListaEmpresas());
 					limpiar();
 					btAgregar.setEnabled(false);
 					btModificar.setEnabled(false);
+					}catch(YaExisteExceptions e){
+						MetodosUtiles.mostrarMensaje(e);
+					}
 				}
 			});
 			btAgregar.setEnabled(false);
