@@ -5,7 +5,7 @@ import java.util.Date;
 
 import excepcionesPropias.YaExisteExceptions;
 
-public class Empresa {
+public class Empresa implements Comparable<Empresa>{
 	private String nombre;
 	private String direccion;
 	private String telefono;
@@ -98,7 +98,7 @@ public class Empresa {
 		int i=0;
 		while(i<listaEntrevistas.size() && salida==null)
 			if(listaEntrevistas.get(i).getOferta().getNumeroId().equalsIgnoreCase(oferta.getNumeroId()))
-				if(listaEntrevistas.get(i).getFecha().compareTo(fecha)==0)
+				if(listaEntrevistas.get(i).mismoDia(fecha))
 					salida=listaEntrevistas.get(i);
 				else 
 					i++;
@@ -120,7 +120,7 @@ public class Empresa {
 		boolean encontrado= false;
 		int i=0;
 		while(i<listaEntrevistas.size()&& !encontrado)
-			if(listaEntrevistas.get(i).mismoDia(entrevista))
+			if(listaEntrevistas.get(i).mismoDia(entrevista.getFecha()))
 				encontrado=true;
 			else i++;
 		if(!encontrado)
@@ -134,6 +134,25 @@ public class Empresa {
 		for(Entrevista x: listaEntrevistas)
 			if(x.getFecha().getYear()==year-1900 && x.getFecha().getMonth()==month)
 				out.add(x);
+		return out;
+	}
+	public float promedioSalario(){
+		float out=0;
+		int cant=0;
+		for(Oferta x: listaOfertas){
+			out+=x.getSalario();
+			cant++;
+		}
+		if(cant>0)
+			out/=cant;
+		return out;
+	}
+	public int compareTo(Empresa o) {
+		int out=0;
+		if(o.promedioSalario()>promedioSalario())
+			out=1;
+		else if(o.promedioSalario()<promedioSalario())
+			out=-1;
 		return out;
 	}
 }

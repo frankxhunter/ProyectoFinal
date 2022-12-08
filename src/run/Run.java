@@ -14,6 +14,7 @@ public class Run {
 				try {
 					MetodosUtiles.RellenoAutomatico();
 					AgenciaEmpleadora x=AgenciaEmpleadora.getInstancia();
+					x.getListaCandidatos().get(0).CalcularEdadAproximada();
 					if(x.getListaEspecialidades().get(20) instanceof Sector)
 						System.out.println();
 					Login window=new Login();

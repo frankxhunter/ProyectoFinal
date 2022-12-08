@@ -12,6 +12,9 @@ public class OfertaCandidatoTableModel extends DefaultTableModel{
 		String[] columnNames = {"Numero de ID","Salario","Cantidad de Plazas","Rama","Empresa"};
 		this.setColumnIdentifiers(columnNames);
 	}
+	public boolean isCellEditable(int row, int column) {
+		return false;
+	}
 	public void refresh(ArrayList<Oferta> arrayList){
 		this.setRowCount(0);
 		for (Oferta x : arrayList) 

@@ -51,6 +51,9 @@ public class ModificarSector extends JDialog {
 	private JButton btnEliminar;
 	private JButton btModificar;
 	private JLabel label;
+	private JPanel panel_3;
+	private JLabel lblCreacinDeSector;
+	private JButton button;
 
 	/**
 	 * Launch the application.
@@ -69,14 +72,16 @@ public class ModificarSector extends JDialog {
 	 * Create the dialog.
 	 */
 	public ModificarSector(int pos) {
-		getContentPane().setBackground(Color.DARK_GRAY);
+		setUndecorated(true);
+		getContentPane().setBackground(new Color(158, 130, 116));
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 727, 540);
+		setBounds(100, 100, 714, 542);
 		getContentPane().setLayout(null);
 		getContentPane().add(getPanel());
 		getContentPane().add(getBtnAceptar());
 		getContentPane().add(getBtnCancelar());
 		getContentPane().add(getBtModificar());
+		getContentPane().add(getPanel_3());
 		if(pos!=-1){
 			posicion=pos;
 			sector=AgenciaEmpleadora.getInstancia().getlistaSector().get(posicion);
@@ -90,9 +95,9 @@ public class ModificarSector extends JDialog {
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-			panel.setBackground(Color.LIGHT_GRAY);
+			panel.setBackground(new Color(158, 130, 116));
 			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Sector", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel.setBounds(10, 11, 691, 455);
+			panel.setBounds(7, 45, 699, 458);
 			panel.setLayout(null);
 			panel.add(getLblNombreDelSector());
 			panel.add(getTxNombre());
@@ -103,7 +108,8 @@ public class ModificarSector extends JDialog {
 	private JLabel getLblNombreDelSector() {
 		if (lblNombreDelSector == null) {
 			lblNombreDelSector = new JLabel("Nombre del sector");
-			lblNombreDelSector.setBounds(42, 38, 116, 14);
+			lblNombreDelSector.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			lblNombreDelSector.setBounds(44, 35, 145, 14);
 		}
 		return lblNombreDelSector;
 	}
@@ -119,7 +125,7 @@ public class ModificarSector extends JDialog {
 				public void keyTyped(KeyEvent e) {
 				MetodosUtiles.validacionJTextLetra(txNombre.getText().trim().length(),e);}
 			});
-			txNombre.setBounds(189, 35, 106, 20);
+			txNombre.setBounds(189, 32, 106, 20);
 			txNombre.setColumns(10);
 		}
 		return txNombre;
@@ -127,9 +133,9 @@ public class ModificarSector extends JDialog {
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
-			panel_1.setBackground(Color.LIGHT_GRAY);
+			panel_1.setBackground(new Color(151, 119, 104));
 			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Documentos Necesarios", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_1.setBounds(20, 78, 661, 366);
+			panel_1.setBounds(19, 65, 661, 374);
 			panel_1.setLayout(null);
 			panel_1.add(getLblDocumentoParaAgregar());
 			panel_1.add(getTxDocumento());
@@ -143,8 +149,9 @@ public class ModificarSector extends JDialog {
 	private JLabel getLblDocumentoParaAgregar() {
 		if (lblDocumentoParaAgregar == null) {
 			lblDocumentoParaAgregar = new JLabel("Documento para agregar");
+			lblDocumentoParaAgregar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 			lblDocumentoParaAgregar.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblDocumentoParaAgregar.setBounds(10, 32, 149, 14);
+			lblDocumentoParaAgregar.setBounds(-16, 30, 201, 17);
 		}
 		return lblDocumentoParaAgregar;
 	}
@@ -163,7 +170,7 @@ public class ModificarSector extends JDialog {
 					label.setVisible(false);
 				}
 			});
-			txDocumento.setBounds(183, 29, 195, 20);
+			txDocumento.setBounds(215, 29, 206, 20);
 			txDocumento.setColumns(10);
 		}
 		return txDocumento;
@@ -187,7 +194,7 @@ public class ModificarSector extends JDialog {
 					}
 				}
 			});
-			btnAgregar.setBounds(407, 28, 89, 23);
+			btnAgregar.setBounds(459, 29, 89, 23);
 		}
 		return btnAgregar;
 	}
@@ -243,7 +250,7 @@ public class ModificarSector extends JDialog {
 					
 				}
 			});
-			btnAceptar.setBounds(455, 467, 89, 23);
+			btnAceptar.setBounds(492, 509, 89, 23);
 		}
 		return btnAceptar;
 	}
@@ -260,7 +267,7 @@ public class ModificarSector extends JDialog {
 					
 				}
 			});
-			btnCancelar.setBounds(592, 467, 89, 23);
+			btnCancelar.setBounds(617, 509, 89, 23);
 		}
 		return btnCancelar;
 	}
@@ -276,7 +283,7 @@ public class ModificarSector extends JDialog {
 					btnEliminar.setEnabled(false);
 				}
 			});
-			btnEliminar.setBounds(526, 28, 89, 23);
+			btnEliminar.setBounds(560, 29, 89, 23);
 		}
 		return btnEliminar;
 	}
@@ -299,7 +306,7 @@ public class ModificarSector extends JDialog {
 					x.setVisible(true);
 				}
 			});
-			btModificar.setBounds(472, 467, 89, 23);
+			btModificar.setBounds(507, 509, 89, 23);
 		}
 		return btModificar;
 	}
@@ -316,11 +323,49 @@ public class ModificarSector extends JDialog {
 	private JLabel getLabel() {
 		if (label == null) {
 			label = new JLabel("->");
-			label.setVisible(false);
+			label.setBounds(197, 32, 17, 14);
+			label.setVisible(true);
 			label.setForeground(Color.RED);
 			label.setFont(new Font("Tahoma", Font.BOLD, 12));
-			label.setBounds(169, 32, 17, 14);
 		}
 		return label;
+	}
+	private JPanel getPanel_3() {
+		if (panel_3 == null) {
+			panel_3 = new JPanel();
+			panel_3.setBounds(0, 0, 714, 32);
+			panel_3.setLayout(null);
+			panel_3.add(getLblCreacinDeSector());
+			panel_3.add(getButton());
+			panel_3.setBackground(new Color(219, 219, 219));
+		}
+		return panel_3;
+	}
+	private JLabel getLblCreacinDeSector() {
+		if (lblCreacinDeSector == null) {
+			lblCreacinDeSector = new JLabel("Creaci\u00F3n de Sector");
+			lblCreacinDeSector.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			lblCreacinDeSector.setBounds(247, 0, 219, 31);
+		}
+		return lblCreacinDeSector;
+	}
+	private JButton getButton() {
+		if (button == null) {
+			button = new JButton("X");
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					VisualSector y = new VisualSector();
+					dispose();
+					y.setVisible(true);
+					y.setModal(true);
+					y.setLocationRelativeTo(null);
+				}
+			});
+			button.setForeground(Color.WHITE);
+			button.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			button.setBackground(Color.RED);
+			button.setBounds(665, 0, 49, 32);
+		}
+		return button;
 	}
 }

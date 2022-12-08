@@ -49,11 +49,11 @@ public class Entrevista implements Comparable<Entrevista> {
 		return out;
 	}
 	@SuppressWarnings("deprecation")
-	public boolean mismoDia(Entrevista e){
+	public boolean mismoDia(Date e){
 		boolean out=false;
-		if(fecha.getYear()==e.getFecha().getYear())
-			if(fecha.getMonth()==e.getFecha().getMonth())
-				if(fecha.getDate()==e.getFecha().getDate())
+		if(fecha.getYear()==e.getYear())
+			if(fecha.getMonth()==e.getMonth())
+				if(fecha.getDate()==e.getDate())
 					out=true;
 		return out;
 	}

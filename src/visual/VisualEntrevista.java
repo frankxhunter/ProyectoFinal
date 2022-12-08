@@ -87,13 +87,15 @@ public class VisualEntrevista extends JDialog {
 		if (btnAgregar == null) {
 			btnAgregar = new JButton("Agregar");
 			btnAgregar.addActionListener(new ActionListener() {
+				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
-					if(oferta.getEmpresaPerteneciente().buscarEntrevistaPorFecha(calendar.getDate(),oferta)==null){
-						Entrevista x=new Entrevista(calendar.getDate(), oferta);
+					Date fecha=new Date(calendar.getDate().getYear(), calendar.getDate().getMonth(), calendar.getDate().getDate());
+					if(oferta.getEmpresaPerteneciente().buscarEntrevistaPorFecha(fecha,oferta)==null){
+						Entrevista x=new Entrevista(fecha, oferta);
 						x.getListaCandidatos().add(candidato);
 						oferta.getEmpresaPerteneciente().getListaEntrevistas().add(x);
 					}else{
-						oferta.getEmpresaPerteneciente().buscarEntrevistaPorFecha(calendar.getDate(),oferta)
+						oferta.getEmpresaPerteneciente().buscarEntrevistaPorFecha(fecha,oferta)
 						.getListaCandidatos().add(candidato);
 					}
 					oferta.getListaCandidatos().add(candidato);

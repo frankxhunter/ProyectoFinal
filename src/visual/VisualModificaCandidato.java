@@ -368,7 +368,7 @@ public class VisualModificaCandidato extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					try{
 					candidato.setCarnet(txCarnet.getText().trim());
-					candidato.setNombre(txCarnet.getText().trim());
+					candidato.setNombre(txNombre.getText().trim());
 					candidato.setDireccion(txDireccion.getText().trim());
 					candidato.setTelefono(txTelefono.getText().trim());
 					candidato.setNivelEscolaridad(txNivelEscolar.getText().trim());

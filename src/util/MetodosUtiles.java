@@ -251,6 +251,8 @@ public class MetodosUtiles {
 					"Costurera", 10, rama2);
 			Candidato candidato17 = new Candidato("94050225669", "Rolando", "Masculino", "Calle de Corsega", "72585510", "Universitario",
 					"Diseñador grafico", 4, rama2);
+			Candidato candidato18 = new Candidato("94050225668", "Juan", "Masculino", "Calle de Corsega", "72586510","Cientifico",
+					"Diseñador grafico", 4, rama13);
 
 			Entrevista entrevista1 = new Entrevista(new Date(2023-1900, 6, 12), candidato1, oferta11);
 			Entrevista entrevista2 = new Entrevista(new Date(2023-1900, 5, 11), candidato2, oferta7);
@@ -366,6 +368,8 @@ public class MetodosUtiles {
 			agencia.addCandidato(candidato14);
 			agencia.addCandidato(candidato15);
 			agencia.addCandidato(candidato16);
+			agencia.addCandidato(candidato17);
+			agencia.addCandidato(candidato18);
 
 			agencia.addRama(rama1);
 			agencia.addRama(rama2);

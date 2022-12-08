@@ -41,6 +41,7 @@ public class VisualAgencia extends JFrame {
 	private JMenuItem mntmComprobarRamas;
 	private JMenu mnEntrevistas;
 	private JMenuItem mntmVerRegistroMensual;
+	private JMenuItem mntmVerReportes;
 
 	/**
 	 * Launch the application.
@@ -115,6 +116,7 @@ public class VisualAgencia extends JFrame {
 		if (mnReportes == null) {
 			mnReportes = new JMenu("Reportes");
 			mnReportes.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			mnReportes.add(getMntmVerReportes());
 		}
 		return mnReportes;
 	}
@@ -261,5 +263,20 @@ public class VisualAgencia extends JFrame {
 			mntmVerRegistroMensual.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		}
 		return mntmVerRegistroMensual;
+	}
+	private JMenuItem getMntmVerReportes() {
+		if (mntmVerReportes == null) {
+			mntmVerReportes = new JMenuItem("Ver Reportes");
+			mntmVerReportes.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					VisualReportes x=new VisualReportes();
+					x.setLocationRelativeTo(null);
+					x.setModal(true);
+					x.setVisible(true);
+				}
+			});
+			mntmVerReportes.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		}
+		return mntmVerReportes;
 	}
 }

@@ -188,5 +188,17 @@ public class AgenciaEmpleadora {
 				out.add(x);
 		return out;
 	}
+	public int PromedioEdadCandidatos(){
+		int out=0;
+		int cant=0;
+		for(Candidato x:listaCandidatos){
+			out+=x.CalcularEdadAproximada();
+			cant++;
+		}
+		if(cant>0)
+			out/=cant;
+		return out;
+			
+	}
 
 }

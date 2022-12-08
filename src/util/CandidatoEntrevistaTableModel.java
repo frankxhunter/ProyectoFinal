@@ -12,6 +12,9 @@ public class CandidatoEntrevistaTableModel extends DefaultTableModel{
 		String[] columnNames = {"Nombre y Apellidos","Carnet","Telefono"};
 		this.setColumnIdentifiers(columnNames);
 	}
+	public boolean isCellEditable(int row, int column) {
+		return false;
+	}
 	public void refresh(ArrayList<Candidato> arrayList){
 		this.setRowCount(0);
 		for (Candidato x : arrayList) 

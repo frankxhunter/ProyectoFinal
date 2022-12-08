@@ -1,6 +1,7 @@
 package clase;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import excepcionesPropias.YaExisteExceptions;
 
@@ -184,6 +185,17 @@ public class Candidato implements Comparable<Candidato>{
 			out=-1;
 		else if(documentos.size()<o.getDocumentos().size())
 			out=1;
+		return out;
+	}
+	public int CalcularEdadAproximada(){
+		Date hoy=new Date();
+		int year=1900+hoy.getYear();
+		int out=Integer.parseInt(carnet.substring(0, 2));
+		if(out>0 && out<30)
+			out+=2000;
+		else if(out>=30&& out<99)
+			out+=1900;
+		out=year-out;
 		return out;
 	}
 
