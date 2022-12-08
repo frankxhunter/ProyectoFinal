@@ -3,6 +3,8 @@ package clase;
 import java.util.ArrayList;
 import java.util.Date;
 
+import excepcionesPropias.YaExisteExceptions;
+
 public class Entrevista implements Comparable<Entrevista> {
 	private Date fecha; //Dia de la entrevista
 	private ArrayList<Candidato> listaCandidatos;
@@ -45,6 +47,28 @@ public class Entrevista implements Comparable<Entrevista> {
 		else if(o.getFecha().getDate()<fecha.getDate())
 			out=1;
 		return out;
+	}
+	@SuppressWarnings("deprecation")
+	public boolean mismoDia(Entrevista e){
+		boolean out=false;
+		if(fecha.getYear()==e.getFecha().getYear())
+			if(fecha.getMonth()==e.getFecha().getMonth())
+				if(fecha.getDate()==e.getFecha().getDate())
+					out=true;
+		return out;
+	}
+	
+	public void addCandidato(Candidato candidato)throws YaExisteExceptions{
+		boolean encontrado=false;
+		int i=0;
+		while(i<listaCandidatos.size() && !encontrado)
+				if(listaCandidatos.get(i).getCarnet().equalsIgnoreCase(candidato.getCarnet()))
+					encontrado=true;
+				else i++;
+		if(!encontrado)
+			listaCandidatos.add(candidato);
+		else
+			throw new YaExisteExceptions("Este Candidato ya esta en esta entrevista");
 	}
 	
 	

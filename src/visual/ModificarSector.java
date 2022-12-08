@@ -26,6 +26,7 @@ import util.MetodosUtiles;
 import clase.AgenciaEmpleadora;
 import clase.Documento;
 import clase.Sector;
+import excepcionesPropias.YaExisteExceptions;
 
 public class ModificarSector extends JDialog {
 	/**
@@ -173,9 +174,13 @@ public class ModificarSector extends JDialog {
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(txDocumento.getText().trim().length()>0){
+						try{
 					sector.addDocumento(new Documento(txDocumento.getText(),false));
 					tableModel.refresh(sector.getListaDocumentos());
 					txDocumento.setText("");
+						}catch(YaExisteExceptions e){
+							MetodosUtiles.mostrarMensaje(e);
+						}
 					}
 					else{
 						label.setVisible(true);
@@ -224,13 +229,17 @@ public class ModificarSector extends JDialog {
 			btnAceptar.setEnabled(false);
 			btnAceptar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					try{
 					sector.setNombre(txNombre.getText());
-					AgenciaEmpleadora.getInstancia().getListaEspecialidades().add(sector);
+					AgenciaEmpleadora.getInstancia().addSector(sector);
 					VisualSector x= new VisualSector();
 					dispose();
 					x.setModal(true);
 					x.setLocationRelativeTo(null);
 					x.setVisible(true);
+					}catch(YaExisteExceptions e){
+						MetodosUtiles.mostrarMensaje(e);
+					}
 					
 				}
 			});

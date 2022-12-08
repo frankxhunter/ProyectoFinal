@@ -4,6 +4,8 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.Date;
 
+import javax.swing.JOptionPane;
+
 import clase.AgenciaEmpleadora;
 import clase.Candidato;
 import clase.Documento;
@@ -15,6 +17,33 @@ import clase.Sector;
 import excepcionesPropias.YaExisteExceptions;
 
 public class MetodosUtiles {
+	@SuppressWarnings("deprecation")
+	public static void validacionJTextLetra(int tamActual,KeyEvent e){
+		Character letra=e.getKeyChar();
+		if(tamActual>=30 || (!(Character.isLetter(letra))&& !(Character.isSpace(letra)) && e.getExtendedKeyCode()!=KeyEvent.VK_BACK_SPACE)){
+			e.consume();
+			Toolkit x= Toolkit.getDefaultToolkit();
+			x.beep();
+		}
+	}
+	public static void validacionJTextNumero(int tamActual,int tamMax,KeyEvent e){
+		Character letra=e.getKeyChar();
+		if(tamActual==tamMax || (!(Character.isDigit(letra))&& e.getExtendedKeyCode()!=8)){
+			e.consume();
+			Toolkit x= Toolkit.getDefaultToolkit();
+			x.beep();
+		}
+	}
+	public static void validacionJTextCharacter(int tamActual,KeyEvent e){
+		if(tamActual>=30){
+			e.consume();
+			Toolkit x= Toolkit.getDefaultToolkit();
+			x.beep();
+		}
+	}
+	public static void mostrarMensaje(YaExisteExceptions e){
+		JOptionPane.showMessageDialog(null, e.getMessage());
+	}
 
 	@SuppressWarnings("deprecation")
 	public static void RellenoAutomatico(){
@@ -27,7 +56,7 @@ public class MetodosUtiles {
 			Documento d = new Documento("Licencia de camion", false);
 			Documento e = new Documento("licencia de carro", true);
 			Documento f = new Documento("Licencia de guagua", true);
-//			Documento g = new Documento("Certificado de curso de alturas", false);
+			//			Documento g = new Documento("Certificado de curso de alturas", false);
 			Documento h = new Documento("Titulo de ing. civil",true);
 			Documento i = new Documento("Titulo a nivel de especialista en Vias Terrestres", false);
 			Documento j = new Documento("Licenciatura en Fisica", false);
@@ -317,6 +346,9 @@ public class MetodosUtiles {
 			agencia.addEmpresa(empresa11);
 			agencia.addEmpresa(empresa12);
 			agencia.addEmpresa(empresa13);
+			agencia.addEmpresa(empresa14);
+			agencia.addEmpresa(empresa15);
+			agencia.addEmpresa(empresa16);
 
 			agencia.addCandidato(candidato1);
 			agencia.addCandidato(candidato2);
@@ -350,7 +382,6 @@ public class MetodosUtiles {
 			agencia.addRama(rama30);
 			agencia.addRama(rama31);
 			agencia.addRama(rama32);
-			agencia.addRama(rama32);
 			agencia.addRama(rama35);
 			agencia.addRama(rama36);
 			agencia.addRama(rama39);
@@ -364,6 +395,7 @@ public class MetodosUtiles {
 			agencia.addSector(sector6);
 			agencia.addSector(sector7);
 			agencia.addSector(sector8);
+			agencia.getListaEspecialidades().add(sector1);
 
 		}catch(YaExisteExceptions e){
 
@@ -376,28 +408,5 @@ public class MetodosUtiles {
 
 
 
-	@SuppressWarnings("deprecation")
-	public static void validacionJTextLetra(int tamActual,KeyEvent e){
-		Character letra=e.getKeyChar();
-		if(tamActual>=30 || (!(Character.isLetter(letra))&& !(Character.isSpace(letra)) && e.getExtendedKeyCode()!=KeyEvent.VK_BACK_SPACE)){
-			e.consume();
-			Toolkit x= Toolkit.getDefaultToolkit();
-			x.beep();
-		}
-	}
-	public static void validacionJTextNumero(int tamActual,int tamMax,KeyEvent e){
-		Character letra=e.getKeyChar();
-		if(tamActual==tamMax || (!(Character.isDigit(letra))&& e.getExtendedKeyCode()!=8)){
-			e.consume();
-			Toolkit x= Toolkit.getDefaultToolkit();
-			x.beep();
-		}
-	}
-	public static void validacionJTextCharacter(int tamActual,KeyEvent e){
-		if(tamActual>=30){
-			e.consume();
-			Toolkit x= Toolkit.getDefaultToolkit();
-			x.beep();
-		}
-	}
+
 }

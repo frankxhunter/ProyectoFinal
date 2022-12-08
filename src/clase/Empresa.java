@@ -3,6 +3,8 @@ package clase;
 import java.util.ArrayList;
 import java.util.Date;
 
+import excepcionesPropias.YaExisteExceptions;
+
 public class Empresa {
 	private String nombre;
 	private String direccion;
@@ -102,17 +104,35 @@ public class Empresa {
 					i++;
 		return salida;
 	}
-	public void addOferta(Oferta oferta){
-		listaOfertas.add(oferta);
+	public void addOferta(Oferta oferta) throws YaExisteExceptions{
+		boolean encontrado = false;
+		int i=0;
+		while(i<listaOfertas.size()&& !encontrado)
+			if(listaOfertas.get(i).getNumeroId().equalsIgnoreCase(oferta.getNumeroId()))
+				encontrado=true;
+			else i++;
+		if(!encontrado)
+			listaOfertas.add(oferta);
+		else 
+			throw new YaExisteExceptions("Ya existe una oferta con el mismo numero de identificacion");
 	}
-	public void addEntrevista(Entrevista entrevista) {
-		listaEntrevistas.add(entrevista);
+	public void addEntrevista(Entrevista entrevista) throws YaExisteExceptions {
+		boolean encontrado= false;
+		int i=0;
+		while(i<listaEntrevistas.size()&& !encontrado)
+			if(listaEntrevistas.get(i).mismoDia(entrevista))
+				encontrado=true;
+			else i++;
+		if(!encontrado)
+			listaEntrevistas.add(entrevista);
+		else
+			listaEntrevistas.get(i).addCandidato(entrevista.getListaCandidatos().get(0));
 	}
 	@SuppressWarnings("deprecation")
 	public ArrayList<Entrevista> obtenerEntrevista(int year, int month) {
 		ArrayList<Entrevista> out=new ArrayList<Entrevista>();
 		for(Entrevista x: listaEntrevistas)
-			if(x.getFecha().getYear()==year-1900 && x.getFecha().getMonth()==month-1)
+			if(x.getFecha().getYear()==year-1900 && x.getFecha().getMonth()==month)
 				out.add(x);
 		return out;
 	}

@@ -2,6 +2,8 @@ package clase;
 
 import java.util.ArrayList;
 
+import excepcionesPropias.YaExisteExceptions;
+
 public class Oferta {
 	private String numeroId;
 	private float salario;
@@ -66,6 +68,18 @@ public class Oferta {
 	}
 	public void setRama(Rama rama) {
 		this.rama = rama;
+	}
+	public void addCandidato(Candidato candidato)throws YaExisteExceptions{
+		boolean encontrado=false;
+		int i=0;
+		while(i<listaCandidatos.size() && !encontrado)
+				if(listaCandidatos.get(i).getCarnet().equalsIgnoreCase(candidato.getCarnet()))
+					encontrado=true;
+				else i++;
+		if(!encontrado)
+			listaCandidatos.add(candidato);
+		else
+			throw new YaExisteExceptions("Este Candidato ya esta en esta Oferta");
 	}
 	
 	

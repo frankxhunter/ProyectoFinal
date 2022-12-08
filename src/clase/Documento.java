@@ -3,6 +3,7 @@ package clase;
 public class Documento {
 	private String documento;
 	private Boolean obligatorio;
+	
 	public Documento(String documento, Boolean obligatorio) {
 		this.documento = documento;
 		this.obligatorio = obligatorio;

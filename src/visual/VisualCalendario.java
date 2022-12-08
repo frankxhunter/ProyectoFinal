@@ -26,6 +26,10 @@ import clase.Entrevista;
 
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 public class VisualCalendario extends JDialog {
 	/**
@@ -48,8 +52,6 @@ public class VisualCalendario extends JDialog {
 	private JScrollPane scrollPane_1;
 	private JTable table;
 	private JTable table2;
-	private JTextField textField;
-	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -68,14 +70,14 @@ public class VisualCalendario extends JDialog {
 	 * Create the dialog.
 	 */
 	public VisualCalendario() {
-		setBounds(100, 100, 612, 416);
+		setBounds(100, 100, 741, 416);
 		getContentPane().setLayout(null);
 		getContentPane().add(getPanel());
 	}
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-			panel.setBounds(0, 0, 596, 377);
+			panel.setBounds(0, 0, 715, 374);
 			panel.setLayout(null);
 			panel.add(getPanel_1());
 			panel.add(getPanel_2());
@@ -87,7 +89,7 @@ public class VisualCalendario extends JDialog {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
 			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Registro de entrevistas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_1.setBounds(10, 105, 324, 261);
+			panel_1.setBounds(10, 83, 361, 283);
 			panel_1.setLayout(new CardLayout(0, 0));
 			panel_1.add(getScrollPane(), "name_48977222191014");
 		}
@@ -97,7 +99,7 @@ public class VisualCalendario extends JDialog {
 		if (panel_2 == null) {
 			panel_2 = new JPanel();
 			panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Candidatos Citados ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_2.setBounds(341, 105, 245, 261);
+			panel_2.setBounds(381, 83, 324, 283);
 			panel_2.setLayout(new CardLayout(0, 0));
 			panel_2.add(getScrollPane_1(), "name_48985439277083");
 		}
@@ -107,15 +109,13 @@ public class VisualCalendario extends JDialog {
 		if (panel_3 == null) {
 			panel_3 = new JPanel();
 			panel_3.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Selecciona la fecha ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_3.setBounds(10, 11, 576, 83);
+			panel_3.setBounds(10, 11, 695, 61);
 			panel_3.setLayout(null);
 			panel_3.add(getLblSeleccionaElAo());
 			panel_3.add(getLblSeleccionaElMes());
 			panel_3.add(getYearChooser());
 			panel_3.add(getMonthChooser());
 			panel_3.add(getBtnActualizar());
-			panel_3.add(getTextField());
-			panel_3.add(getTextField_1());
 		}
 		return panel_3;
 	}
@@ -129,7 +129,7 @@ public class VisualCalendario extends JDialog {
 	private JLabel getLblSeleccionaElMes() {
 		if (lblSeleccionaElMes == null) {
 			lblSeleccionaElMes = new JLabel("Selecciona el mes");
-			lblSeleccionaElMes.setBounds(10, 58, 100, 14);
+			lblSeleccionaElMes.setBounds(182, 22, 100, 14);
 		}
 		return lblSeleccionaElMes;
 	}
@@ -143,7 +143,7 @@ public class VisualCalendario extends JDialog {
 	private JMonthChooser getMonthChooser() {
 		if (monthChooser == null) {
 			monthChooser = new JMonthChooser();
-			monthChooser.setBounds(120, 52, 108, 20);
+			monthChooser.setBounds(290, 22, 108, 20);
 		}
 		return monthChooser;
 	}
@@ -152,15 +152,10 @@ public class VisualCalendario extends JDialog {
 			btnActualizar = new JButton("Actualizar");
 			btnActualizar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-//					listaEntrevistas=AgenciaEmpleadora.getInstancia().obtenerEntrevista(yearChooser.getYear(),Integer.parseInt( textField.getText()));
-					listaEntrevistas=AgenciaEmpleadora.getInstancia().obtenerEntrevista(0,0);
-					
-//					Collections.sort(listaEntrevistas);
-					tableModel.refresh(listaEntrevistas);
-					tableModel2.setRowCount(0);
+					actualizar();
 				}
 			});
-			btnActualizar.setBounds(250, 52, 100, 23);
+			btnActualizar.setBounds(430, 22, 100, 23);
 		}
 		return btnActualizar;
 	}
@@ -198,20 +193,10 @@ public class VisualCalendario extends JDialog {
 		}
 		return table2;
 	}
-	private JTextField getTextField() {
-		if (textField == null) {
-			textField = new JTextField();
-			textField.setBounds(410, 19, 86, 20);
-			textField.setColumns(10);
-		}
-		return textField;
-	}
-	private JTextField getTextField_1() {
-		if (textField_1 == null) {
-			textField_1 = new JTextField();
-			textField_1.setBounds(410, 50, 86, 20);
-			textField_1.setColumns(10);
-		}
-		return textField_1;
+	public void actualizar(){
+		listaEntrevistas=AgenciaEmpleadora.getInstancia().obtenerEntrevista(yearChooser.getYear(),monthChooser.getMonth());
+		Collections.sort(listaEntrevistas);
+		tableModel.refresh(listaEntrevistas);
+		tableModel2.setRowCount(0);
 	}
 }

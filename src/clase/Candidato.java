@@ -175,14 +175,14 @@ public class Candidato {
 		return salida;
 	}
 	public void addDocumento(String documento) throws YaExisteExceptions{
-		boolean razon=true;
+		boolean encontrado=false;
 		int i=0;
-		while(i<documentos.size() && razon)
+		while(i<documentos.size() && !encontrado)
 			if(documentos.get(i).equalsIgnoreCase(documento))
-				razon=false;
+				encontrado=true;
 			else 
 				i++;
-		if(razon)
+		if(!encontrado)
 		documentos.add(documento);
 		else
 		throw new YaExisteExceptions("Ya existe");

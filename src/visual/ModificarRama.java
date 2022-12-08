@@ -26,6 +26,7 @@ import util.MetodosUtiles;
 import clase.AgenciaEmpleadora;
 import clase.Documento;
 import clase.Rama;
+import excepcionesPropias.YaExisteExceptions;
 
 public class ModificarRama extends JDialog {
 	/**
@@ -117,7 +118,7 @@ public class ModificarRama extends JDialog {
 				}
 				@Override
 				public void keyTyped(KeyEvent e) {
-				MetodosUtiles.validacionJTextLetra(txNombre.getText().trim().length(), e);
+					MetodosUtiles.validacionJTextLetra(txNombre.getText().trim().length(), e);
 				}
 			});
 			txNombre.setBounds(189, 35, 116, 20);
@@ -155,7 +156,7 @@ public class ModificarRama extends JDialog {
 			txDocumento.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
-				MetodosUtiles.validacionJTextCharacter(txDocumento.getText().trim().length(), e);}
+					MetodosUtiles.validacionJTextCharacter(txDocumento.getText().trim().length(), e);}
 			});
 			txDocumento.addMouseListener(new MouseAdapter() {
 				@Override
@@ -174,9 +175,13 @@ public class ModificarRama extends JDialog {
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(txDocumento.getText().trim().length()>0){
-						rama.addDocumento(new Documento(txDocumento.getText(),false));
-						tableModel.refresh(rama.getListaDocumentos());
-						txDocumento.setText("");
+						try{
+							rama.addDocumento(new Documento(txDocumento.getText(),false));
+							tableModel.refresh(rama.getListaDocumentos());
+							txDocumento.setText("");
+						}catch(YaExisteExceptions e){
+							MetodosUtiles.mostrarMensaje(e);
+						}
 					}
 					else{
 						label.setVisible(true);

@@ -2,6 +2,8 @@ package clase;
 
 import java.util.ArrayList;
 
+import excepcionesPropias.YaExisteExceptions;
+
 public class Especialidad {
 	private String nombre;
 	private ArrayList<Documento> listaDocumentos;
@@ -33,8 +35,18 @@ public class Especialidad {
 	public ArrayList<Documento> getListaDocumentos() {
 		return listaDocumentos;
 	}
-	public void addDocumento(Documento doc){
-		listaDocumentos.add(doc);
+	public void addDocumento(Documento documento) throws YaExisteExceptions{
+		boolean encontrado=false;
+		int i=0;
+		while(i<listaDocumentos.size() && !encontrado)
+			if(listaDocumentos.get(i).getDocumento().equalsIgnoreCase(documento.getDocumento()))
+				encontrado=true;
+			else 
+				i++;
+		if(!encontrado)
+			listaDocumentos.add(documento);
+		else
+		throw new YaExisteExceptions("Ya existe");
 	}
 
 }
