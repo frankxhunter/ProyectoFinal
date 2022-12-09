@@ -2,6 +2,7 @@ package clase;
 
 import java.util.ArrayList;
 
+import excepcionesPropias.ElementosInsuficientesException;
 import excepcionesPropias.YaExisteExceptions;
 
 public class AgenciaEmpleadora {
@@ -152,8 +153,9 @@ public class AgenciaEmpleadora {
 		else
 			throw new YaExisteExceptions("Ya existe la Rama");
 	}
-	public void addCandidato(Candidato candidato)throws YaExisteExceptions{
+	public void addCandidato(Candidato candidato)throws YaExisteExceptions, ElementosInsuficientesException{
 		boolean encontrado=false;
+		candidato.VerificarSiCumpleCondiciones();
 		int i=0;
 		while(i<listaCandidatos.size() && !encontrado)
 			if(listaCandidatos.get(i).getCarnet().equalsIgnoreCase(candidato.getCarnet()))

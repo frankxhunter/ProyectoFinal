@@ -31,6 +31,7 @@ import util.MetodosUtiles;
 import clase.AgenciaEmpleadora;
 import clase.Candidato;
 import clase.Rama;
+import excepcionesPropias.ElementosInsuficientesException;
 import excepcionesPropias.YaExisteExceptions;
 
 public class VisualModificaCandidato extends JDialog {
@@ -72,6 +73,9 @@ public class VisualModificaCandidato extends JDialog {
 	private JTextField txDocumento;
 	private JButton btnAgregar;
 	private JButton btnEliminar;
+	private JPanel panel_4;
+	private JLabel lblCandidato;
+	private JButton button;
 
 	/**
 	 * Launch the application.
@@ -89,11 +93,14 @@ public class VisualModificaCandidato extends JDialog {
 	 * Create the dialog.
 	 */
 	public VisualModificaCandidato(int pos) {
+		getContentPane().setBackground(new Color(158, 130, 116));
+		setUndecorated(true);
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setTitle("Agregar Candidatos");
-		setBounds(100, 100, 663, 539);
+		setBounds(100, 100, 678, 539);
 		getContentPane().setLayout(null);
 		getContentPane().add(getPanel());
+		getContentPane().add(getPanel_4());
 		setLocationRelativeTo(null);
 		position=pos;
 		if(pos!=-1){
@@ -108,8 +115,8 @@ public class VisualModificaCandidato extends JDialog {
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-			panel.setBackground(Color.DARK_GRAY);
-			panel.setBounds(0, 0, 647, 500);
+			panel.setBackground(new Color(158, 130, 116));
+			panel.setBounds(0, 34, 678, 505);
 			panel.setLayout(null);
 			panel.add(getPanel_1());
 			panel.add(getPanel_2());
@@ -121,10 +128,11 @@ public class VisualModificaCandidato extends JDialog {
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
-			panel_1.setBounds(10, 11, 265, 448);
-			panel_1.setLayout(null);
-			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2), "Datos del Candidato", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panel_1.setBackground(Color.LIGHT_GRAY);
+			panel_1.setBounds(10, 11, 295, 448);
+			panel_1.setLayout(null);
+			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 1), "Datos del Candidato", TitledBorder.LEFT, TitledBorder.TOP, 
+					new Font("Tahoma", Font.PLAIN, 15), new Color(0, 0, 0)));
 			panel_1.add(getLabel());
 			panel_1.add(getTxNombre());
 			panel_1.add(getLabel_1());
@@ -152,7 +160,7 @@ public class VisualModificaCandidato extends JDialog {
 			label = new JLabel("Carnet");
 			label.setHorizontalAlignment(SwingConstants.RIGHT);
 			label.setForeground(Color.BLACK);
-			label.setFont(new Font("Roboto Black", Font.BOLD, 12));
+			label.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			label.setBounds(80, 76, 60, 14);
 		}
 		return label;
@@ -168,7 +176,7 @@ public class VisualModificaCandidato extends JDialog {
 				}
 			});
 			txNombre.setColumns(10);
-			txNombre.setBounds(150, 28, 86, 20);
+			txNombre.setBounds(150, 28, 135, 20);
 		}
 		return txNombre;
 	}
@@ -177,7 +185,7 @@ public class VisualModificaCandidato extends JDialog {
 			label_1 = new JLabel("Nombre y Apelllidos");
 			label_1.setHorizontalAlignment(SwingConstants.RIGHT);
 			label_1.setForeground(Color.BLACK);
-			label_1.setFont(new Font("Roboto Black", Font.BOLD, 12));
+			label_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			label_1.setBounds(10, 28, 130, 14);
 		}
 		return label_1;
@@ -196,7 +204,7 @@ public class VisualModificaCandidato extends JDialog {
 				}
 			});
 			txCarnet.setColumns(10);
-			txCarnet.setBounds(150, 76, 86, 20);
+			txCarnet.setBounds(150, 76, 135, 20);
 		}
 		return txCarnet;
 	}
@@ -205,7 +213,7 @@ public class VisualModificaCandidato extends JDialog {
 			label_2 = new JLabel("Sexo");
 			label_2.setHorizontalAlignment(SwingConstants.RIGHT);
 			label_2.setForeground(Color.BLACK);
-			label_2.setFont(new Font("Roboto Black", Font.BOLD, 12));
+			label_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			label_2.setBounds(90, 124, 50, 14);
 		}
 		return label_2;
@@ -213,7 +221,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JComboBox  getCoSexo() {
 		if (coSexo == null) {
 			coSexo = new JComboBox();
-			coSexo.setBounds(150, 124, 86, 20);
+			coSexo.setBounds(150, 124, 135, 20);
 			Object[] sexos = new Object[2];
 			sexos[0]="Masculino";
 			sexos[1]="Femenino";
@@ -227,7 +235,7 @@ public class VisualModificaCandidato extends JDialog {
 			label_3 = new JLabel("Direccion");
 			label_3.setHorizontalAlignment(SwingConstants.RIGHT);
 			label_3.setForeground(Color.BLACK);
-			label_3.setFont(new Font("Roboto Black", Font.BOLD, 12));
+			label_3.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			label_3.setBounds(68, 172, 72, 14);
 		}
 		return label_3;
@@ -243,7 +251,7 @@ public class VisualModificaCandidato extends JDialog {
 				}
 			});
 			txDireccion.setColumns(10);
-			txDireccion.setBounds(150, 172, 86, 20);
+			txDireccion.setBounds(150, 172, 135, 20);
 		}
 		return txDireccion;
 	}
@@ -261,7 +269,7 @@ public class VisualModificaCandidato extends JDialog {
 				}
 			});
 			txTelefono.setColumns(10);
-			txTelefono.setBounds(150, 268, 86, 20);
+			txTelefono.setBounds(150, 268, 135, 20);
 		}
 		return txTelefono;
 	}
@@ -270,7 +278,7 @@ public class VisualModificaCandidato extends JDialog {
 			label_4 = new JLabel("Rama de interes");
 			label_4.setHorizontalAlignment(SwingConstants.RIGHT);
 			label_4.setForeground(Color.BLACK);
-			label_4.setFont(new Font("Roboto Black", Font.BOLD, 12));
+			label_4.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			label_4.setBounds(10, 220, 130, 14);
 		}
 		return label_4;
@@ -279,7 +287,7 @@ public class VisualModificaCandidato extends JDialog {
 		if (coRama == null) {
 			coRama = new JComboBox ();
 			coRama.setModel(new DefaultComboBoxModel (crearComboBox()));
-			coRama.setBounds(150, 220, 86, 20);
+			coRama.setBounds(150, 220, 135, 20);
 		}
 		return coRama;
 	}
@@ -288,7 +296,7 @@ public class VisualModificaCandidato extends JDialog {
 			label_5 = new JLabel("A\u00F1os de Experiencia");
 			label_5.setHorizontalAlignment(SwingConstants.RIGHT);
 			label_5.setForeground(Color.BLACK);
-			label_5.setFont(new Font("Roboto Black", Font.BOLD, 12));
+			label_5.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			label_5.setBounds(0, 412, 140, 14);
 		}
 		return label_5;
@@ -297,7 +305,7 @@ public class VisualModificaCandidato extends JDialog {
 		if (spAnnos == null) {
 			spAnnos = new JSpinner();
 			spAnnos.setModel(new SpinnerNumberModel(0, 0, 60, 1));
-			spAnnos.setBounds(150, 412, 86, 20);
+			spAnnos.setBounds(150, 412, 135, 20);
 		}
 		return spAnnos;
 	}
@@ -312,7 +320,7 @@ public class VisualModificaCandidato extends JDialog {
 				}
 			});
 			txEspecialidad.setColumns(10);
-			txEspecialidad.setBounds(150, 364, 86, 20);
+			txEspecialidad.setBounds(150, 364, 135, 20);
 		}
 		return txEspecialidad;
 	}
@@ -321,7 +329,7 @@ public class VisualModificaCandidato extends JDialog {
 			label_6 = new JLabel("Especialidad");
 			label_6.setHorizontalAlignment(SwingConstants.RIGHT);
 			label_6.setForeground(Color.BLACK);
-			label_6.setFont(new Font("Roboto Black", Font.BOLD, 12));
+			label_6.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			label_6.setBounds(54, 364, 86, 14);
 		}
 		return label_6;
@@ -331,7 +339,7 @@ public class VisualModificaCandidato extends JDialog {
 			label_7 = new JLabel("Nivel Escolar");
 			label_7.setHorizontalAlignment(SwingConstants.RIGHT);
 			label_7.setForeground(Color.BLACK);
-			label_7.setFont(new Font("Roboto Black", Font.BOLD, 12));
+			label_7.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			label_7.setBounds(54, 316, 86, 14);
 		}
 		return label_7;
@@ -347,7 +355,7 @@ public class VisualModificaCandidato extends JDialog {
 				}
 			});
 			txNivelEscolar.setColumns(10);
-			txNivelEscolar.setBounds(150, 316, 86, 20);
+			txNivelEscolar.setBounds(150, 316, 135, 20);
 		}
 		return txNivelEscolar;
 	}
@@ -356,7 +364,7 @@ public class VisualModificaCandidato extends JDialog {
 			label_8 = new JLabel("Telefono");
 			label_8.setHorizontalAlignment(SwingConstants.RIGHT);
 			label_8.setForeground(Color.BLACK);
-			label_8.setFont(new Font("Roboto Black", Font.BOLD, 12));
+			label_8.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			label_8.setBounds(78, 268, 60, 14);
 		}
 		return label_8;
@@ -364,6 +372,8 @@ public class VisualModificaCandidato extends JDialog {
 	private JButton getBtnAceptar() {
 		if (btnAceptar == null) {
 			btnAceptar = new JButton("Aceptar");
+			btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnAceptar.setFocusable(false);
 			btnAceptar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try{
@@ -381,10 +391,12 @@ public class VisualModificaCandidato extends JDialog {
 					siguientePantalla();	
 					}catch(YaExisteExceptions e2){
 						MetodosUtiles.mostrarMensaje(e2);
+					} catch (ElementosInsuficientesException e1) {
+						MetodosUtiles.mostrarMensaje(e1);
 					}
 				}
 			});
-			btnAceptar.setBounds(425, 470, 89, 23);
+			btnAceptar.setBounds(479, 470, 89, 23);
 			btnAceptar.setEnabled(false);
 		}
 		return btnAceptar;
@@ -392,13 +404,15 @@ public class VisualModificaCandidato extends JDialog {
 	private JButton getBtnCancelar() {
 		if (btnCancelar == null) {
 			btnCancelar = new JButton("Cancelar");
+			btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnCancelar.setFocusable(false);
 			btnCancelar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					siguientePantalla();
 					
 				}
 			});
-			btnCancelar.setBounds(536, 470, 89, 23);
+			btnCancelar.setBounds(578, 470, 89, 23);
 		}
 		return btnCancelar;
 	}
@@ -406,8 +420,10 @@ public class VisualModificaCandidato extends JDialog {
 	private JPanel getPanel_2() {
 		if (panel_2 == null) {
 			panel_2 = new JPanel();
+			panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Documentos", TitledBorder.LEADING, TitledBorder.TOP, 
+					new Font("Tahoma", Font.PLAIN, 15), new Color(0, 0, 0)));
 			panel_2.setBackground(Color.LIGHT_GRAY);
-			panel_2.setBounds(285, 11, 352, 448);
+			panel_2.setBounds(315, 11, 352, 448);
 			panel_2.setLayout(null);
 			panel_2.add(getPanel_3());
 			panel_2.add(getLblDocumento());
@@ -451,6 +467,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JLabel getLblDocumento() {
 		if (lblDocumento == null) {
 			lblDocumento = new JLabel("Documento");
+			lblDocumento.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			lblDocumento.setBounds(10, 21, 66, 14);
 		}
 		return lblDocumento;
@@ -464,7 +481,7 @@ public class VisualModificaCandidato extends JDialog {
 					MetodosUtiles.validacionJTextCharacter(txDocumento.getText().length(), e);
 				}
 			});
-			txDocumento.setBounds(73, 18, 163, 20);
+			txDocumento.setBounds(86, 18, 150, 20);
 			txDocumento.setColumns(10);
 		}
 		return txDocumento;
@@ -472,6 +489,8 @@ public class VisualModificaCandidato extends JDialog {
 	private JButton getBtnAgregar() {
 		if (btnAgregar == null) {
 			btnAgregar = new JButton("Agregar");
+			btnAgregar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnAgregar.setFocusable(false);
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if(txDocumento.getText().trim().length()>0){
@@ -494,6 +513,8 @@ public class VisualModificaCandidato extends JDialog {
 	private JButton getBtnEliminar() {
 		if (btnEliminar == null) {
 			btnEliminar = new JButton("Eliminar");
+			btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnEliminar.setFocusable(false);
 			btnEliminar.setEnabled(false);
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -559,5 +580,40 @@ public class VisualModificaCandidato extends JDialog {
 		x.setVisible(true);
 		x.setLocationRelativeTo(null);
 		x.setModal(true);
+	}
+	private JPanel getPanel_4() {
+		if (panel_4 == null) {
+			panel_4 = new JPanel();
+			panel_4.setLayout(null);
+			panel_4.setBackground(new Color(219, 219, 219));
+			panel_4.setBounds(0, 0, 678, 33);
+			panel_4.add(getLblCandidato());
+			panel_4.add(getButton());
+		}
+		return panel_4;
+	}
+	private JLabel getLblCandidato() {
+		if (lblCandidato == null) {
+			lblCandidato = new JLabel("Candidato");
+			lblCandidato.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			lblCandidato.setBounds(256, 0, 171, 33);
+		}
+		return lblCandidato;
+	}
+	private JButton getButton() {
+		if (button == null) {
+			button = new JButton("X");
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					siguientePantalla();
+				}
+			});
+			button.setForeground(Color.WHITE);
+			button.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			button.setFocusable(false);
+			button.setBackground(Color.RED);
+			button.setBounds(629, 0, 49, 33);
+		}
+		return button;
 	}
 }

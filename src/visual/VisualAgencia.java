@@ -42,6 +42,7 @@ public class VisualAgencia extends JFrame {
 	private JMenu mnEntrevistas;
 	private JMenuItem mntmVerRegistroMensual;
 	private JMenuItem mntmVerReportes;
+	private JMenuItem mntmCerrar;
 
 	/**
 	 * Launch the application.
@@ -63,6 +64,7 @@ public class VisualAgencia extends JFrame {
 	 * Create the frame.
 	 */
 	public VisualAgencia() {
+		setUndecorated(true);
 		setType(Type.UTILITY);
 		setVisible(true);
 		setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -97,6 +99,7 @@ public class VisualAgencia extends JFrame {
 		if (mnArchivo == null) {
 			mnArchivo = new JMenu("Archivo");
 			mnArchivo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+			mnArchivo.add(getMntmCerrar());
 			mnArchivo.add(getMntmSalir());
 		}
 		return mnArchivo;
@@ -278,5 +281,17 @@ public class VisualAgencia extends JFrame {
 			mntmVerReportes.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		}
 		return mntmVerReportes;
+	}
+	private JMenuItem getMntmCerrar() {
+		if (mntmCerrar == null) {
+			mntmCerrar = new JMenuItem("Cerrar Programa");
+			mntmCerrar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					System.exit(1);
+				}
+			});
+			mntmCerrar.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		}
+		return mntmCerrar;
 	}
 }

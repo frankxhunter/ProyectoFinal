@@ -27,6 +27,7 @@ import clase.AgenciaEmpleadora;
 import clase.Documento;
 import clase.Sector;
 import excepcionesPropias.YaExisteExceptions;
+import javax.swing.JRadioButton;
 
 public class ModificarSector extends JDialog {
 	/**
@@ -54,6 +55,7 @@ public class ModificarSector extends JDialog {
 	private JPanel panel_3;
 	private JLabel lblCreacinDeSector;
 	private JButton button;
+	private JRadioButton rdbtnObligatorio;
 
 	/**
 	 * Launch the application.
@@ -95,8 +97,8 @@ public class ModificarSector extends JDialog {
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-			panel.setBackground(new Color(158, 130, 116));
-			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Sector", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setBackground(Color.LIGHT_GRAY);
+			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Sector", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.PLAIN, 15), null));
 			panel.setBounds(7, 45, 699, 458);
 			panel.setLayout(null);
 			panel.add(getLblNombreDelSector());
@@ -133,8 +135,8 @@ public class ModificarSector extends JDialog {
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
-			panel_1.setBackground(new Color(151, 119, 104));
-			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Documentos Necesarios", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel_1.setBackground(Color.LIGHT_GRAY);
+			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Documentos Necesarios", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.PLAIN, 15), null));
 			panel_1.setBounds(19, 65, 661, 374);
 			panel_1.setLayout(null);
 			panel_1.add(getLblDocumentoParaAgregar());
@@ -143,6 +145,7 @@ public class ModificarSector extends JDialog {
 			panel_1.add(getPanel_2());
 			panel_1.add(getBtnEliminar());
 			panel_1.add(getLabel());
+			panel_1.add(getRdbtnObligatorio());
 		}
 		return panel_1;
 	}
@@ -178,11 +181,12 @@ public class ModificarSector extends JDialog {
 	private JButton getBtnAgregar() {
 		if (btnAgregar == null) {
 			btnAgregar = new JButton("Agregar");
+			btnAgregar.setFocusable(false);
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					if(txDocumento.getText().trim().length()>0){
 						try{
-					sector.addDocumento(new Documento(txDocumento.getText(),false));
+					sector.addDocumento(new Documento(txDocumento.getText(),rdbtnObligatorio.isSelected()));
 					tableModel.refresh(sector.getListaDocumentos());
 					txDocumento.setText("");
 						}catch(YaExisteExceptions e){
@@ -201,7 +205,7 @@ public class ModificarSector extends JDialog {
 	private JPanel getPanel_2() {
 		if (panel_2 == null) {
 			panel_2 = new JPanel();
-			panel_2.setBounds(10, 69, 641, 286);
+			panel_2.setBounds(10, 91, 641, 272);
 			panel_2.setLayout(new CardLayout(0, 0));
 			panel_2.add(getScrollPane(), "name_304077772251119");
 		}
@@ -233,6 +237,7 @@ public class ModificarSector extends JDialog {
 	private JButton getBtnAceptar() {
 		if (btnAceptar == null) {
 			btnAceptar = new JButton("Aceptar");
+			btnAceptar.setFocusable(false);
 			btnAceptar.setEnabled(false);
 			btnAceptar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -257,6 +262,7 @@ public class ModificarSector extends JDialog {
 	private JButton getBtnCancelar() {
 		if (btnCancelar == null) {
 			btnCancelar = new JButton("Cancelar");
+			btnCancelar.setFocusable(false);
 			btnCancelar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					VisualSector x= new VisualSector();
@@ -274,6 +280,7 @@ public class ModificarSector extends JDialog {
 	private JButton getBtnEliminar() {
 		if (btnEliminar == null) {
 			btnEliminar = new JButton("Eliminar");
+			btnEliminar.setFocusable(false);
 			btnEliminar.setEnabled(false);
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -295,6 +302,7 @@ public class ModificarSector extends JDialog {
 	private JButton getBtModificar() {
 		if (btModificar == null) {
 			btModificar = new JButton("Modificar");
+			btModificar.setFocusable(false);
 			btModificar.setVisible(false);
 			btModificar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -352,6 +360,7 @@ public class ModificarSector extends JDialog {
 	private JButton getButton() {
 		if (button == null) {
 			button = new JButton("X");
+			button.setFocusable(false);
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					VisualSector y = new VisualSector();
@@ -367,5 +376,14 @@ public class ModificarSector extends JDialog {
 			button.setBounds(665, 0, 49, 32);
 		}
 		return button;
+	}
+	private JRadioButton getRdbtnObligatorio() {
+		if (rdbtnObligatorio == null) {
+			rdbtnObligatorio = new JRadioButton("Obligatorio");
+			rdbtnObligatorio.setBackground(Color.LIGHT_GRAY);
+			rdbtnObligatorio.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			rdbtnObligatorio.setBounds(33, 61, 152, 23);
+		}
+		return rdbtnObligatorio;
 	}
 }

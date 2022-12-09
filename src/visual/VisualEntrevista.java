@@ -21,6 +21,10 @@ import util.MetodosUtiles;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.LineBorder;
 
 public class VisualEntrevista extends JDialog {
 	/**
@@ -34,7 +38,11 @@ public class VisualEntrevista extends JDialog {
 	private JCalendar calendar;
 	private JButton btnAgregar;
 	private JButton btnCancelar;
-	private JLabel lblInformacion;
+	private JPanel panel_1;
+	private JLabel lblEntrevista;
+	private JButton button;
+	private JLabel lblCandidato;
+	private JLabel lblEmpresa;
 
 	/**
 	 * Launch the application.
@@ -54,22 +62,29 @@ public class VisualEntrevista extends JDialog {
 	 * @param jDialog 
 	 */
 	public VisualEntrevista(Candidato candidato, Oferta oferta, JDialog jDialog) {
+		getContentPane().setBackground(new Color(158, 130, 116));
+		setUndecorated(true);
 		this.candidato=candidato;
 		this.oferta=oferta;
 		pantalla=jDialog;
-		setBounds(100, 100, 478, 324);
+		setBounds(100, 100, 484, 370);
 		getContentPane().setLayout(null);
 		getContentPane().add(getPanel());
+		getContentPane().add(getPanel_1());
 	}
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-			panel.setBounds(0, 0, 462, 285);
+			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Fecha de la Entrevista", 
+					TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.PLAIN, 15), new Color(0, 0, 0)));
+			panel.setBackground(Color.LIGHT_GRAY);
+			panel.setBounds(10, 44, 462, 315);
 			panel.setLayout(null);
 			panel.add(getCalendar());
 			panel.add(getBtnAgregar());
 			panel.add(getBtnCancelar());
-			panel.add(getLblInformacion());
+			panel.add(getLblCandidato());
+			panel.add(getLblEmpresa());
 		}
 		return panel;
 	}
@@ -77,7 +92,7 @@ public class VisualEntrevista extends JDialog {
 		if (calendar == null) {
 			calendar = new JCalendar();
 			calendar.getDayChooser().setWeekOfYearVisible(false);
-			calendar.setBounds(10, 68, 442, 175);
+			calendar.setBounds(10, 95, 442, 175);
 			calendar.getDayChooser().setMinSelectableDate(new Date());
 
 		}
@@ -86,6 +101,7 @@ public class VisualEntrevista extends JDialog {
 	private JButton getBtnAgregar() {
 		if (btnAgregar == null) {
 			btnAgregar = new JButton("Agregar");
+			btnAgregar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btnAgregar.addActionListener(new ActionListener() {
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
@@ -102,19 +118,20 @@ public class VisualEntrevista extends JDialog {
 					cambiaPantalla();
 				}
 			});
-			btnAgregar.setBounds(260, 251, 89, 23);
+			btnAgregar.setBounds(264, 281, 89, 23);
 		}
 		return btnAgregar;
 	}
 	private JButton getBtnCancelar() {
 		if (btnCancelar == null) {
 			btnCancelar = new JButton("Cancelar");
+			btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btnCancelar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					cambiaPantalla();
 				}
 			});
-			btnCancelar.setBounds(359, 251, 89, 23);
+			btnCancelar.setBounds(363, 281, 89, 23);
 		}
 		return btnCancelar;
 	}
@@ -124,12 +141,55 @@ public class VisualEntrevista extends JDialog {
 		pantalla.setModal(true);
 		pantalla.setVisible(true);
 	}
-	private JLabel getLblInformacion() {
-		if (lblInformacion == null) {
-			lblInformacion = new JLabel("Introduzca la fecha de la entrevista del candidato "+candidato.getNombre()
-					+" con la empresa "+oferta.getEmpresaPerteneciente().getNombre()+"para la oferta de"+oferta.getRama().getNombre());
-			lblInformacion.setBounds(10, 11, 442, 46);
+	private JPanel getPanel_1() {
+		if (panel_1 == null) {
+			panel_1 = new JPanel();
+			panel_1.setLayout(null);
+			panel_1.setBackground(new Color(219, 219, 219));
+			panel_1.setBounds(0, 0, 482, 33);
+			panel_1.add(getLblEntrevista());
+			panel_1.add(getButton());
 		}
-		return lblInformacion;
+		return panel_1;
+	}
+	private JLabel getLblEntrevista() {
+		if (lblEntrevista == null) {
+			lblEntrevista = new JLabel("Entrevista");
+			lblEntrevista.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			lblEntrevista.setBounds(180, 0, 171, 33);
+		}
+		return lblEntrevista;
+	}
+	private JButton getButton() {
+		if (button == null) {
+			button = new JButton("X");
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cambiaPantalla();
+				}
+			});
+			button.setForeground(Color.WHITE);
+			button.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			button.setFocusable(false);
+			button.setBackground(Color.RED);
+			button.setBounds(433, 0, 49, 33);
+		}
+		return button;
+	}
+	private JLabel getLblCandidato() {
+		if (lblCandidato == null) {
+			lblCandidato = new JLabel("Candidato: "+ candidato.getNombre());
+			lblCandidato.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			lblCandidato.setBounds(10, 28, 393, 14);
+		}
+		return lblCandidato;
+	}
+	private JLabel getLblEmpresa() {
+		if (lblEmpresa == null) {
+			lblEmpresa = new JLabel("Empresa: "+oferta.getEmpresaPerteneciente().getNombre() );
+			lblEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			lblEmpresa.setBounds(10, 60, 393, 14);
+		}
+		return lblEmpresa;
 	}
 }

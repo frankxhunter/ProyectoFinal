@@ -36,6 +36,9 @@ import clase.Candidato;
 import clase.Empresa;
 import clase.Oferta;
 import clase.Rama;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
+import java.awt.SystemColor;
 
 public class VisualOferta extends JDialog {
 	/**
@@ -71,6 +74,9 @@ public class VisualOferta extends JDialog {
 	private JPanel panel_4;
 	private JScrollPane scrollPane_1;
 	private JTable table_1;
+	private JPanel panel_5;
+	private JLabel lblOfertas;
+	private JButton button_1;
 
 	/**
 	 * Launch the application.
@@ -89,11 +95,13 @@ public class VisualOferta extends JDialog {
 	 * Create the dialog.
 	 */
 	public VisualOferta() {
-		getContentPane().setBackground(Color.DARK_GRAY);
-		setBounds(100, 100, 1097, 402);
+		setUndecorated(true);
+		getContentPane().setBackground(new Color(158, 130, 116));
+		setBounds(100, 100, 1044, 402);
 		getContentPane().setLayout(null);
 		getContentPane().add(getPanel());
 		getContentPane().add(getPanel_3());
+		getContentPane().add(getPanel_5());
 		if(AgenciaEmpleadora.getInstancia().getListaEmpresas().get(0)!=null){
 		empresa=AgenciaEmpleadora.getInstancia().getListaEmpresas().get(0);
 		tableModel.refresh(empresa.getListaOfertas());
@@ -104,8 +112,9 @@ public class VisualOferta extends JDialog {
 		if (panel == null) {
 			panel = new JPanel();
 			panel.setBackground(Color.LIGHT_GRAY);
-			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Control de Ofertas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel.setBounds(10, 11, 728, 341);
+			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Control de Ofertas", TitledBorder.LEADING, TitledBorder.TOP, 
+					new Font("Tahoma", Font.PLAIN, 15), new Color(0, 0, 0)));
+			panel.setBounds(10, 50, 711, 341);
 			panel.setLayout(null);
 			panel.add(getLblSeleccioneLaEmpresa());
 			panel.add(getCoEmpresa());
@@ -118,7 +127,9 @@ public class VisualOferta extends JDialog {
 	}
 	private JLabel getLblSeleccioneLaEmpresa() {
 		if (lblSeleccioneLaEmpresa == null) {
-			lblSeleccioneLaEmpresa = new JLabel("Seleccione la Empresa Responsable");
+			lblSeleccioneLaEmpresa = new JLabel("Seleccione la Empresa");
+			lblSeleccioneLaEmpresa.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblSeleccioneLaEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			lblSeleccioneLaEmpresa.setBounds(10, 23, 169, 14);
 		}
 		return lblSeleccioneLaEmpresa;
@@ -140,8 +151,8 @@ public class VisualOferta extends JDialog {
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
-			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Lista de Ofertas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_1.setBounds(347, 11, 371, 285);
+			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Lista de Ofertas", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.PLAIN, 15), null));
+			panel_1.setBounds(330, 11, 371, 285);
 			panel_1.setLayout(new CardLayout(0, 0));
 			panel_1.add(getScrollPane(), "name_485070499566889");
 		}
@@ -157,6 +168,8 @@ public class VisualOferta extends JDialog {
 	private JButton getBtnCancelar() {
 		if (btnCancelar == null) {
 			btnCancelar = new JButton("Cancelar");
+			btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnCancelar.setFocusable(false);
 			btnCancelar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					dispose();
@@ -169,6 +182,8 @@ public class VisualOferta extends JDialog {
 	private JButton getBtnModificar() {
 		if (btnModificar == null) {
 			btnModificar = new JButton("Modificar");
+			btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnModificar.setFocusable(false);
 			btnModificar.setEnabled(false);
 			btnModificar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -185,13 +200,15 @@ public class VisualOferta extends JDialog {
 					btnEliminar.setEnabled(false);
 				}
 			});
-			btnModificar.setBounds(530, 307, 89, 23);
+			btnModificar.setBounds(513, 307, 89, 23);
 		}
 		return btnModificar;
 	}
 	private JButton getBtnAgregar() {
 		if (btnAgregar == null) {
 			btnAgregar = new JButton("Agregar");
+			btnAgregar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnAgregar.setFocusable(false);
 			btnAgregar.setEnabled(false);
 			btnAgregar.setBounds(114, 202, 89, 23);
 			btnAgregar.addActionListener(new ActionListener() {
@@ -230,7 +247,7 @@ public class VisualOferta extends JDialog {
 	private JPanel getPanel_2() {
 		if (panel_2 == null) {
 			panel_2 = new JPanel();
-			panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "A\u00F1adir Ofertas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "A\u00F1adir Ofertas", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.PLAIN, 15), null));
 			panel_2.setBounds(10, 48, 311, 248);
 			panel_2.setLayout(null);
 			panel_2.add(getLblNewLabel());
@@ -250,6 +267,8 @@ public class VisualOferta extends JDialog {
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("Numero de ID");
+			lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			lblNewLabel.setBounds(25, 32, 79, 14);
 		}
 		return lblNewLabel;
@@ -282,6 +301,8 @@ public class VisualOferta extends JDialog {
 	private JLabel getLblSalario() {
 		if (lblSalario == null) {
 			lblSalario = new JLabel("Salario");
+			lblSalario.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblSalario.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			lblSalario.setBounds(58, 75, 46, 14);
 		}
 		return lblSalario;
@@ -296,7 +317,9 @@ public class VisualOferta extends JDialog {
 	}
 	private JLabel getLblCantidadDePlazas() {
 		if (lblCantidadDePlazas == null) {
-			lblCantidadDePlazas = new JLabel("Cantidad de Plazas");
+			lblCantidadDePlazas = new JLabel(" Plazas");
+			lblCantidadDePlazas.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblCantidadDePlazas.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			lblCantidadDePlazas.setBounds(4, 119, 100, 14);
 		}
 		return lblCantidadDePlazas;
@@ -312,6 +335,8 @@ public class VisualOferta extends JDialog {
 	private JButton getBtnEliminar() {
 		if (btnEliminar == null) {
 			btnEliminar = new JButton("Eliminar");
+			btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnEliminar.setFocusable(false);
 			btnEliminar.setEnabled(false);
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -322,7 +347,7 @@ public class VisualOferta extends JDialog {
 					btnModificar.setEnabled(false);
 				}
 			});
-			btnEliminar.setBounds(629, 307, 89, 23);
+			btnEliminar.setBounds(612, 307, 89, 23);
 		}
 		return btnEliminar;
 	}
@@ -336,6 +361,8 @@ public class VisualOferta extends JDialog {
 	private JLabel getLblRama() {
 		if (lblRama == null) {
 			lblRama = new JLabel("Rama");
+			lblRama.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblRama.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			lblRama.setBounds(58, 162, 46, 14);
 		}
 		return lblRama;
@@ -362,19 +389,36 @@ public class VisualOferta extends JDialog {
 	}
 	private JButton getButton() {
 		if (button == null) {
-			button = new JButton("#");
+			button = new JButton("");
+			button.setBackground(SystemColor.textHighlight);
+			button.setHorizontalTextPosition(SwingConstants.CENTER);
+			button.setIcon(null);
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-//					int numero
+					boolean encontrado;
+					String id;
+					do{
+						encontrado=false;
+						int value=(int)(Math.random()*10000+10000);
+						id=""+value;
+						for(Empresa x: AgenciaEmpleadora.getInstancia().getListaEmpresas())
+							for(Oferta y: x.getListaOfertas())
+								if(y.getNumeroId().equalsIgnoreCase(id))
+									encontrado=true;
+						
+					}while(encontrado);
+					txID.setText(id);
 				}
 			});
 			button.setFont(new Font("Tahoma", Font.PLAIN, 1));
-			button.setBounds(284, 29, 17, 18);
+			button.setBounds(284, 29, 17, 17);
 		}
 		return button;
 	}
 	public void rellenar(){
 		txID.setText(empresa.getListaOfertas().get(table.getSelectedRow()).getNumeroId());
+		spCantidad.setValue(empresa.getListaOfertas().get(table.getSelectedRow()).getCantCandidatos());
+		spSalario.setValue(empresa.getListaOfertas().get(table.getSelectedRow()).getSalario());
 		btnModificar.setEnabled(true);
 		btnEliminar.setEnabled(true);
 	}
@@ -382,8 +426,9 @@ public class VisualOferta extends JDialog {
 		if (panel_3 == null) {
 			panel_3 = new JPanel();
 			panel_3.setBackground(Color.LIGHT_GRAY);
-			panel_3.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Candidatos disponibles", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_3.setBounds(748, 11, 323, 341);
+			panel_3.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Candidatos disponibles",
+					TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.PLAIN, 15), new Color(0, 0, 0)));
+			panel_3.setBounds(731, 50, 299, 341);
 			panel_3.setLayout(null);
 			panel_3.add(getBtnProgramarEntrevista());
 			panel_3.add(getPanel_4());
@@ -393,6 +438,8 @@ public class VisualOferta extends JDialog {
 	private JButton getBtnProgramarEntrevista() {
 		if (btnProgramarEntrevista == null) {
 			btnProgramarEntrevista = new JButton("Programar Entrevista");
+			btnProgramarEntrevista.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnProgramarEntrevista.setFocusable(false);
 			btnProgramarEntrevista.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Oferta oferta=empresa.getListaOfertas().get(table.getSelectedRow());
@@ -407,14 +454,14 @@ public class VisualOferta extends JDialog {
 				}
 			});
 			btnProgramarEntrevista.setEnabled(false);
-			btnProgramarEntrevista.setBounds(104, 307, 146, 23);
+			btnProgramarEntrevista.setBounds(62, 307, 188, 23);
 		}
 		return btnProgramarEntrevista;
 	}
 	private JPanel getPanel_4() {
 		if (panel_4 == null) {
 			panel_4 = new JPanel();
-			panel_4.setBounds(10, 21, 303, 271);
+			panel_4.setBounds(10, 21, 279, 271);
 			panel_4.setLayout(new CardLayout(0, 0));
 			panel_4.add(getScrollPane_1(), "name_564395980841573");
 		}
@@ -442,5 +489,40 @@ public class VisualOferta extends JDialog {
 	}
 	public JDialog getThis(){
 		return this;
+	}
+	private JPanel getPanel_5() {
+		if (panel_5 == null) {
+			panel_5 = new JPanel();
+			panel_5.setLayout(null);
+			panel_5.setBackground(new Color(219, 219, 219));
+			panel_5.setBounds(0, 0, 1097, 33);
+			panel_5.add(getLblOfertas());
+			panel_5.add(getButton_1());
+		}
+		return panel_5;
+	}
+	private JLabel getLblOfertas() {
+		if (lblOfertas == null) {
+			lblOfertas = new JLabel("Ofertas");
+			lblOfertas.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			lblOfertas.setBounds(520, 0, 171, 33);
+		}
+		return lblOfertas;
+	}
+	private JButton getButton_1() {
+		if (button_1 == null) {
+			button_1 = new JButton("X");
+			button_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			button_1.setForeground(Color.WHITE);
+			button_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			button_1.setFocusable(false);
+			button_1.setBackground(Color.RED);
+			button_1.setBounds(994, 0, 49, 33);
+		}
+		return button_1;
 	}
 }

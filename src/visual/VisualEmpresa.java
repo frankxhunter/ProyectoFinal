@@ -56,6 +56,8 @@ public class VisualEmpresa extends JDialog {
 	private JButton btEliminar;
 	private JButton btModificar;
 	private JPanel panel_2;
+	private JPanel panel_3;
+	private JLabel lblListaDeEmpresas;
 	private JButton button;
 
 	/**
@@ -76,21 +78,23 @@ public class VisualEmpresa extends JDialog {
 	 */
 	public VisualEmpresa() {
 		setUndecorated(true);
-		setBounds(100, 100, 709, 481);
+		setBounds(100, 100, 697, 491);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(new Color(0, 0, 0));
+		contentPanel.setBackground(new Color(158, 130, 116));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		contentPanel.add(getPanel_2());
+		contentPanel.add(getPanel_3());
 		tableModel.refresh(AgenciaEmpleadora.getInstancia().getListaEmpresas());
 	}
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-			panel.setBounds(10, 172, 679, 294);
+			panel.setBounds(0, 143, 679, 294);
 			panel.setBackground(Color.LIGHT_GRAY);
-			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2), "Listado de Empresas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2), "Listado de Empresas", TitledBorder.LEADING, TitledBorder.TOP,
+					new Font("Tahoma", Font.PLAIN, 15), new Color(0, 0, 0)));
 			panel.setLayout(null);
 			panel.add(getScrollPane());
 			panel.add(getBtModificar());
@@ -101,7 +105,7 @@ public class VisualEmpresa extends JDialog {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
-			scrollPane.setBounds(10, 11, 643, 233);
+			scrollPane.setBounds(10, 25, 643, 224);
 			scrollPane.setViewportView(getTable());
 		}
 		return scrollPane;
@@ -124,10 +128,11 @@ public class VisualEmpresa extends JDialog {
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
-			panel_1.setBounds(10, 25, 679, 132);
+			panel_1.setBounds(0, 0, 679, 132);
 			panel_1.setBackground(Color.LIGHT_GRAY);
 			panel_1.setLayout(null);
-			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2), "Datos de la Empresa", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2), "Datos de la Empresa", TitledBorder.LEADING, TitledBorder.TOP, 
+					new Font("Tahoma", Font.PLAIN, 15), new Color(0, 0, 0)));
 			panel_1.add(getTxNombre());
 			panel_1.add(getLabel());
 			panel_1.add(getLabel_1());
@@ -158,7 +163,7 @@ public class VisualEmpresa extends JDialog {
 	private JLabel getLabel() {
 		if (label == null) {
 			label = new JLabel("Nombre");
-			label.setFont(new Font("Roboto", Font.BOLD, 13));
+			label.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			label.setHorizontalAlignment(SwingConstants.RIGHT);
 			label.setBounds(45, 36, 56, 16);
 		}
@@ -167,7 +172,7 @@ public class VisualEmpresa extends JDialog {
 	private JLabel getLabel_1() {
 		if (label_1 == null) {
 			label_1 = new JLabel("Direccion");
-			label_1.setFont(new Font("Roboto", Font.BOLD, 13));
+			label_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			label_1.setHorizontalAlignment(SwingConstants.RIGHT);
 			label_1.setBounds(45, 67, 56, 14);
 		}
@@ -191,7 +196,7 @@ public class VisualEmpresa extends JDialog {
 	private JLabel getLabel_2() {
 		if (label_2 == null) {
 			label_2 = new JLabel("Telefono");
-			label_2.setFont(new Font("Roboto", Font.BOLD, 13));
+			label_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			label_2.setHorizontalAlignment(SwingConstants.RIGHT);
 			label_2.setBounds(353, 37, 62, 14);
 		}
@@ -200,7 +205,7 @@ public class VisualEmpresa extends JDialog {
 	private JLabel getLabel_3() {
 		if (label_3 == null) {
 			label_3 = new JLabel("Sector");
-			label_3.setFont(new Font("Roboto", Font.BOLD, 13));
+			label_3.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			label_3.setHorizontalAlignment(SwingConstants.RIGHT);
 			label_3.setBounds(369, 67, 46, 14);
 		}
@@ -235,6 +240,7 @@ public class VisualEmpresa extends JDialog {
 	private JButton getBtAgregar() {
 		if (btAgregar == null) {
 			btAgregar = new JButton("Agregar");
+			btAgregar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try{
@@ -258,6 +264,7 @@ public class VisualEmpresa extends JDialog {
 	private JButton getBtEliminar() {
 		if (btEliminar == null) {
 			btEliminar = new JButton("Eliminar");
+			btEliminar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btEliminar.setBounds(564, 260, 89, 23);
 			btEliminar.setEnabled(false);
 			btEliminar.addActionListener(new ActionListener() {
@@ -275,6 +282,7 @@ public class VisualEmpresa extends JDialog {
 	private JButton getBtModificar() {
 		if (btModificar == null) {
 			btModificar = new JButton("Modificar");
+			btModificar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btModificar.setBounds(465, 260, 89, 23);
 			btModificar.setEnabled(false);
 			btModificar.addActionListener(new ActionListener() {
@@ -316,29 +324,13 @@ public class VisualEmpresa extends JDialog {
 	private JPanel getPanel_2() {
 		if (panel_2 == null) {
 			panel_2 = new JPanel();
-			panel_2.setBackground(Color.DARK_GRAY);
-			panel_2.setBounds(5, 5, 699, 471);
+			panel_2.setBackground(new Color(158, 130, 116));
+			panel_2.setBounds(10, 44, 699, 463);
 			panel_2.setLayout(null);
-			panel_2.add(getButton());
 			panel_2.add(getPanel_1());
 			panel_2.add(getPanel());
 		}
 		return panel_2;
-	}
-	private JButton getButton() {
-		if (button == null) {
-			button = new JButton("");
-			button.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					dispose();
-				}
-			});
-			button.setIcon(new ImageIcon(VisualEmpresa.class.getResource("/com/sun/javafx/scene/control/skin/caspian/dialog-error.png")));
-			button.setSelectedIcon(new ImageIcon(VisualEmpresa.class.getResource("/com/sun/javafx/scene/control/skin/caspian/dialog-error.png")));
-			button.setFont(new Font("Roboto", Font.BOLD | Font.ITALIC, 7));
-			button.setBounds(674, 0, 25, 18);
-		}
-		return button;
 	}
 	public String[] crearComboBox(){
 		String[] salida=new String[AgenciaEmpleadora.getInstancia().getlistaSector().size()];
@@ -357,4 +349,39 @@ public class VisualEmpresa extends JDialog {
 		btEliminar.setEnabled(true);
 	}
 
+	private JPanel getPanel_3() {
+		if (panel_3 == null) {
+			panel_3 = new JPanel();
+			panel_3.setLayout(null);
+			panel_3.setBackground(new Color(219, 219, 219));
+			panel_3.setBounds(0, 0, 697, 33);
+			panel_3.add(getLblListaDeEmpresas());
+			panel_3.add(getButton_1());
+		}
+		return panel_3;
+	}
+	private JLabel getLblListaDeEmpresas() {
+		if (lblListaDeEmpresas == null) {
+			lblListaDeEmpresas = new JLabel("Lista de Empresas");
+			lblListaDeEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			lblListaDeEmpresas.setBounds(249, 0, 263, 33);
+		}
+		return lblListaDeEmpresas;
+	}
+	private JButton getButton_1() {
+		if (button == null) {
+			button = new JButton("X");
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			button.setForeground(Color.WHITE);
+			button.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			button.setFocusable(false);
+			button.setBackground(Color.RED);
+			button.setBounds(648, 0, 49, 33);
+		}
+		return button;
+	}
 }

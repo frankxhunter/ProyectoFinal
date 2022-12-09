@@ -25,6 +25,9 @@ import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VisualReportes extends JDialog {
 	private JTabbedPane tabbedPane;
@@ -43,6 +46,9 @@ public class VisualReportes extends JDialog {
 	private JLabel lblPromedioDeEdades;
 	private JLabel lblNewLabel;
 	private JLabel lblGupoPoblacional;
+	private JPanel panel_6;
+	private JLabel lblReportes;
+	private JButton button;
 
 	/**
 	 * Launch the application.
@@ -61,14 +67,20 @@ public class VisualReportes extends JDialog {
 	 * Create the dialog.
 	 */
 	public VisualReportes() {
-		setBounds(100, 100, 531, 321);
+		getContentPane().setBackground(new Color(151, 119, 104));
+		setBackground(Color.LIGHT_GRAY);
+		setUndecorated(true);
+		setBounds(100, 100, 517, 321);
 		getContentPane().setLayout(null);
 		getContentPane().add(getTabbedPane());
+		getContentPane().add(getPanel_6());
 	}
 	private JTabbedPane getTabbedPane() {
 		if (tabbedPane == null) {
 			tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-			tabbedPane.setBounds(10, 11, 495, 260);
+			tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			tabbedPane.setBackground(Color.LIGHT_GRAY);
+			tabbedPane.setBounds(10, 50, 495, 260);
 			tabbedPane.addTab("Promedio de Salarios", null, getPanel(), null);
 			tabbedPane.addTab("Ramas mas Solicitadas", null, getPanel_1(), null);
 			tabbedPane.addTab("Promedio de Edad", null, getPanel_2(), null);
@@ -78,6 +90,7 @@ public class VisualReportes extends JDialog {
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
+			panel.setBackground(Color.LIGHT_GRAY);
 			panel.setLayout(null);
 			panel.add(getPanel_3());
 		}
@@ -86,6 +99,7 @@ public class VisualReportes extends JDialog {
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
+			panel_1.setBackground(Color.LIGHT_GRAY);
 			panel_1.setLayout(null);
 			panel_1.add(getPanel_4());
 		}
@@ -94,6 +108,7 @@ public class VisualReportes extends JDialog {
 	private JPanel getPanel_2() {
 		if (panel_2 == null) {
 			panel_2 = new JPanel();
+			panel_2.setBackground(Color.LIGHT_GRAY);
 			panel_2.setLayout(null);
 			panel_2.add(getPanel_5());
 		}
@@ -150,6 +165,7 @@ public class VisualReportes extends JDialog {
 	private JPanel getPanel_5() {
 		if (panel_5 == null) {
 			panel_5 = new JPanel();
+			panel_5.setBackground(Color.LIGHT_GRAY);
 			panel_5.setBounds(10, 11, 470, 210);
 			panel_5.setLayout(null);
 			panel_5.add(getLblPromedioDeEdades());
@@ -193,5 +209,40 @@ public class VisualReportes extends JDialog {
 		else 
 			salida="3ra Edad";
 		return salida;
+	}
+	private JPanel getPanel_6() {
+		if (panel_6 == null) {
+			panel_6 = new JPanel();
+			panel_6.setLayout(null);
+			panel_6.setBackground(new Color(219, 219, 219));
+			panel_6.setBounds(0, 0, 517, 33);
+			panel_6.add(getLblReportes());
+			panel_6.add(getButton());
+		}
+		return panel_6;
+	}
+	private JLabel getLblReportes() {
+		if (lblReportes == null) {
+			lblReportes = new JLabel("Reportes");
+			lblReportes.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			lblReportes.setBounds(175, 0, 185, 33);
+		}
+		return lblReportes;
+	}
+	private JButton getButton() {
+		if (button == null) {
+			button = new JButton("X");
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			button.setForeground(Color.WHITE);
+			button.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			button.setFocusable(false);
+			button.setBackground(Color.RED);
+			button.setBounds(468, 0, 49, 33);
+		}
+		return button;
 	}
 }

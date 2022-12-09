@@ -3,6 +3,7 @@ package clase;
 import java.util.ArrayList;
 import java.util.Date;
 
+import excepcionesPropias.ElementosInsuficientesException;
 import excepcionesPropias.YaExisteExceptions;
 
 public class Candidato implements Comparable<Candidato>{
@@ -182,6 +183,28 @@ public class Candidato implements Comparable<Candidato>{
 			out+=1900;
 		out=year-out;
 		return out;
+	}
+	public void VerificarSiCumpleCondiciones() throws ElementosInsuficientesException{
+		ArrayList<String> faltantes=new ArrayList<String>();
+		for(Documento x: rama.getListaDocumentos()){
+			if(x.getObligatorio()){
+				boolean encontrado=false;
+				int i=0;
+				while(!encontrado && i<documentos.size())
+					if(x.getDocumento().equalsIgnoreCase(documentos.get(i)))
+						encontrado=true;
+					else i++;
+				if(!encontrado)
+					faltantes.add(x.getDocumento());
+			}
+		}
+		if(faltantes.size()>0){
+			String mensaje="";
+			for(String z: faltantes)
+				mensaje+=z+"\n";
+			throw new ElementosInsuficientesException(mensaje);
+		}
+			
 	}
 
 

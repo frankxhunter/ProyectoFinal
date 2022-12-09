@@ -30,6 +30,7 @@ import clase.Rama;
 import javax.swing.UIManager;
 
 import excepcionesPropias.YaExisteExceptions;
+import javax.swing.JRadioButton;
 
 public class ModificarRama extends JDialog {
 	/**
@@ -58,6 +59,7 @@ public class ModificarRama extends JDialog {
 	private JScrollPane scrollPane_1;
 	private JPanel panel_4;
 	private JLabel lblCreacinDeRama;
+	private JRadioButton radioButton;
 
 	/**
 	 * Launch the application.
@@ -103,7 +105,7 @@ public class ModificarRama extends JDialog {
 		if (panel == null) {
 			panel = new JPanel();
 			panel.setBounds(7, 45, 699, 458);
-			panel.setBackground(new Color(158, 130, 116));
+			panel.setBackground(Color.LIGHT_GRAY);
 			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Rama", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panel.setLayout(null);
 			panel.add(getLblNombreDelaRama());
@@ -141,7 +143,7 @@ public class ModificarRama extends JDialog {
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
-			panel_1.setBackground(new Color(151, 119, 104));
+			panel_1.setBackground(Color.LIGHT_GRAY);
 			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Documentos Necesarios", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			panel_1.setBounds(19, 65, 661, 374);
 			panel_1.setLayout(null);
@@ -151,6 +153,7 @@ public class ModificarRama extends JDialog {
 			panel_1.add(getPanel_2());
 			panel_1.add(getBtnEliminar());
 			panel_1.add(getLabel());
+			panel_1.add(getRadioButton());
 		}
 		return panel_1;
 	}
@@ -190,7 +193,7 @@ public class ModificarRama extends JDialog {
 					try {
 						if(txDocumento.getText().trim().length()>0){
 
-							rama.addDocumento(new Documento(txDocumento.getText(),false));
+							rama.addDocumento(new Documento(txDocumento.getText(),radioButton.isSelected()));
 
 							tableModel.refresh(rama.getListaDocumentos());
 							txDocumento.setText("");
@@ -210,7 +213,7 @@ public class ModificarRama extends JDialog {
 	private JPanel getPanel_2() {
 		if (panel_2 == null) {
 			panel_2 = new JPanel();
-			panel_2.setBounds(10, 69, 641, 286);
+			panel_2.setBounds(10, 94, 641, 261);
 			panel_2.setLayout(new CardLayout(0, 0));
 			panel_2.add(getScrollPane(), "name_304077772251119");
 		}
@@ -336,6 +339,7 @@ public class ModificarRama extends JDialog {
 	private JButton getBtnX() {
 		if (btnX == null) {
 			btnX = new JButton("X");
+			btnX.setFocusable(false);
 			btnX.setBounds(665, 0, 49, 32);
 			btnX.setForeground(Color.WHITE);
 			btnX.setBackground(Color.RED);
@@ -377,5 +381,14 @@ public class ModificarRama extends JDialog {
 			lblCreacinDeRama.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		}
 		return lblCreacinDeRama;
+	}
+	private JRadioButton getRadioButton() {
+		if (radioButton == null) {
+			radioButton = new JRadioButton("Obligatorio");
+			radioButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			radioButton.setBackground(Color.LIGHT_GRAY);
+			radioButton.setBounds(33, 64, 152, 23);
+		}
+		return radioButton;
 	}
 }

@@ -23,6 +23,7 @@ import clase.AgenciaEmpleadora;
 import clase.Candidato;
 import clase.Oferta;
 import clase.Rama;
+import javax.swing.JLabel;
 
 public class VisualCandidato extends JDialog {
 	/**
@@ -43,6 +44,9 @@ public class VisualCandidato extends JDialog {
 	private JScrollPane scrollPane_1;
 	private JButton btnProgramarEntrevista;
 	private JTable table_1;
+	private JPanel panel_3;
+	private JLabel lblListaDeCandidatos;
+	private JButton button;
 
 	/**
 	 * Launch the application.
@@ -61,7 +65,8 @@ public class VisualCandidato extends JDialog {
 	 * Create the dialog.
 	 */
 	public VisualCandidato() {
-		setBounds(100, 100, 1067, 463);
+		setUndecorated(true);
+		setBounds(100, 100, 1051, 463);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(0, 0, 0));
 		contentPanel.setForeground(new Color(0, 0, 0));
@@ -80,10 +85,10 @@ public class VisualCandidato extends JDialog {
 	private JPanel getPanel_1() {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
-			panel_1.setBounds(10, 11, 664, 393);
+			panel_1.setBounds(10, 58, 664, 393);
 			panel_1.setBackground(Color.LIGHT_GRAY);
 			panel_1.setLayout(null);
-			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2), "Listado de Candidatos", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Listado de Candidatos", TitledBorder.LEFT, TitledBorder.TOP, new Font("Tahoma", Font.PLAIN, 15), new Color(0, 0, 0)));
 			panel_1.add(getScrollPane());
 			panel_1.add(getBtModificar());
 			panel_1.add(getBtEliminar());
@@ -103,7 +108,7 @@ public class VisualCandidato extends JDialog {
 	private JButton getBtModificar() {
 		if (btModificar == null) {
 			btModificar = new JButton("Modificar");
-			btModificar.setFont(new Font("Roboto Black", Font.BOLD, 12));
+			btModificar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btModificar.setEnabled(false);
 			btModificar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -132,7 +137,7 @@ public class VisualCandidato extends JDialog {
 					tableModel2.setRowCount(0);
 				}
 			});
-			btEliminar.setFont(new Font("Roboto Black", Font.BOLD, 12));
+			btEliminar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btEliminar.setBounds(555, 349, 99, 23);
 		}
 		return btEliminar;
@@ -141,10 +146,11 @@ public class VisualCandidato extends JDialog {
 		if (panel_2 == null) {
 			panel_2 = new JPanel();
 			panel_2.setBounds(0, 0, 1051, 462);
-			panel_2.setBackground(Color.DARK_GRAY);
+			panel_2.setBackground(new Color(158, 130, 116));
 			panel_2.setLayout(null);
 			panel_2.add(getPanel_1());
 			panel_2.add(getPanel());
+			panel_2.add(getPanel_3());
 		}
 		return panel_2;
 	}
@@ -177,6 +183,7 @@ public class VisualCandidato extends JDialog {
 	private JButton getBtnAgregar() {
 		if (btnAgregar == null) {
 			btnAgregar = new JButton("Agregar");
+			btnAgregar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					VisualModificaCandidato x=new VisualModificaCandidato(-1);
@@ -186,7 +193,7 @@ public class VisualCandidato extends JDialog {
 					x.setVisible(true);
 				}
 			});
-			btnAgregar.setBounds(347, 349, 89, 23);
+			btnAgregar.setBounds(337, 349, 99, 23);
 		}
 		return btnAgregar;
 	}
@@ -196,9 +203,9 @@ public class VisualCandidato extends JDialog {
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Ofertas Disponibles", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Ofertas Disponibles", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.PLAIN, 15), new Color(0, 0, 0)));
 			panel.setBackground(Color.LIGHT_GRAY);
-			panel.setBounds(684, 11, 357, 393);
+			panel.setBounds(684, 58, 357, 393);
 			panel.setLayout(null);
 			panel.add(getScrollPane_1());
 			panel.add(getBtnProgramarEntrevista());
@@ -237,8 +244,8 @@ public class VisualCandidato extends JDialog {
 				}
 			});
 			btnProgramarEntrevista.setEnabled(false);
-			btnProgramarEntrevista.setFont(new Font("Roboto Black", Font.BOLD, 12));
-			btnProgramarEntrevista.setBounds(133, 344, 188, 23);
+			btnProgramarEntrevista.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnProgramarEntrevista.setBounds(71, 344, 216, 23);
 		}
 		return btnProgramarEntrevista;
 	}
@@ -258,6 +265,41 @@ public class VisualCandidato extends JDialog {
 	}
 	public JDialog getThis(){
 		return this;
+	}
+	private JPanel getPanel_3() {
+		if (panel_3 == null) {
+			panel_3 = new JPanel();
+			panel_3.setLayout(null);
+			panel_3.setBackground(new Color(219, 219, 219));
+			panel_3.setBounds(0, 0, 1051, 33);
+			panel_3.add(getLblListaDeCandidatos());
+			panel_3.add(getButton());
+		}
+		return panel_3;
+	}
+	private JLabel getLblListaDeCandidatos() {
+		if (lblListaDeCandidatos == null) {
+			lblListaDeCandidatos = new JLabel("Lista de Candidatos");
+			lblListaDeCandidatos.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			lblListaDeCandidatos.setBounds(440, 0, 316, 33);
+		}
+		return lblListaDeCandidatos;
+	}
+	private JButton getButton() {
+		if (button == null) {
+			button = new JButton("X");
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			button.setForeground(Color.WHITE);
+			button.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			button.setFocusable(false);
+			button.setBackground(Color.RED);
+			button.setBounds(1002, 0, 49, 33);
+		}
+		return button;
 	}
 }
 
