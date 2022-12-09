@@ -52,8 +52,15 @@ public class OfertaTestCase {
 		assertEquals(id, x.getNumeroId());
 		assertNotEquals(id2, x.getNumeroId());
 		assertNotEquals(id3, x.getNumeroId());
-	
-		
-		
+	}
+	@Test
+	public void testOferta(){
+		try{
+		Oferta oferta = new Oferta("12345", 234, 2, null,null);
+		Oferta oferta2 = new Oferta(null, 234, 2, null,null);
+		fail("Not yet implemented");
+		}catch(IllegalArgumentException e){
+			
+		}
 	}
 }

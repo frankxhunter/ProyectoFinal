@@ -1,13 +1,18 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.sql.Date;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import clase.Candidato;
 import clase.Entrevista;
+import clase.Oferta;
 import excepcionesPropias.YaExisteExceptions;
 
 public class EntrevistaTestCase {
@@ -57,7 +62,16 @@ public class EntrevistaTestCase {
 		assertFalse(x.mismoDia(d3));
 		assertFalse(x.mismoDia(d2));
 		assertTrue(x.mismoDia(d));
-		
-		
+
+
+	}
+	@Test
+	public void testEntrevista(){
+		try{
+			Entrevista entrevista1=new Entrevista(new Date(123,2,31), new Candidato(), new Oferta());
+			Entrevista entrevista2=new Entrevista(null, new Candidato(), new Oferta());
+			fail("Not yet implemented");
+		}catch(IllegalArgumentException e){
+		}
 	}
 }

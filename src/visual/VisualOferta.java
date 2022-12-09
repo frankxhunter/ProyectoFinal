@@ -36,8 +36,12 @@ import clase.Candidato;
 import clase.Empresa;
 import clase.Oferta;
 import clase.Rama;
+
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+
+import excepcionesPropias.YaExisteExceptions;
+
 import java.awt.SystemColor;
 
 public class VisualOferta extends JDialog {
@@ -213,14 +217,18 @@ public class VisualOferta extends JDialog {
 			btnAgregar.setBounds(114, 202, 89, 23);
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					try{
 					Oferta  oferta=new Oferta(txID.getText(), Integer.parseInt(spSalario.getValue().toString()),
 							Integer.parseInt(spCantidad.getValue().toString()), 
 							AgenciaEmpleadora.getInstancia().obtenerRama(coRama.getSelectedItem().toString()),empresa);
-					empresa.getListaOfertas().add(oferta);
+					empresa.addOferta(oferta);;
 					tableModel.refresh(empresa.getListaOfertas());
 					limpiar();		
 					btnAgregar.setEnabled(false);
 					btnModificar.setEnabled(false);
+					}catch(YaExisteExceptions d){
+						MetodosUtiles.mostrarMensaje(d);
+					}
 				}
 			});
 		}

@@ -30,6 +30,8 @@ public class CandidatoTestCase {
 	public void testAddDocumeto() {
 		try{
 		String documento1="Carnet ID";
+		String documento2="Pasaporte";
+		 x.addDocumento(documento2);
 	    x.addDocumento(documento1);
 		fail("Not yet implemented");
 
@@ -47,9 +49,20 @@ public class CandidatoTestCase {
 		assertFalse(x.verificarSiCumpleOferta(oferta2));
 		assertTrue(x.verificarSiCumpleOferta(oferta));
 		assertFalse(x.verificarSiCumpleOferta(oferta3));
-		
-		
-		
+	}
+	@Test
+	public void testCandidato(){
+		try {
+			//Todo bien
+			Candidato candidato1= new Candidato("12345678910", "Juan", "Masculino", "calle14",
+					"5465357", "12 grado", "Ninguna", 3, null);
+			//Se lanza exception
+			Candidato candidato2= new Candidato("12345678910", null, "Masculino", "calle14",
+					"5465357", "12 grado", "Ninguna", 3, null);
+			fail("Not yet implemented");
+		}catch(IllegalArgumentException e){
+			
+		}
 	}
 
 }

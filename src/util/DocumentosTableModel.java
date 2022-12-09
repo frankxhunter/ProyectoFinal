@@ -19,7 +19,7 @@ public class DocumentosTableModel extends DefaultTableModel{
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		// TODO Auto-generated method stub
-		if( columnIndex==2)
+		if( columnIndex==1)
 			return	Boolean.class;
 		return super.getColumnClass(columnIndex);
 	}

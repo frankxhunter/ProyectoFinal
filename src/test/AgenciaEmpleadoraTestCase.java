@@ -24,9 +24,10 @@ public class AgenciaEmpleadoraTestCase extends TestCase {
 	
 	public void testBuscarCand(){
 		String id1=null;
-		String id2="21321";
-		String id3 ="34567";
-		Candidato candidato= new Candidato(id2, "1", "1", "1", "1", "1", "1", 10, new Rama());
+		String id2="90030541233";
+		String id3 ="01021023112";
+		Candidato candidato= new Candidato(id2, "Alberto", "Masculino", "Calle Jose Ortega y Gasset, 40", "54587996",
+				"Universitario","Ing. civil", 8, null);
 		x.getListaCandidatos().add(candidato);
 		assertEquals(null, x.buscarCandidato(id1));
 		assertEquals(candidato, x.buscarCandidato(id2));

@@ -9,7 +9,7 @@ public class Entrevista implements Comparable<Entrevista> {
 	private Date fecha; //Dia de la entrevista
 	private ArrayList<Candidato> listaCandidatos;
 	private Oferta oferta;
-	
+
 	public Entrevista(Date fecha,Candidato candidato,Oferta oferta){
 		setFecha(fecha);
 		listaCandidatos = new ArrayList<Candidato>();
@@ -31,7 +31,10 @@ public class Entrevista implements Comparable<Entrevista> {
 		return fecha;
 	}
 	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+		if(fecha!=null){
+			this.fecha = fecha;
+		}else 
+			throw new IllegalArgumentException("No se ha elegido una fecha");
 	}
 	public ArrayList<Candidato> getListaCandidatos() {
 		return listaCandidatos;
@@ -57,21 +60,21 @@ public class Entrevista implements Comparable<Entrevista> {
 					out=true;
 		return out;
 	}
-	
+
 	public void addCandidato(Candidato candidato)throws YaExisteExceptions{
 		boolean encontrado=false;
 		int i=0;
 		while(i<listaCandidatos.size() && !encontrado)
-				if(listaCandidatos.get(i).getCarnet().equalsIgnoreCase(candidato.getCarnet()))
-					encontrado=true;
-				else i++;
+			if(listaCandidatos.get(i).getCarnet().equalsIgnoreCase(candidato.getCarnet()))
+				encontrado=true;
+			else i++;
 		if(!encontrado)
 			listaCandidatos.add(candidato);
 		else
 			throw new YaExisteExceptions("Este Candidato ya esta en esta entrevista");
 	}
-	
-	
+
+
 
 
 }

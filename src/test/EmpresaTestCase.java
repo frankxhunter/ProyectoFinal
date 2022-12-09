@@ -28,8 +28,8 @@ public class EmpresaTestCase {
 	}
 	@Test
 	public void testaddOferta(){
-		x.getListaOfertas().add(new Oferta("1234", 222, 2, null, null));
-		Oferta oferta = new Oferta("1234", 4, 5, null, null);
+		x.getListaOfertas().add(new Oferta("4321", 222, 2, null, null));
+		Oferta oferta = new Oferta("5432", 4, 5, null, null);
 		Oferta oferta2 = new Oferta("2134", 4, 5, null, null);
 		Oferta oferta3 = new Oferta("4321", 4, 5, null, null);
 		try{
@@ -55,5 +55,19 @@ public class EmpresaTestCase {
 		assertTrue(x.verificaSiCandidatoTieneEntrevista(new Date(123,1,21), candidato));
 		assertFalse(x.verificaSiCandidatoTieneEntrevista(new Date(123,2,21), new Candidato()));
 		
+	}
+	
+	
+	@Test
+	public void testEmpresa(){
+		try {
+			//Todo bien
+			Empresa empresa= new Empresa("Google", "Suecia", "53525467", null);
+			//Se lanza exception
+			Empresa empresa2= new Empresa(null, "Suecia", "53525467", null);
+			fail("Not yet implemented");
+		}catch(IllegalArgumentException e){
+			
+		}
 	}
 }

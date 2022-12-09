@@ -250,12 +250,16 @@ public class ModificarRama extends JDialog {
 			btnAceptar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					rama.setNombre(txNombre.getText());
-					AgenciaEmpleadora.getInstancia().getListaEspecialidades().add(rama);
+					try{
+					AgenciaEmpleadora.getInstancia().addRama(rama);
 					VisualRama x= new VisualRama();
 					dispose();
 					x.setVisible(true);
 					x.setModal(true);
 					x.setLocationRelativeTo(null);
+					}catch(YaExisteExceptions e){
+					MetodosUtiles.mostrarMensaje(e);
+					}
 				}
 			});
 		}

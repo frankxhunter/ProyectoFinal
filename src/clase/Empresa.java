@@ -71,7 +71,8 @@ public class Empresa implements Comparable<Empresa>{
 		else 
 			throw new IllegalArgumentException("No puede estar vacio");
 	}
-	public boolean verificaSiCandidatoTieneEntrevista(Date fecha,Candidato candidato){
+	public boolean verificaSiCandidatoTieneEntrevista(Date fecha,
+			Candidato candidato){
 		boolean salida=false;
 		int i=0;
 		boolean dia=false;
@@ -79,8 +80,10 @@ public class Empresa implements Comparable<Empresa>{
 			if(listaEntrevistas.get(i).mismoDia(fecha)){
 				dia=true;
 				int j=0;
-				while(j<listaEntrevistas.get(i).getListaCandidatos().size() && !salida)
-					if(listaEntrevistas.get(i).getListaCandidatos().get(j).equals(candidato))
+				while(j<listaEntrevistas.get(i).getListaCandidatos().
+						size() && !salida)
+					if(listaEntrevistas.get(i).getListaCandidatos().
+							get(j).equals(candidato))
 						salida=true;
 					else
 						j++;
@@ -108,13 +111,15 @@ public class Empresa implements Comparable<Empresa>{
 		boolean encontrado = false;
 		int i=0;
 		while(i<listaOfertas.size()&& !encontrado)
-			if(listaOfertas.get(i).getNumeroId().equalsIgnoreCase(oferta.getNumeroId()))
+			if(listaOfertas.get(i).getNumeroId().
+					equalsIgnoreCase(oferta.getNumeroId()))
 				encontrado=true;
 			else i++;
 		if(!encontrado)
 			listaOfertas.add(oferta);
 		else 
-			throw new YaExisteExceptions("Ya existe una oferta con el mismo numero de identificacion");
+			throw new YaExisteExceptions("Ya existe una "
+					+ "oferta con el mismo numero de identificacion");
 	}
 	public void addEntrevista(Entrevista entrevista) throws YaExisteExceptions {
 		boolean encontrado= false;
