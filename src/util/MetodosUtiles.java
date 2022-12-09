@@ -48,7 +48,7 @@ public class MetodosUtiles {
 	@SuppressWarnings("deprecation")
 	public static void RellenoAutomatico(){
 		try{
-			AgenciaEmpleadora agencia=AgenciaEmpleadora.CrearInstancia("Agencia");
+			AgenciaEmpleadora agencia=AgenciaEmpleadora.CrearInstancia("Agencia Cubana");
 
 			Documento a = new Documento("Pasaporte", true);
 			Documento b = new Documento("Certificado de 9no grado", true);

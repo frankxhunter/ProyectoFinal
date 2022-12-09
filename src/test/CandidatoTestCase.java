@@ -7,33 +7,49 @@ import org.junit.Before;
 import org.junit.Test;
 
 import clase.Candidato;
+import clase.Oferta;
 import clase.Rama;
 import excepcionesPropias.YaExisteExceptions;
 
 public class CandidatoTestCase {
     private Candidato  x;
+    private Rama rama;
 	@Before
 	public void setUp() throws Exception {
-		x= new Candidato("897", "1", "1", "1", "1", "1", "1", 10, new Rama());
-		x.addDocumento("La pinga");
+		 rama=new Rama("Limpieza");
+		x= new Candidato("897", "1", "1", "1", "1", "1", "1", 10, rama);
+		x.addDocumento("Carnet ID");
 
 	}
-
 	@After
 	public void tearDown() throws Exception {
 		x=null;
 	}
 
 	@Test
-	public void test() {
+	public void testAddDocumeto() {
 		try{
-		String documento1="La pinga";
+		String documento1="Carnet ID";
 	    x.addDocumento(documento1);
 		fail("Not yet implemented");
 
 		}catch(YaExisteExceptions e){			
-//		   assertEquals(e.getMessage(), e.getMessage());
 		}
+	}
+	@Test
+	public void testVerificarSiCumpleOferta(){
+		//Prueba de Condiciones
+		Oferta oferta=new Oferta("12345", 1000, 2, rama, null);
+		Oferta oferta2=new Oferta("123", 33333, 1, new Rama("hola"), null);
+		Oferta oferta3=new Oferta("12345", 1000, 2, rama, null);
+		oferta3.getListaCandidatos().add(x);
+
+		assertFalse(x.verificarSiCumpleOferta(oferta2));
+		assertTrue(x.verificarSiCumpleOferta(oferta));
+		assertFalse(x.verificarSiCumpleOferta(oferta3));
+		
+		
+		
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import excepcionesPropias.YaExisteExceptions;
 
-public class Especialidad {
+public abstract class Especialidad {
 	private String nombre;
 	private ArrayList<Documento> listaDocumentos;
 

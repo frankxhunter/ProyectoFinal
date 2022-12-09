@@ -36,21 +36,6 @@ public class Candidato implements Comparable<Candidato>{
 	public Candidato() {
 		documentos = new ArrayList<String>();
 	}
-
-	//	public Candidato(String carnet, String nombre, String sexo,
-	//			String direccion, String telefono, String nivelEscolaridad,
-	//			String especialidad, int yearsExp) {
-	//		setCarnet(carnet);
-	//		setNombre(nombre);
-	//		setSexo(sexo);
-	//		setDireccion(direccion);
-	//		setTelefono(telefono);
-	//		setNivelEscolaridad(nivelEscolaridad);
-	//		setEspecialidad(especialidad);
-	//		setYearsExp(yearsExp);
-	//		setYearsExp(yearsExp);
-	//		setRama(rama);
-	//	}
 	public String getCarnet() {
 		return carnet;
 	}
@@ -147,7 +132,7 @@ public class Candidato implements Comparable<Candidato>{
 	}
 	public boolean verificarSiCumpleOferta(Oferta oferta){
 		boolean salida=false;
-		if(rama.getNombre()==oferta.getRama().getNombre()){
+		if(rama.getNombre().equalsIgnoreCase(oferta.getRama().getNombre())){
 			salida=true;
 			int i=0;
 			while(i<oferta.getListaCandidatos().size() && salida)

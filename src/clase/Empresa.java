@@ -76,7 +76,7 @@ public class Empresa implements Comparable<Empresa>{
 		int i=0;
 		boolean dia=false;
 		while(i<listaEntrevistas.size()&& !dia){
-			if(listaEntrevistas.get(i).getFecha().equals(fecha)){
+			if(listaEntrevistas.get(i).mismoDia(fecha)){
 				dia=true;
 				int j=0;
 				while(j<listaEntrevistas.get(i).getListaCandidatos().size() && !salida)

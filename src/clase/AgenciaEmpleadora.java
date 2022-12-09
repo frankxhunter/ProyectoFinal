@@ -71,9 +71,6 @@ public class AgenciaEmpleadora {
 
 
 	//Metodos de la lista de especialidades
-	public void agregar(Especialidad x){
-		listaEspecialidades.add(x);
-	}
 	public ArrayList<Especialidad> getListaEspecialidades(){
 		return listaEspecialidades;
 	}
@@ -92,14 +89,6 @@ public class AgenciaEmpleadora {
 				listaRamas.add((Rama)x);
 		return listaRamas;
 
-	}
-	public void validarSiExiste(Sector sector){
-		for(Especialidad x: listaEspecialidades){
-			if(x instanceof Sector)
-				if(x.getNombre().equalsIgnoreCase(sector.getNombre()))
-					throw new IllegalArgumentException("Error");
-
-		}
 	}
 	public Sector obtenerSector(String nombre){
 		int i=0;
