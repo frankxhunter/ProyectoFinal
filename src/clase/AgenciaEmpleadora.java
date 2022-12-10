@@ -6,45 +6,27 @@ import excepcionesPropias.ElementosInsuficientesException;
 import excepcionesPropias.YaExisteExceptions;
 
 public class AgenciaEmpleadora {
-	private String nombre;
 	private ArrayList<Candidato> listaCandidatos;
 	private ArrayList<Empresa> listaEmpresas;
 	private ArrayList<Especialidad> listaEspecialidades;
 	private static AgenciaEmpleadora instancia;
 
 
-	public static AgenciaEmpleadora CrearInstancia(String nombre){
+	public static AgenciaEmpleadora getInstancia( ){
 		if(instancia==null)
-			instancia=new AgenciaEmpleadora(nombre);
+			instancia=new AgenciaEmpleadora();
 		return instancia;
 	}
-	public static AgenciaEmpleadora getInstancia(){
-		return instancia;
-	}
-
-	private AgenciaEmpleadora(String nombre){
-		setNombre(nombre);
+	private AgenciaEmpleadora( ){
 		listaCandidatos=new ArrayList<Candidato>();
 		listaEmpresas=new ArrayList<Empresa>();
 		listaEspecialidades=new ArrayList<Especialidad>();
 	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 	public ArrayList<Candidato> getListaCandidatos() {
 		return listaCandidatos;
 	}
-	public void setListaCandidatosDisponibles(ArrayList<Candidato> listaCandidatos) {
-		this.listaCandidatos = listaCandidatos;
-	}
 	public ArrayList<Empresa> getListaEmpresas() {
 		return listaEmpresas;
-	}
-	public void setListaEmpresas(ArrayList<Empresa> listaEmpresas) {
-		this.listaEmpresas = listaEmpresas;
 	}
 	public Candidato buscarCandidato(String carnet){
 		Candidato candidato=null;
@@ -68,10 +50,6 @@ public class AgenciaEmpleadora {
 
 		return salida;
 	}
-
-
-
-	//Metodos de la lista de especialidades
 	public ArrayList<Especialidad> getListaEspecialidades(){
 		return listaEspecialidades;
 	}

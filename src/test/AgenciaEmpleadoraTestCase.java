@@ -18,7 +18,7 @@ public class AgenciaEmpleadoraTestCase extends TestCase {
 	private AgenciaEmpleadora x;
 	@Before
 	public void setUp() throws Exception {
-		AgenciaEmpleadora.CrearInstancia("Agencia Cubana");
+		AgenciaEmpleadora.getInstancia();
 		x=AgenciaEmpleadora.getInstancia();
 	}
 	

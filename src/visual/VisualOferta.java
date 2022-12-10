@@ -192,12 +192,17 @@ public class VisualOferta extends JDialog {
 			btnModificar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int pos=table.getSelectedRow();
-					Oferta  oferta=new Oferta(txID.getText(), Integer.parseInt(spSalario.getValue().toString()),
-							Integer.parseInt(spCantidad.getValue().toString()), 
-							AgenciaEmpleadora.getInstancia().obtenerRama(coRama.getSelectedItem().toString()),empresa);
-
-					empresa.getListaOfertas().remove(pos);
-					empresa.getListaOfertas().add(pos, oferta);
+					Oferta oferta1=empresa.getListaOfertas().get(table.getSelectedRow());
+					oferta1.setSalario(Float.parseFloat(spSalario.getValue().toString()));
+					oferta1.setNumeroId(txID.getText());
+					oferta1.setCantCandidatos(Integer.parseInt(spCantidad.getValue().toString()));
+					oferta1.setRama(AgenciaEmpleadora.getInstancia().obtenerRama(coRama.getSelectedItem().toString()));
+//					Oferta  oferta=new Oferta(txID.getText(), Integer.parseInt(spSalario.getValue().toString()),
+//							Integer.parseInt(spCantidad.getValue().toString()), 
+//							AgenciaEmpleadora.getInstancia().obtenerRama(coRama.getSelectedItem().toString()),empresa);
+//
+//					empresa.getListaOfertas().remove(pos);
+//					empresa.getListaOfertas().add(pos, oferta);
 					tableModel.refresh(empresa.getListaOfertas());
 					limpiar();
 					btnModificar.setEnabled(false);
@@ -318,7 +323,7 @@ public class VisualOferta extends JDialog {
 	private JSpinner getSpSalario() {
 		if (spSalario == null) {
 			spSalario = new JSpinner();
-			spSalario.setModel(new SpinnerNumberModel(100, 100, 30000, 50));
+			spSalario.setModel(new SpinnerNumberModel(new Float(100), new Float(100), new Float(30000), new Float(50)));
 			spSalario.setBounds(114, 72, 160, 20);
 		}
 		return spSalario;
