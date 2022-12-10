@@ -197,7 +197,6 @@ public class VisualOferta extends JDialog {
 					oferta1.setNumeroId(txID.getText());
 					oferta1.setCantCandidatos(Integer.parseInt(spCantidad.getValue().toString()));
 					oferta1.setRama(AgenciaEmpleadora.getInstancia().obtenerRama(coRama.getSelectedItem().toString()));
-
 					tableModel.refresh(empresa.getListaOfertas());
 					limpiar();
 					btnModificar.setEnabled(false);
