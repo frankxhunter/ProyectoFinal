@@ -173,6 +173,7 @@ public class Candidato implements Comparable<Candidato>{
 			out=1;
 		return out;
 	}
+	@SuppressWarnings("deprecation")
 	public int CalcularEdadAproximada(){
 		Date hoy=new Date();
 		int year=1900+hoy.getYear();
@@ -204,7 +205,7 @@ public class Candidato implements Comparable<Candidato>{
 				mensaje+=z+"\n";
 			throw new ElementosInsuficientesException(mensaje);
 		}
-			
+
 	}
 
 

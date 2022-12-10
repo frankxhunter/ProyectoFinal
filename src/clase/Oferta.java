@@ -16,6 +16,9 @@ public class Oferta {
 	
 	
 
+	public Oferta() {
+		listaCandidatos=new ArrayList<Candidato>();
+	}
 	public Empresa getEmpresaPerteneciente() {
 		return EmpresaPerteneciente;
 	}
@@ -28,9 +31,6 @@ public class Oferta {
 		setCantCandidatos(cantCandidatos);
 		setRama(rama);
 		setEmpresaPerteneciente(empresa);
-		listaCandidatos=new ArrayList<Candidato>();
-	}
-	public Oferta() {
 		listaCandidatos=new ArrayList<Candidato>();
 	}
 	public String getNumeroId() {

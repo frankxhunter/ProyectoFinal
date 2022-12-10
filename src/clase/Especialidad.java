@@ -27,8 +27,11 @@ public abstract class Especialidad {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
-		if(nombre.trim().length()>0)
-			this.nombre = nombre;
+		if(nombre!=null)
+			if(nombre.trim().length()>0)
+				this.nombre = nombre;
+			else 
+				throw new IllegalArgumentException("No puede estar vacio");
 		else 
 			throw new IllegalArgumentException("No puede estar vacio");
 	}
@@ -46,7 +49,7 @@ public abstract class Especialidad {
 		if(!encontrado)
 			listaDocumentos.add(documento);
 		else
-		throw new YaExisteExceptions("Ya existe");
+			throw new YaExisteExceptions("Ya existe");
 	}
 
 }

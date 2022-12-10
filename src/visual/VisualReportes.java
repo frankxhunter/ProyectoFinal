@@ -176,7 +176,7 @@ public class VisualReportes extends JDialog {
 	}
 	private JLabel getLblPromedioDeEdades() {
 		if (lblPromedioDeEdades == null) {
-			lblPromedioDeEdades = new JLabel("Promedio de edad de los Candiddatos que se presentan en la Agencia");
+			lblPromedioDeEdades = new JLabel("Promedio de edad de los Candidatos que se presentan en la Agencia");
 			lblPromedioDeEdades.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			lblPromedioDeEdades.setBounds(0, 0, 460, 38);
 		}

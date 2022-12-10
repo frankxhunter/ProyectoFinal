@@ -14,28 +14,6 @@ public class Empresa implements Comparable<Empresa>{
 	private ArrayList<Oferta> listaOfertas;
 
 
-	public Sector getSector() {
-		return sector;
-	}
-	public void setSector(Sector sector) {
-		this.sector = sector;
-	}
-	public ArrayList<Entrevista> getListaEntrevistas() {
-		return listaEntrevistas;
-	}
-	public void setListaEntrevistas(ArrayList<Entrevista> listaEntrevistas) {
-		this.listaEntrevistas = listaEntrevistas;
-	}
-	public ArrayList<Oferta> getListaOfertas() {
-		return listaOfertas;
-	}
-	public void setListaOfertas(ArrayList<Oferta> listaOfertas) {
-		this.listaOfertas = listaOfertas;
-	}
-
-
-
-
 	public Empresa(String nombre, String direccion, String telefono, Sector sector) {
 		setNombre(nombre);
 		setDireccion(direccion);
@@ -44,8 +22,26 @@ public class Empresa implements Comparable<Empresa>{
 		listaEntrevistas=new ArrayList<Entrevista>();
 		listaOfertas=new ArrayList<Oferta>();
 	}
+	public Sector getSector() {
+		return sector;
+	}
+	public ArrayList<Entrevista> getListaEntrevistas() {
+		return listaEntrevistas;
+	}
+	public ArrayList<Oferta> getListaOfertas() {
+		return listaOfertas;
+	}
 	public String getNombre() {
 		return nombre;
+	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public String getTelefono() {
+		return telefono;
+	}
+	public void setSector(Sector sector) {
+		this.sector = sector;
 	}
 	public void setNombre(String nombre) {
 		if(nombre!=null)
@@ -53,48 +49,17 @@ public class Empresa implements Comparable<Empresa>{
 		else 
 			throw new IllegalArgumentException("No puede estar vacio");
 	}
-	public String getDireccion() {
-		return direccion;
-	}
 	public void setDireccion(String direccion) {
 		if(direccion!=null)
 			this.direccion = direccion;
 		else 
 			throw new IllegalArgumentException("No puede estar vacio");
 	}
-	public String getTelefono() {
-		return telefono;
-	}
 	public void setTelefono(String telefono) {
 		if(telefono!=null)
 			this.telefono = telefono;
 		else 
 			throw new IllegalArgumentException("No puede estar vacio");
-	}
-	public boolean verificaSiCandidatoTieneEntrevista(Date fecha,
-			Candidato candidato){
-		boolean salida=false;
-		int i=0;
-		boolean dia=false;
-		while(i<listaEntrevistas.size()&& !dia){
-			if(listaEntrevistas.get(i).mismoDia(fecha)){
-				dia=true;
-				int j=0;
-				while(j<listaEntrevistas.get(i).getListaCandidatos().
-						size() && !salida)
-					if(listaEntrevistas.get(i).getListaCandidatos().
-							get(j).equals(candidato))
-						salida=true;
-					else
-						j++;
-			}
-			else 
-				i++;
-		}
-		return salida;
-	}
-	public void eliminarOferta(int posicion){
-		listaOfertas.remove(posicion);
 	}
 	public Entrevista buscarEntrevistaPorFecha(Date fecha,Oferta oferta){
 		Entrevista salida=null;
@@ -132,6 +97,28 @@ public class Empresa implements Comparable<Empresa>{
 			listaEntrevistas.add(entrevista);
 		else
 			listaEntrevistas.get(i).addCandidato(entrevista.getListaCandidatos().get(0));
+	}
+	public boolean verificaSiCandidatoTieneEntrevista(Date fecha,
+			Candidato candidato){
+		boolean salida=false;
+		int i=0;
+		boolean dia=false;
+		while(i<listaEntrevistas.size()&& !dia){
+			if(listaEntrevistas.get(i).mismoDia(fecha)){
+				dia=true;
+				int j=0;
+				while(j<listaEntrevistas.get(i).getListaCandidatos().
+						size() && !salida)
+					if(listaEntrevistas.get(i).getListaCandidatos().
+							get(j).equals(candidato))
+						salida=true;
+					else
+						j++;
+			}
+			else 
+				i++;
+		}
+		return salida;
 	}
 	@SuppressWarnings("deprecation")
 	public ArrayList<Entrevista> obtenerEntrevista(int year, int month) {
