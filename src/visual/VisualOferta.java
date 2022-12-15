@@ -193,7 +193,7 @@ public class VisualOferta extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					int pos=table.getSelectedRow();
 					Oferta oferta1=empresa.getListaOfertas().get(table.getSelectedRow());
-					oferta1.setSalario(Float.parseFloat(spSalario.getValue().toString()));
+					oferta1.setSalario(Integer.parseInt(spSalario.getValue().toString()));
 					oferta1.setNumeroId(txID.getText());
 					oferta1.setCantCandidatos(Integer.parseInt(spCantidad.getValue().toString()));
 					oferta1.setRama(AgenciaEmpleadora.getInstancia().obtenerRama(coRama.getSelectedItem().toString()));
@@ -201,6 +201,7 @@ public class VisualOferta extends JDialog {
 					limpiar();
 					btnModificar.setEnabled(false);
 					btnEliminar.setEnabled(false);
+					tableModel2.setRowCount(0);
 				}
 			});
 			btnModificar.setBounds(513, 307, 89, 23);
@@ -225,6 +226,7 @@ public class VisualOferta extends JDialog {
 					limpiar();		
 					btnAgregar.setEnabled(false);
 					btnModificar.setEnabled(false);
+					tableModel2.setRowCount(0);
 					}catch(YaExisteExceptions d){
 						MetodosUtiles.mostrarMensaje(d);
 					}
@@ -283,6 +285,7 @@ public class VisualOferta extends JDialog {
 	private JTextField getTxID() {
 		if (txID == null) {
 			txID = new JTextField();
+			txID.setToolTipText("Numero de identificacion de la oferta, este numero es unico para cada oferta, se recomienda utlizar el peque\u00F1o boton para generar un ID");
 			txID.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyReleased(KeyEvent e) {
@@ -317,7 +320,7 @@ public class VisualOferta extends JDialog {
 	private JSpinner getSpSalario() {
 		if (spSalario == null) {
 			spSalario = new JSpinner();
-			spSalario.setModel(new SpinnerNumberModel(new Float(100), new Float(100), new Float(30000), new Float(50)));
+			spSalario.setModel(new SpinnerNumberModel(100, 100, 30000, 50));
 			spSalario.setBounds(114, 72, 160, 20);
 		}
 		return spSalario;
@@ -352,6 +355,7 @@ public class VisualOferta extends JDialog {
 					tableModel.refresh(empresa.getListaOfertas());
 					btnEliminar.setEnabled(false);
 					btnModificar.setEnabled(false);
+					tableModel2.setRowCount(0);
 				}
 			});
 			btnEliminar.setBounds(612, 307, 89, 23);
@@ -415,6 +419,9 @@ public class VisualOferta extends JDialog {
 						
 					}while(encontrado);
 					txID.setText(id);
+					btnAgregar.setEnabled(true);
+					btnModificar.setEnabled(false);
+					btnEliminar.setEnabled(false);
 				}
 			});
 			button.setFont(new Font("Tahoma", Font.PLAIN, 1));
@@ -425,7 +432,7 @@ public class VisualOferta extends JDialog {
 	public void rellenar(){
 		txID.setText(empresa.getListaOfertas().get(table.getSelectedRow()).getNumeroId());
 		spCantidad.setValue(empresa.getListaOfertas().get(table.getSelectedRow()).getCantCandidatos());
-		spSalario.setValue(empresa.getListaOfertas().get(table.getSelectedRow()).getSalario());
+		spSalario.setValue((int)empresa.getListaOfertas().get(table.getSelectedRow()).getSalario());
 		btnModificar.setEnabled(true);
 		btnEliminar.setEnabled(true);
 	}
@@ -450,7 +457,8 @@ public class VisualOferta extends JDialog {
 			btnProgramarEntrevista.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Oferta oferta=empresa.getListaOfertas().get(table.getSelectedRow());
-					VisualEntrevista x=new VisualEntrevista(lista.get(table.getSelectedRow()), oferta,getThis());
+					Candidato candidato=lista.get(table_1.getSelectedRow());
+					VisualEntrevista x=new VisualEntrevista(candidato, oferta,getThis());
 					tableModel2.setRowCount(0);
 					getThis().setVisible(false);
 					x.setLocationRelativeTo(null);

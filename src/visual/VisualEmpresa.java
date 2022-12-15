@@ -148,6 +148,7 @@ public class VisualEmpresa extends JDialog {
 	private JTextField getTxNombre() {
 		if (txNombre == null) {
 			txNombre = new JTextField();
+			txNombre.setToolTipText("Nombre de la Empresa\r\n");
 			txNombre.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
@@ -181,6 +182,7 @@ public class VisualEmpresa extends JDialog {
 	private JTextField getTxDireccion() {
 		if (txDireccion == null) {
 			txDireccion = new JTextField();
+			txDireccion.setToolTipText("Direccion donde se encuentra ubicada la empresa");
 			txDireccion.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
@@ -214,6 +216,7 @@ public class VisualEmpresa extends JDialog {
 	private JTextField getTxTelefono() {
 		if (txTelefono == null) {
 			txTelefono = new JTextField();
+			txTelefono.setToolTipText("El numero de telefeono, deben ser 8 digitos");
 			txTelefono.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
@@ -232,6 +235,7 @@ public class VisualEmpresa extends JDialog {
 	private JComboBox<String> getCoSector() {
 		if (coSector == null) {
 			coSector = new JComboBox<String>();
+			coSector.setToolTipText("El sector al que pertenece la empresa");
 			coSector.setModel(new DefaultComboBoxModel<String>(crearComboBox()));
 			coSector.setBounds(425, 64, 212, 20);
 		}

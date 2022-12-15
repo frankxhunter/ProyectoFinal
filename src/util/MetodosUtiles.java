@@ -213,7 +213,7 @@ public class MetodosUtiles {
 			Oferta oferta9 = new Oferta("36589", 11000, 3, rama4, empresa2);
 			Oferta oferta10 = new Oferta("02147", 8650, 1, rama16, empresa4);
 			Oferta oferta11 = new Oferta("02699", 7000, 4, rama36, empresa14);
-			Oferta oferta12 = new Oferta("96587", 9300, 2, rama39, empresa16);
+			Oferta oferta12 = new Oferta("96587", 9300, 2, rama39, empresa1);
 
 
 			Candidato candidato1 = new Candidato("90030541233", "Alberto", "Masculino", "Calle Jose Ortega y Gasset, 40", "54587996",
@@ -268,6 +268,7 @@ public class MetodosUtiles {
 
 
 			empresa1.addOferta(oferta2);
+			empresa1.addOferta(oferta12);
 			empresa2.addOferta(oferta9);
 			empresa3.addOferta(oferta3);
 			empresa4.addOferta(oferta10);
@@ -278,7 +279,7 @@ public class MetodosUtiles {
 			empresa13.addOferta(oferta7);
 			empresa14.addOferta(oferta11);
 			empresa15.addOferta(oferta8);
-			empresa16.addOferta(oferta12);
+//			empresa16.addOferta(oferta12);
 
 //			empresa1.addEntrevista(entrevista9);
 			empresa2.addEntrevista(entrevista4);

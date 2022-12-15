@@ -168,6 +168,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JTextField getTxNombre() {
 		if (txNombre == null) {
 			txNombre = new JTextField();
+			txNombre.setToolTipText("Nombre y Apellidos completos del candidato, solo se admiten letras");
 			txNombre.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
@@ -193,6 +194,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JTextField getTxCarnet() {
 		if (txCarnet == null) {
 			txCarnet = new JTextField();
+			txCarnet.setToolTipText("Numero de carnet del candidato, deben ser 11 digitos");
 			txCarnet.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
@@ -221,6 +223,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JComboBox  getCoSexo() {
 		if (coSexo == null) {
 			coSexo = new JComboBox();
+			coSexo.setToolTipText("El sexo del candidato");
 			coSexo.setBounds(150, 124, 135, 20);
 			Object[] sexos = new Object[2];
 			sexos[0]="Masculino";
@@ -243,6 +246,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JTextField getTxDireccion() {
 		if (txDireccion == null) {
 			txDireccion = new JTextField();
+			txDireccion.setToolTipText("Direccion en la que reside el candidato actualmente");
 			txDireccion.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
@@ -258,6 +262,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JTextField getTxTelefono() {
 		if (txTelefono == null) {
 			txTelefono = new JTextField();
+			txTelefono.setToolTipText("Numero de telefono con el que puede ser localizado, deben ser 8 digitos");
 			txTelefono.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
@@ -286,6 +291,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JComboBox  getCoRama() {
 		if (coRama == null) {
 			coRama = new JComboBox ();
+			coRama.setToolTipText("Rama en la que desea trabajar el candidato");
 			coRama.setModel(new DefaultComboBoxModel (crearComboBox()));
 			coRama.setBounds(150, 220, 135, 20);
 		}
@@ -304,6 +310,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JSpinner getSpAnnos() {
 		if (spAnnos == null) {
 			spAnnos = new JSpinner();
+			spAnnos.setToolTipText("Cantidad de a\u00F1os de experiencia en la especialidad");
 			spAnnos.setModel(new SpinnerNumberModel(0, 0, 60, 1));
 			spAnnos.setBounds(150, 412, 135, 20);
 		}
@@ -312,6 +319,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JTextField getTxEspecialidad() {
 		if (txEspecialidad == null) {
 			txEspecialidad = new JTextField();
+			txEspecialidad.setToolTipText("Especializacion del candidato");
 			txEspecialidad.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
@@ -347,6 +355,7 @@ public class VisualModificaCandidato extends JDialog {
 	private JTextField getTxNivelEscolar() {
 		if (txNivelEscolar == null) {
 			txNivelEscolar = new JTextField();
+			txNivelEscolar.setToolTipText("Nivel escolar del candidato");
 			txNivelEscolar.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
