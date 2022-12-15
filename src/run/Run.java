@@ -14,7 +14,6 @@ public class Run {
 					Login window=new Login();
 					window.setVisible(true);
 					window.setLocationRelativeTo(null);
-//					gfhgf
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
