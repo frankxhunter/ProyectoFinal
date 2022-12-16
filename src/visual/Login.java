@@ -146,6 +146,7 @@ public class Login extends JDialog {
 	private JButton getBtnIS() {
 		if (btnIS == null) {
 			btnIS = new JButton("Iniciar sesion");
+			btnIS.setFocusable(false);
 			btnIS.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			btnIS.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -314,10 +315,10 @@ public class Login extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 				}
 			});
-			btnNewButton.setPressedIcon(new ImageIcon("C:\\UNIVERSIDAD\\DPOO\\DPOO\\AgenciaEmpleado_ProyectoFinal\\Invisible_32px.png"));
+			btnNewButton.setPressedIcon(new ImageIcon("C:\\UNIVERSIDAD\\DPOO\\DPOO\\ProyectoFinal\\bin\\imagen\\Invisible_32px.png"));
 			btnNewButton.setBounds(275, 17, 33, 23);
 			btnNewButton.setBackground(new Color(237, 234, 229));
-			btnNewButton.setIcon(new ImageIcon("C:\\UNIVERSIDAD\\DPOO\\DPOO\\AgenciaEmpleado_ProyectoFinal\\Eye_32px.png"));
+			btnNewButton.setIcon(new ImageIcon("C:\\UNIVERSIDAD\\DPOO\\DPOO\\ProyectoFinal\\bin\\imagen\\Eye_32px.png"));
 			btnNewButton.setBorder(null);
 			btnNewButton.addMouseListener(new MouseAdapter() {
 				@Override

@@ -57,6 +57,10 @@ public class VisualCalendario extends JDialog {
 	private JPanel panel_4;
 	private JLabel lblTexto;
 	private JButton button;
+	private JPanel panel_5;
+	private JButton btnEliminar;
+	private JPanel panel_6;
+	private JButton button_1;
 
 	/**
 	 * Launch the application.
@@ -76,7 +80,7 @@ public class VisualCalendario extends JDialog {
 	 */
 	public VisualCalendario() {
 		setUndecorated(true);
-		setBounds(100, 100, 715, 407);
+		setBounds(100, 100, 715, 437);
 		getContentPane().setLayout(null);
 		getContentPane().add(getPanel());
 		getContentPane().add(getPanel_4());
@@ -84,7 +88,7 @@ public class VisualCalendario extends JDialog {
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-			panel.setBounds(0, 33, 715, 374);
+			panel.setBounds(0, 33, 715, 404);
 			panel.setBackground(new Color(158, 130, 116));
 			panel.setLayout(null);
 			panel.add(getPanel_1());
@@ -98,9 +102,10 @@ public class VisualCalendario extends JDialog {
 			panel_1 = new JPanel();
 			panel_1.setBackground(Color.LIGHT_GRAY);
 			panel_1.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Registro de entrevistas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_1.setBounds(10, 83, 361, 283);
-			panel_1.setLayout(new CardLayout(0, 0));
-			panel_1.add(getScrollPane(), "name_48977222191014");
+			panel_1.setBounds(10, 83, 361, 310);
+			panel_1.setLayout(null);
+			panel_1.add(getPanel_5());
+			panel_1.add(getBtnEliminar());
 		}
 		return panel_1;
 	}
@@ -109,9 +114,10 @@ public class VisualCalendario extends JDialog {
 			panel_2 = new JPanel();
 			panel_2.setBackground(Color.LIGHT_GRAY);
 			panel_2.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Candidatos Citados ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			panel_2.setBounds(381, 83, 324, 283);
-			panel_2.setLayout(new CardLayout(0, 0));
-			panel_2.add(getScrollPane_1(), "name_48985439277083");
+			panel_2.setBounds(381, 83, 324, 310);
+			panel_2.setLayout(null);
+			panel_2.add(getPanel_6());
+			panel_2.add(getButton_1());
 		}
 		return panel_2;
 	}
@@ -166,7 +172,8 @@ public class VisualCalendario extends JDialog {
 	}
 	private JButton getBtnActualizar() {
 		if (btnActualizar == null) {
-			btnActualizar = new JButton("Actualizar");
+			btnActualizar = new JButton("Mostrar");
+			btnActualizar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btnActualizar.setFocusable(false);
 			btnActualizar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -198,6 +205,7 @@ public class VisualCalendario extends JDialog {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					tableModel2.refresh(listaEntrevistas.get(table.getSelectedRow()).getListaCandidatos());
+					btnEliminar.setEnabled(true);
 				}
 			});
 			table.setModel(tableModel);
@@ -251,5 +259,65 @@ public class VisualCalendario extends JDialog {
 			button.setBounds(666, 0, 49, 33);
 		}
 		return button;
+	}
+	private JPanel getPanel_5() {
+		if (panel_5 == null) {
+			panel_5 = new JPanel();
+			panel_5.setBounds(10, 21, 341, 245);
+			panel_5.setLayout(new CardLayout(0, 0));
+			panel_5.add(getScrollPane(), "name_313419936292098");
+		}
+		return panel_5;
+	}
+	private JButton getBtnEliminar() {
+		if (btnEliminar == null) {
+			btnEliminar = new JButton("Eliminar");
+			btnEliminar.setEnabled(false);
+			btnEliminar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					eliminarEntrevista();
+				}
+			});
+			btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnEliminar.setFocusable(false);
+			btnEliminar.setBounds(251, 276, 100, 23);
+		}
+		return btnEliminar;
+	}
+	private JPanel getPanel_6() {
+		if (panel_6 == null) {
+			panel_6 = new JPanel();
+			panel_6.setBounds(10, 22, 304, 245);
+			panel_6.setLayout(new CardLayout(0, 0));
+			panel_6.add(getScrollPane_1(), "name_313555207043068");
+		}
+		return panel_6;
+	}
+	private JButton getButton_1() {
+		if (button_1 == null) {
+			button_1 = new JButton("Eliminar");
+			button_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					int posEntrevista=table.getSelectedRow();
+					int posCandidato=table2.getSelectedRow();
+					listaEntrevistas.get(posEntrevista).getOferta().getListaCandidatos().remove(listaEntrevistas.get(posEntrevista).getListaCandidatos().get(posCandidato));
+					listaEntrevistas.get(posEntrevista).getListaCandidatos().remove(posCandidato);
+					if(listaEntrevistas.get(posEntrevista).getListaCandidatos().size()==0){
+						eliminarEntrevista();
+					}
+					tableModel2.refresh(listaEntrevistas.get(table.getSelectedRow()).getListaCandidatos());
+				}
+			});
+			button_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			button_1.setFocusable(false);
+			button_1.setBounds(214, 278, 100, 23);
+		}
+		return button_1;
+	}
+	public void eliminarEntrevista(){
+		listaEntrevistas.get(table.getSelectedRow()).getOferta().getEmpresaPerteneciente().getListaEntrevistas()
+		.remove(listaEntrevistas.get(table.getSelectedRow()));
+		actualizar();
+		btnEliminar.setEnabled(false);
 	}
 }
