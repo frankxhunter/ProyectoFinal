@@ -75,7 +75,7 @@ public class VisualRama extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 		}
 		tableModel.refresh2(AgenciaEmpleadora.getInstancia().getlistaRama());
-	}
+	} 
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();

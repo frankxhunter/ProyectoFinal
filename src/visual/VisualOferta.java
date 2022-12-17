@@ -362,13 +362,6 @@ public class VisualOferta extends JDialog {
 		}
 		return btnEliminar;
 	}
-	public String[] obtenerEmpresas(){
-		String[]salida= new String[AgenciaEmpleadora.getInstancia().getListaEmpresas().size()];
-		int pos=0;
-		for(Empresa x: AgenciaEmpleadora.getInstancia().getListaEmpresas())
-			salida[pos++]=x.getNombre();
-		return salida;
-	}
 	private JLabel getLblRama() {
 		if (lblRama == null) {
 			lblRama = new JLabel("Rama");
@@ -385,18 +378,6 @@ public class VisualOferta extends JDialog {
 			coRama.setBounds(114, 159, 160, 20);
 		}
 		return coRama;
-	}
-	public void limpiar(){
-		txID.setText("");
-		spCantidad.setValue(1);
-		spSalario.setValue(100);
-	}
-	public String[] crearComboBox(){
-		String[] salida=new String[AgenciaEmpleadora.getInstancia().getlistaRama().size()];
-		int pos=0;
-		for(Rama x: AgenciaEmpleadora.getInstancia().getlistaRama())
-			salida[pos++]=x.getNombre();
-		return salida;
 	}
 	private JButton getButton() {
 		if (button == null) {
@@ -428,13 +409,6 @@ public class VisualOferta extends JDialog {
 			button.setBounds(284, 29, 17, 17);
 		}
 		return button;
-	}
-	public void rellenar(){
-		txID.setText(empresa.getListaOfertas().get(table.getSelectedRow()).getNumeroId());
-		spCantidad.setValue(empresa.getListaOfertas().get(table.getSelectedRow()).getCantCandidatos());
-		spSalario.setValue((int)empresa.getListaOfertas().get(table.getSelectedRow()).getSalario());
-		btnModificar.setEnabled(true);
-		btnEliminar.setEnabled(true);
 	}
 	private JPanel getPanel_3() {
 		if (panel_3 == null) {
@@ -502,9 +476,6 @@ public class VisualOferta extends JDialog {
 		}
 		return table_1;
 	}
-	public JDialog getThis(){
-		return this;
-	}
 	private JPanel getPanel_5() {
 		if (panel_5 == null) {
 			panel_5 = new JPanel();
@@ -539,5 +510,41 @@ public class VisualOferta extends JDialog {
 			button_1.setBounds(994, 0, 49, 33);
 		}
 		return button_1;
+	}
+
+	public JDialog getThis(){
+		return this;
+	}
+
+	public void limpiar(){
+		txID.setText("");
+		spCantidad.setValue(1);
+		spSalario.setValue(100);
+	}
+
+	public String[] obtenerEmpresas(){
+		String[]salida= new String[AgenciaEmpleadora.getInstancia().getListaEmpresas().size()];
+		int pos=0;
+		for(Empresa x: AgenciaEmpleadora.getInstancia().getListaEmpresas())
+			salida[pos++]=x.getNombre();
+		return salida;
+	}
+
+	public String[] crearComboBox(){
+		String[] salida=new String[AgenciaEmpleadora.getInstancia().getlistaRama().size()];
+		int pos=0;
+		for(Rama x: AgenciaEmpleadora.getInstancia().getlistaRama())
+			salida[pos++]=x.getNombre();
+		return salida;
+	}
+
+	public void rellenar(){
+		Oferta oferta=empresa.getListaOfertas().get(table.getSelectedRow());
+		txID.setText(oferta.getNumeroId());
+		spCantidad.setValue(oferta.getCantCandidatos());
+		spSalario.setValue((int)oferta.getSalario());
+		coRama.setSelectedItem(oferta.getRama().getNombre());
+		btnModificar.setEnabled(true);
+		btnEliminar.setEnabled(true);
 	}
 }

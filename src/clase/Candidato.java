@@ -167,9 +167,11 @@ public class Candidato implements Comparable<Candidato>{
 	}
 	public int compareTo(Candidato o) {
 		int out=0;
-		if(documentos.size()>o.getDocumentos().size())
+		int x=o.getYearsExp()+o.getDocumentos().size();
+		int y=documentos.size()+yearsExp;
+		if(y>x)
 			out=-1;
-		else if(documentos.size()<o.getDocumentos().size())
+		else if(y<x)
 			out=1;
 		return out;
 	}

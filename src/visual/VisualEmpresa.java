@@ -31,6 +31,7 @@ import clase.AgenciaEmpleadora;
 import clase.Empresa;
 import clase.Sector;
 import excepcionesPropias.YaExisteExceptions;
+
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -336,26 +337,6 @@ public class VisualEmpresa extends JDialog {
 		}
 		return btModificar;
 	}
-	public void validar(){
-		boolean x=false;
-		if(!txNombre.getText().trim().isEmpty())
-			if(!txDireccion.getText().trim().isEmpty())
-				if(txTelefono.getText().trim().length()==8){
-					btAgregar.setEnabled(true);
-					if(table.getSelectedRow()!=-1)
-					btModificar.setEnabled(true);
-					x=true;
-				}
-		if(!x){
-			btAgregar.setEnabled(false);
-			btModificar.setEnabled(false);
-		}
-	}
-	public void limpiar(){
-		txNombre.setText("");
-		txDireccion.setText("");
-		txTelefono.setText("");
-	}
 	private JPanel getPanel_2() {
 		if (panel_2 == null) {
 			panel_2 = new JPanel();
@@ -367,23 +348,6 @@ public class VisualEmpresa extends JDialog {
 		}
 		return panel_2;
 	}
-	public String[] crearComboBox(){
-		String[] salida=new String[AgenciaEmpleadora.getInstancia().getlistaSector().size()];
-		int pos=0;
-		for(Sector x: AgenciaEmpleadora.getInstancia().getlistaSector())
-			salida[pos++]=x.getNombre();
-		return salida;
-	}
-	public void rellenar(){
-		Empresa x= AgenciaEmpleadora.getInstancia().getListaEmpresas().get(table.getSelectedRow());
-		txDireccion.setText(x.getDireccion());
-		txNombre.setText(x.getNombre());
-		txTelefono.setText(x.getTelefono());
-		btAgregar.setEnabled(false);
-		btModificar.setEnabled(false);
-		btEliminar.setEnabled(true);
-	}
-
 	private JPanel getPanel_3() {
 		if (panel_3 == null) {
 			panel_3 = new JPanel();
@@ -418,5 +382,46 @@ public class VisualEmpresa extends JDialog {
 			button.setBounds(648, 0, 49, 33);
 		}
 		return button;
+	}
+
+	public void rellenar(){
+		Empresa x= AgenciaEmpleadora.getInstancia().getListaEmpresas().get(table.getSelectedRow());
+		txDireccion.setText(x.getDireccion());
+		txNombre.setText(x.getNombre());
+		txTelefono.setText(x.getTelefono());
+		btAgregar.setEnabled(false);
+		coSector.setSelectedItem(x.getSector().getNombre());
+		btModificar.setEnabled(false);
+		btEliminar.setEnabled(true);
+	}
+
+	public String[] crearComboBox(){
+		String[] salida=new String[AgenciaEmpleadora.getInstancia().getlistaSector().size()];
+		int pos=0;
+		for(Sector x: AgenciaEmpleadora.getInstancia().getlistaSector())
+			salida[pos++]=x.getNombre();
+		return salida;
+	}
+
+	public void limpiar(){
+		txNombre.setText("");
+		txDireccion.setText("");
+		txTelefono.setText("");
+	}
+
+	public void validar(){
+		boolean x=false;
+		if(!txNombre.getText().trim().isEmpty())
+			if(!txDireccion.getText().trim().isEmpty())
+				if(txTelefono.getText().trim().length()==8){
+					btAgregar.setEnabled(true);
+					if(table.getSelectedRow()!=-1)
+					btModificar.setEnabled(true);
+					x=true;
+				}
+		if(!x){
+			btAgregar.setEnabled(false);
+			btModificar.setEnabled(false);
+		}
 	}
 }

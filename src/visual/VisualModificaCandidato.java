@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -33,8 +35,6 @@ import clase.Candidato;
 import clase.Rama;
 import excepcionesPropias.ElementosInsuficientesException;
 import excepcionesPropias.YaExisteExceptions;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 public class VisualModificaCandidato extends JDialog {
 	/**
@@ -589,6 +589,44 @@ public class VisualModificaCandidato extends JDialog {
 		}
 		return btnEliminar;
 	}
+	private JPanel getPanel_4() {
+		if (panel_4 == null) {
+			panel_4 = new JPanel();
+			panel_4.setLayout(null);
+			panel_4.setBackground(new Color(219, 219, 219));
+			panel_4.setBounds(0, 0, 678, 33);
+			panel_4.add(getLblCandidato());
+			panel_4.add(getButton());
+		}
+		return panel_4;
+	}
+
+	private JLabel getLblCandidato() {
+		if (lblCandidato == null) {
+			lblCandidato = new JLabel("Candidato");
+			lblCandidato.setFont(new Font("Tahoma", Font.PLAIN, 22));
+			lblCandidato.setBounds(256, 0, 171, 33);
+		}
+		return lblCandidato;
+	}
+
+	private JButton getButton() {
+		if (button == null) {
+			button = new JButton("X");
+			button.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					siguientePantalla();
+				}
+			});
+			button.setForeground(Color.WHITE);
+			button.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			button.setFocusable(false);
+			button.setBackground(Color.RED);
+			button.setBounds(629, 0, 49, 33);
+		}
+		return button;
+	}
+
 	//Funciones a utilzar
 	public String[] crearComboBox(){
 		String[] salida=new String[AgenciaEmpleadora.getInstancia().getlistaRama().size()];
@@ -642,40 +680,5 @@ public class VisualModificaCandidato extends JDialog {
 		x.setVisible(true);
 		x.setLocationRelativeTo(null);
 		x.setModal(true);
-	}
-	private JPanel getPanel_4() {
-		if (panel_4 == null) {
-			panel_4 = new JPanel();
-			panel_4.setLayout(null);
-			panel_4.setBackground(new Color(219, 219, 219));
-			panel_4.setBounds(0, 0, 678, 33);
-			panel_4.add(getLblCandidato());
-			panel_4.add(getButton());
-		}
-		return panel_4;
-	}
-	private JLabel getLblCandidato() {
-		if (lblCandidato == null) {
-			lblCandidato = new JLabel("Candidato");
-			lblCandidato.setFont(new Font("Tahoma", Font.PLAIN, 22));
-			lblCandidato.setBounds(256, 0, 171, 33);
-		}
-		return lblCandidato;
-	}
-	private JButton getButton() {
-		if (button == null) {
-			button = new JButton("X");
-			button.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					siguientePantalla();
-				}
-			});
-			button.setForeground(Color.WHITE);
-			button.setFont(new Font("Tahoma", Font.PLAIN, 13));
-			button.setFocusable(false);
-			button.setBackground(Color.RED);
-			button.setBounds(629, 0, 49, 33);
-		}
-		return button;
 	}
 }
