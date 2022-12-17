@@ -1,33 +1,26 @@
 package visual;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import clase.AgenciaEmpleadora;
 import clase.Candidato;
 import clase.Entrevista;
 import clase.Oferta;
 
-import javax.swing.JLabel;
-
 import com.toedter.calendar.JCalendar;
-
-import excepcionesPropias.YaExisteExceptions;
-
-import javax.swing.JButton;
-
-import util.MetodosUtiles;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.awt.Font;
-
-import javax.swing.border.TitledBorder;
-import javax.swing.border.LineBorder;
 
 public class VisualEntrevista extends JDialog {
 	/**
@@ -119,6 +112,11 @@ public class VisualEntrevista extends JDialog {
 						.getListaCandidatos().add(candidato);
 					}
 					oferta.getListaCandidatos().add(candidato);
+					SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+					String message="La entrevista del candidato "+candidato.getNombre()+" con la empresa "
+					+oferta.getEmpresaPerteneciente().getNombre()+"\n para el dia "+formatter.format(calendar.getDate())+" se ha realizado"
+							+ " correctamente.";
+					JOptionPane.showMessageDialog(null,message );
 					cambiaPantalla();
 					
 					}else{

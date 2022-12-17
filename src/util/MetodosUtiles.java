@@ -49,6 +49,18 @@ public class MetodosUtiles {
 		String x="Faltan los siguientes Documentos:\n"+e.getMessage();
 		JOptionPane.showMessageDialog(null, x);
 	}
+	public static boolean mostrarMesajeDeSector(Candidato candidato,Sector sector){
+		boolean out=true;
+		String message=candidato.VerificarSiCumpleCondicionesSector(sector);
+		if(message.length()>0){
+
+			int valor=JOptionPane.showConfirmDialog(null, "Este candidato no tiene los siguientes documentos del Sector "
+					+sector.getNombre()+":\n"+ message+"¿Aun asi quieres continuar?");
+			if(valor!=JOptionPane.OK_OPTION)
+				out=false;
+		}
+		return out;
+	}
 
 	@SuppressWarnings("deprecation")
 	public static void RellenoAutomatico(){
@@ -61,7 +73,7 @@ public class MetodosUtiles {
 			Documento d = new Documento("Licencia de camion", false);
 			Documento e = new Documento("licencia de carro", true);
 			Documento f = new Documento("Licencia de guagua", true);
-			//			Documento g = new Documento("Certificado de curso de alturas", false);
+			//	     	Documento g = new Documento("Certificado de curso de alturas", false);
 			Documento h = new Documento("Titulo de ing. civil",true);
 			Documento i = new Documento("Titulo a nivel de especialista en Vias Terrestres", false);
 			Documento j = new Documento("Licenciatura en Fisica", false);
@@ -234,24 +246,24 @@ public class MetodosUtiles {
 					"Ciencias de la nutricion", 15, rama30);
 			Candidato candidato9 = new Candidato("89022456985", "Jose", "Masculino", "Calle Francisco Giner", "56654187", "Universitario",
 					"Marinero Mercante", 12, rama39);
-//			Candidato candidato10 = new Candidato("96030524589", "Estefania", "Femenino", "Calle de Santa Rosa", "56589978", "Universitario",
-//					"Gestion Turistica", 6, rama33);
-//			Candidato candidato11 = new Candidato("88120365456", "Humberto", "Masculino", "Calle de Santo Domingo", "72665984", "Bachiller",
-//					"Marinero", 10, rama39);
-//			Candidato candidato12 = new Candidato("90100232656", "Roberto", "Masculino", "Calle Juarez", "56942200", "Bachiller",
-//					"Dentista", 11, rama21);
-//			Candidato candidato13 = new Candidato("91032625811", "Esperanza", "Femenino", "Calle La Cuesta", "58621142", "9no grado",
-//					"nutricionista", 2, rama28);
-//			Candidato candidato14 = new Candidato("93080451233", "Pablo", "Masculino", "Calle Independencia", "54522369", "Universitario",
-//					"Ing. Quimico", 9, rama13);
-//			Candidato candidato15 = new Candidato("93021425669", "Ernesto", "Masculino", "Calle de Diego de Leon", "72588963", "9no grado",
-//					"chofer", 11, rama41);
-//			Candidato candidato16 = new Candidato("90102566532", "Paula", "Femenino", "Calle Grove Street", "76658961", "Bachiller",
-//					"Costurera", 10, rama2);
-//			Candidato candidato17 = new Candidato("94050225669", "Rolando", "Masculino", "Calle de Corsega", "72585510", "Universitario",
-//					"Diseñador grafico", 4, rama2);
-//			Candidato candidato18 = new Candidato("94050225668", "Juan", "Masculino", "Calle de Corsega", "72586510","Cientifico",
-//					"Diseñador grafico", 4, rama13);
+			//			Candidato candidato10 = new Candidato("96030524589", "Estefania", "Femenino", "Calle de Santa Rosa", "56589978", "Universitario",
+			//					"Gestion Turistica", 6, rama33);
+			//			Candidato candidato11 = new Candidato("88120365456", "Humberto", "Masculino", "Calle de Santo Domingo", "72665984", "Bachiller",
+			//					"Marinero", 10, rama39);
+			//			Candidato candidato12 = new Candidato("90100232656", "Roberto", "Masculino", "Calle Juarez", "56942200", "Bachiller",
+			//					"Dentista", 11, rama21);
+			//			Candidato candidato13 = new Candidato("91032625811", "Esperanza", "Femenino", "Calle La Cuesta", "58621142", "9no grado",
+			//					"nutricionista", 2, rama28);
+			//			Candidato candidato14 = new Candidato("93080451233", "Pablo", "Masculino", "Calle Independencia", "54522369", "Universitario",
+			//					"Ing. Quimico", 9, rama13);
+			//			Candidato candidato15 = new Candidato("93021425669", "Ernesto", "Masculino", "Calle de Diego de Leon", "72588963", "9no grado",
+			//					"chofer", 11, rama41);
+			//			Candidato candidato16 = new Candidato("90102566532", "Paula", "Femenino", "Calle Grove Street", "76658961", "Bachiller",
+			//					"Costurera", 10, rama2);
+			//			Candidato candidato17 = new Candidato("94050225669", "Rolando", "Masculino", "Calle de Corsega", "72585510", "Universitario",
+			//					"Diseñador grafico", 4, rama2);
+			//			Candidato candidato18 = new Candidato("94050225668", "Juan", "Masculino", "Calle de Corsega", "72586510","Cientifico",
+			//					"Diseñador grafico", 4, rama13);
 
 			Entrevista entrevista1 = new Entrevista(new Date(2023-1900, 6, 12), candidato1, oferta11);
 			Entrevista entrevista2 = new Entrevista(new Date(2023-1900, 5, 11), candidato2, oferta7);
@@ -259,12 +271,12 @@ public class MetodosUtiles {
 			Entrevista entrevista4 = new Entrevista(new Date(2023-1900, 10, 9), candidato7, oferta9);
 			Entrevista entrevista5 = new Entrevista(new Date(2023-1900, 11, 7), candidato8, oferta5);
 			Entrevista entrevista6 = new Entrevista(new Date(2023-1900, 4, 20), candidato9, oferta12);
-//			Entrevista entrevista7 = new Entrevista(new Date(2023-1900, 6, 21), candidato6, oferta4);
-//			Entrevista entrevista8 = new Entrevista(new Date(2023-1900, 5, 22), candidato12, oferta3);
-//			Entrevista entrevista9 = new Entrevista(new Date(2023-1900, 3, 24), candidato14, oferta2);
-//			Entrevista entrevista10 = new Entrevista(new Date(2023-1900, 4, 5), candidato15, oferta8);
-//			Entrevista entrevista11 = new Entrevista(new Date(2023-1900, 4, 6), candidato16, oferta1);
-//			Entrevista entrevista12 = new Entrevista(new Date(2023-1900, 4, 7), candidato17, oferta1);
+			//			Entrevista entrevista7 = new Entrevista(new Date(2023-1900, 6, 21), candidato6, oferta4);
+			//			Entrevista entrevista8 = new Entrevista(new Date(2023-1900, 5, 22), candidato12, oferta3);
+			//			Entrevista entrevista9 = new Entrevista(new Date(2023-1900, 3, 24), candidato14, oferta2);
+			//			Entrevista entrevista10 = new Entrevista(new Date(2023-1900, 4, 5), candidato15, oferta8);
+			//			Entrevista entrevista11 = new Entrevista(new Date(2023-1900, 4, 6), candidato16, oferta1);
+			//			Entrevista entrevista12 = new Entrevista(new Date(2023-1900, 4, 7), candidato17, oferta1);
 
 
 			empresa1.addOferta(oferta2);
@@ -279,19 +291,19 @@ public class MetodosUtiles {
 			empresa13.addOferta(oferta7);
 			empresa14.addOferta(oferta11);
 			empresa15.addOferta(oferta8);
-//			empresa16.addOferta(oferta12);
+			//			empresa16.addOferta(oferta12);
 
-//			empresa1.addEntrevista(entrevista9);
+			//			empresa1.addEntrevista(entrevista9);
 			empresa2.addEntrevista(entrevista4);
-//			empresa3.addEntrevista(entrevista8);
-//			empresa5.addEntrevista(entrevista7);
+			//			empresa3.addEntrevista(entrevista8);
+			//			empresa5.addEntrevista(entrevista7);
 			empresa7.addEntrevista(entrevista3);
-//			empresa7.addEntrevista(entrevista11);
-//			empresa7.addEntrevista(entrevista12);
+			//			empresa7.addEntrevista(entrevista11);
+			//			empresa7.addEntrevista(entrevista12);
 			empresa10.addEntrevista(entrevista5);
 			empresa13.addEntrevista(entrevista2);
 			empresa14.addEntrevista(entrevista1);
-//			empresa15.addEntrevista(entrevista10);
+			//			empresa15.addEntrevista(entrevista10);
 			empresa16.addEntrevista(entrevista6);
 
 
@@ -323,19 +335,19 @@ public class MetodosUtiles {
 			candidato9.addDocumento(v.getDocumento());
 			candidato9.addDocumento(w.getDocumento());
 			candidato9.addDocumento(l.getDocumento());
-//			candidato10.addDocumento(y.getDocumento());
-//			candidato10.addDocumento(m.getDocumento());
-//			candidato10.addDocumento(a.getDocumento());
-//			candidato11.addDocumento(l.getDocumento());
-//			candidato12.addDocumento(z.getDocumento());
-//			candidato13.addDocumento(x.getDocumento());
-//			candidato14.addDocumento(u.getDocumento());
-//			candidato15.addDocumento(b.getDocumento());
-//			candidato15.addDocumento(e.getDocumento());
-//			candidato16.addDocumento(c.getDocumento());
-//			candidato16.addDocumento(t.getDocumento());
-//			candidato16.addDocumento(r.getDocumento());
-//			candidato17.addDocumento(s.getDocumento());
+			//			candidato10.addDocumento(y.getDocumento());
+			//			candidato10.addDocumento(m.getDocumento());
+			//			candidato10.addDocumento(a.getDocumento());
+			//			candidato11.addDocumento(l.getDocumento());
+			//			candidato12.addDocumento(z.getDocumento());
+			//			candidato13.addDocumento(x.getDocumento());
+			//			candidato14.addDocumento(u.getDocumento());
+			//			candidato15.addDocumento(b.getDocumento());
+			//			candidato15.addDocumento(e.getDocumento());
+			//			candidato16.addDocumento(c.getDocumento());
+			//			candidato16.addDocumento(t.getDocumento());
+			//			candidato16.addDocumento(r.getDocumento());
+			//			candidato17.addDocumento(s.getDocumento());
 
 
 
@@ -356,7 +368,7 @@ public class MetodosUtiles {
 			agencia.addEmpresa(empresa15);
 			agencia.addEmpresa(empresa16);
 
-			
+
 
 			agencia.addRama(rama1);
 			agencia.addRama(rama2);
@@ -395,15 +407,15 @@ public class MetodosUtiles {
 			agencia.addCandidato(candidato7);
 			agencia.addCandidato(candidato8);
 			agencia.addCandidato(candidato9);
-//			agencia.addCandidato(candidato10);
-//			agencia.addCandidato(candidato11);
-//			agencia.addCandidato(candidato12);
-//			agencia.addCandidato(candidato13);
-//			agencia.addCandidato(candidato14);
-//			agencia.addCandidato(candidato15);
-//			agencia.addCandidato(candidato16);
-//			agencia.addCandidato(candidato17);
-//			agencia.addCandidato(candidato18);
+			//			agencia.addCandidato(candidato10);
+			//			agencia.addCandidato(candidato11);
+			//			agencia.addCandidato(candidato12);
+			//			agencia.addCandidato(candidato13);
+			//			agencia.addCandidato(candidato14);
+			//			agencia.addCandidato(candidato15);
+			//			agencia.addCandidato(candidato16);
+			//			agencia.addCandidato(candidato17);
+			//			agencia.addCandidato(candidato18);
 
 		}catch(YaExisteExceptions e){
 

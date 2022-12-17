@@ -185,7 +185,7 @@ public class Candidato implements Comparable<Candidato>{
 		out=year-out;
 		return out;
 	}
-	public void VerificarSiCumpleCondiciones() throws ElementosInsuficientesException{
+	public void VerificarSiCumpleCondicionesRama() throws ElementosInsuficientesException{
 		ArrayList<String> faltantes=new ArrayList<String>();
 		for(Documento x: rama.getListaDocumentos()){
 			if(x.getObligatorio()){
@@ -199,6 +199,7 @@ public class Candidato implements Comparable<Candidato>{
 					faltantes.add(x.getDocumento());
 			}
 		}
+		
 		if(faltantes.size()>0){
 			String mensaje="";
 			for(String z: faltantes)
@@ -207,6 +208,18 @@ public class Candidato implements Comparable<Candidato>{
 		}
 
 	}
-
-
+	public String VerificarSiCumpleCondicionesSector(Sector sector){
+		String message="";
+		for(Documento x: sector.getListaDocumentos()){
+			boolean encontrado=false;
+			int i=0;
+			while(i<documentos.size()&& !encontrado)
+				if(documentos.get(i).equalsIgnoreCase(x.getDocumento()))
+					encontrado=true;
+				else i++;
+			if(!encontrado)
+				message+=x.getDocumento()+"\n";
+		}
+		return message;
+	}
 }

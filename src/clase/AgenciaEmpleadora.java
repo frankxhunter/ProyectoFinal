@@ -134,7 +134,7 @@ public class AgenciaEmpleadora {
 	}
 	public void addCandidato(Candidato candidato)throws YaExisteExceptions, ElementosInsuficientesException{
 		boolean encontrado=false;
-		candidato.VerificarSiCumpleCondiciones();
+		candidato.VerificarSiCumpleCondicionesRama();
 		int i=0;
 		while(i<listaCandidatos.size() && !encontrado)
 			if(listaCandidatos.get(i).getCarnet().equalsIgnoreCase(candidato.getCarnet()))

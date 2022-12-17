@@ -17,12 +17,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import util.MetodosUtiles;
 import util.OfertaCandidatoTableModel;
 import util.PersonaTableModel;
 import clase.AgenciaEmpleadora;
 import clase.Candidato;
 import clase.Oferta;
 import clase.Rama;
+
 import javax.swing.JLabel;
 
 public class VisualCandidato extends JDialog {
@@ -135,6 +137,7 @@ public class VisualCandidato extends JDialog {
 					btEliminar.setEnabled(false);
 					btModificar.setEnabled(false);
 					tableModel2.setRowCount(0);
+					btnProgramarEntrevista.setEnabled(false);
 				}
 			});
 			btEliminar.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -165,6 +168,7 @@ public class VisualCandidato extends JDialog {
 					tableModel2.refresh(AgenciaEmpleadora.getInstancia().getListaCandidatos().get
 							(table.getSelectedRow()).DevolverListaDeOfertasDisponibles(AgenciaEmpleadora.getInstancia
 									().getListaEmpresas()));
+					btnProgramarEntrevista.setEnabled(false);
 				}
 			});
 			tableModel=new PersonaTableModel();
@@ -215,13 +219,6 @@ public class VisualCandidato extends JDialog {
 	private JScrollPane getScrollPane_1() {
 		if (scrollPane_1 == null) {
 			scrollPane_1 = new JScrollPane();
-			scrollPane_1.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mousePressed(MouseEvent e) {
-					btnProgramarEntrevista.setEnabled(true);;
-					
-				}
-			});
 			scrollPane_1.setBounds(10, 24, 337, 309);
 			scrollPane_1.setViewportView(getTable_1());
 		}
@@ -235,12 +232,14 @@ public class VisualCandidato extends JDialog {
 					Candidato candidato=AgenciaEmpleadora.getInstancia().getListaCandidatos().get(table.getSelectedRow());
 					Oferta oferta=candidato.DevolverListaDeOfertasDisponibles(AgenciaEmpleadora.getInstancia().
 							getListaEmpresas()).get(table_1.getSelectedRow());
-					tableModel2.setRowCount(0);
-					VisualEntrevista x=new VisualEntrevista(candidato,oferta,getThis());
-					getThis().setVisible(false);
-					x.setLocationRelativeTo(null);
-					x.setModal(true);
-					x.setVisible(true);
+					if(MetodosUtiles.mostrarMesajeDeSector(candidato, oferta.getEmpresaPerteneciente().getSector())){
+						VisualEntrevista x=new VisualEntrevista(candidato,oferta,getThis());
+						tableModel2.setRowCount(0);
+						getThis().setVisible(false);
+						x.setLocationRelativeTo(null);
+						x.setModal(true);
+						x.setVisible(true);
+					}
 				}
 			});
 			btnProgramarEntrevista.setEnabled(false);
