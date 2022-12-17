@@ -152,6 +152,8 @@ public class VisualRama extends JDialog {
 					Rama rama=AgenciaEmpleadora.getInstancia().getlistaRama().get(pos);
 					AgenciaEmpleadora.getInstancia().getListaEspecialidades().remove(rama);
 					tableModel.refresh2(AgenciaEmpleadora.getInstancia().getlistaRama());
+					btnEliminar.setEnabled(false);
+					btnModificar.setEnabled(false);
 				}
 			});
 			btnEliminar.setBounds(152, 408, 89, 23);

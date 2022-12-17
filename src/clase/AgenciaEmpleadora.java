@@ -1,6 +1,7 @@
 package clase;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import excepcionesPropias.ElementosInsuficientesException;
 import excepcionesPropias.YaExisteExceptions;
@@ -168,6 +169,17 @@ public class AgenciaEmpleadora {
 			out/=cant;
 		return out;
 			
+	}
+	public boolean verificarSiCandidatoTieneEntrevista(Candidato candidato, Date fecha){
+		boolean out=false;
+		int i=0;
+		while(!out && i<listaEmpresas.size())
+			if(listaEmpresas.get(i).verificaSiCandidatoTieneEntrevista(fecha, candidato))
+				out=true;
+			else
+				i++;
+		return out;
+		
 	}
 
 }

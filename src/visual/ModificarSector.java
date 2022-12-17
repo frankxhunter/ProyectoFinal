@@ -28,6 +28,8 @@ import clase.Documento;
 import clase.Sector;
 import excepcionesPropias.YaExisteExceptions;
 import javax.swing.JRadioButton;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class ModificarSector extends JDialog {
 	/**
@@ -51,7 +53,6 @@ public class ModificarSector extends JDialog {
 	private JButton btnCancelar;
 	private JButton btnEliminar;
 	private JButton btModificar;
-	private JLabel label;
 	private JPanel panel_3;
 	private JLabel lblCreacinDeSector;
 	private JButton button;
@@ -118,6 +119,13 @@ public class ModificarSector extends JDialog {
 	private JTextField getTxNombre() {
 		if (txNombre == null) {
 			txNombre = new JTextField();
+			txNombre.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(txNombre.getText().trim().length()==0)
+						txNombre.setBorder(new LineBorder(Color.RED, 2));
+				}
+			});
 			txNombre.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyReleased(KeyEvent arg0) {
@@ -125,7 +133,9 @@ public class ModificarSector extends JDialog {
 				}
 				@Override
 				public void keyTyped(KeyEvent e) {
-				MetodosUtiles.validacionJTextLetra(txNombre.getText().trim().length(),e);}
+				MetodosUtiles.validacionJTextLetra(txNombre.getText().trim().length(),e);
+				txNombre.setBorder(null);
+				}
 			});
 			txNombre.setBounds(189, 32, 106, 20);
 			txNombre.setColumns(10);
@@ -144,7 +154,6 @@ public class ModificarSector extends JDialog {
 			panel_1.add(getBtnAgregar());
 			panel_1.add(getPanel_2());
 			panel_1.add(getBtnEliminar());
-			panel_1.add(getLabel());
 			panel_1.add(getRdbtnObligatorio());
 		}
 		return panel_1;
@@ -165,12 +174,7 @@ public class ModificarSector extends JDialog {
 				@Override
 				public void keyTyped(KeyEvent e) {
 					MetodosUtiles.validacionJTextCharacter(txDocumento.getText().trim().length(), e);
-				}
-			});
-			txDocumento.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent arg0) {
-					label.setVisible(false);
+					txDocumento.setBorder(null);
 				}
 			});
 			txDocumento.setBounds(215, 29, 206, 20);
@@ -194,7 +198,7 @@ public class ModificarSector extends JDialog {
 						}
 					}
 					else{
-						label.setVisible(true);
+							txDocumento.setBorder(new LineBorder(Color.RED, 2));
 					}
 				}
 			});
@@ -327,16 +331,6 @@ public class ModificarSector extends JDialog {
 			btnAceptar.setEnabled(false);
 			btModificar.setEnabled(false);
 		}
-	}
-	private JLabel getLabel() {
-		if (label == null) {
-			label = new JLabel("->");
-			label.setBounds(197, 32, 17, 14);
-			label.setVisible(true);
-			label.setForeground(Color.RED);
-			label.setFont(new Font("Tahoma", Font.BOLD, 12));
-		}
-		return label;
 	}
 	private JPanel getPanel_3() {
 		if (panel_3 == null) {

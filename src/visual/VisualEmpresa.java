@@ -31,6 +31,8 @@ import clase.AgenciaEmpleadora;
 import clase.Empresa;
 import clase.Sector;
 import excepcionesPropias.YaExisteExceptions;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class VisualEmpresa extends JDialog {
 
@@ -117,6 +119,7 @@ public class VisualEmpresa extends JDialog {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					rellenar();
+					btModificar.setEnabled(true);
 				}
 			});
 			tableModel=new EmpresaTableModel();
@@ -148,12 +151,20 @@ public class VisualEmpresa extends JDialog {
 	private JTextField getTxNombre() {
 		if (txNombre == null) {
 			txNombre = new JTextField();
+			txNombre.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(txNombre.getText().trim().length()==0)
+						txNombre.setBorder(new LineBorder(Color.RED, 2));
+				}
+			});
 			txNombre.setToolTipText("Nombre de la Empresa\r\n");
 			txNombre.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
 					MetodosUtiles.validacionJTextLetra(txNombre.getText().trim().length(), e);
 						validar();
+						txNombre.setBorder(null);
 				}
 			});
 			txNombre.setColumns(10);
@@ -182,12 +193,20 @@ public class VisualEmpresa extends JDialog {
 	private JTextField getTxDireccion() {
 		if (txDireccion == null) {
 			txDireccion = new JTextField();
+			txDireccion.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(txDireccion.getText().trim().length()==0)
+						txDireccion.setBorder(new LineBorder(Color.RED, 2));
+				}
+			});
 			txDireccion.setToolTipText("Direccion donde se encuentra ubicada la empresa");
 			txDireccion.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
 					MetodosUtiles.validacionJTextCharacter(txDireccion.getText().trim().length(), e);
 					validar();
+					txDireccion.setBorder(null);
 					}
 			});
 			txDireccion.setColumns(10);
@@ -216,6 +235,13 @@ public class VisualEmpresa extends JDialog {
 	private JTextField getTxTelefono() {
 		if (txTelefono == null) {
 			txTelefono = new JTextField();
+			txTelefono.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(txTelefono.getText().trim().length()<8)
+						txTelefono.setBorder(new LineBorder(Color.RED, 2));
+				}
+			});
 			txTelefono.setToolTipText("El numero de telefeono, deben ser 8 digitos");
 			txTelefono.addKeyListener(new KeyAdapter() {
 				@Override
@@ -225,6 +251,7 @@ public class VisualEmpresa extends JDialog {
 				@Override
 				public void keyReleased(KeyEvent e) {
 					validar();
+					txTelefono.setBorder(null);
 					}
 			});
 			txTelefono.setColumns(10);
@@ -244,6 +271,7 @@ public class VisualEmpresa extends JDialog {
 	private JButton getBtAgregar() {
 		if (btAgregar == null) {
 			btAgregar = new JButton("Agregar");
+			btAgregar.setFocusable(false);
 			btAgregar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -268,6 +296,7 @@ public class VisualEmpresa extends JDialog {
 	private JButton getBtEliminar() {
 		if (btEliminar == null) {
 			btEliminar = new JButton("Eliminar");
+			btEliminar.setFocusable(false);
 			btEliminar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btEliminar.setBounds(564, 260, 89, 23);
 			btEliminar.setEnabled(false);
@@ -286,6 +315,7 @@ public class VisualEmpresa extends JDialog {
 	private JButton getBtModificar() {
 		if (btModificar == null) {
 			btModificar = new JButton("Modificar");
+			btModificar.setFocusable(false);
 			btModificar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btModificar.setBounds(465, 260, 89, 23);
 			btModificar.setEnabled(false);
@@ -300,6 +330,7 @@ public class VisualEmpresa extends JDialog {
 					limpiar();
 					btAgregar.setEnabled(false); 
 					btModificar.setEnabled(false);
+					btEliminar.setEnabled(false);
 				}
 			});
 		}

@@ -3,8 +3,10 @@ package visual;
 import java.util.Date;
 
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import clase.AgenciaEmpleadora;
 import clase.Candidato;
 import clase.Entrevista;
 import clase.Oferta;
@@ -23,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
+
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 
@@ -67,7 +70,7 @@ public class VisualEntrevista extends JDialog {
 		this.candidato=candidato;
 		this.oferta=oferta;
 		pantalla=jDialog;
-		setBounds(100, 100, 484, 370);
+		setBounds(100, 100, 484, 369);
 		getContentPane().setLayout(null);
 		getContentPane().add(getPanel());
 		getContentPane().add(getPanel_1());
@@ -78,7 +81,7 @@ public class VisualEntrevista extends JDialog {
 			panel.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Fecha de la Entrevista", 
 					TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.PLAIN, 15), new Color(0, 0, 0)));
 			panel.setBackground(Color.LIGHT_GRAY);
-			panel.setBounds(10, 44, 462, 315);
+			panel.setBounds(10, 44, 462, 313);
 			panel.setLayout(null);
 			panel.add(getCalendar());
 			panel.add(getBtnAgregar());
@@ -106,6 +109,7 @@ public class VisualEntrevista extends JDialog {
 				@SuppressWarnings("deprecation")
 				public void actionPerformed(ActionEvent e) {
 					Date fecha=new Date(calendar.getDate().getYear(), calendar.getDate().getMonth(), calendar.getDate().getDate());
+					if(!AgenciaEmpleadora.getInstancia().verificarSiCandidatoTieneEntrevista(candidato, fecha)){
 					if(oferta.getEmpresaPerteneciente().buscarEntrevistaPorFecha(fecha,oferta)==null){
 						Entrevista x=new Entrevista(fecha, oferta);
 						x.getListaCandidatos().add(candidato);
@@ -116,9 +120,14 @@ public class VisualEntrevista extends JDialog {
 					}
 					oferta.getListaCandidatos().add(candidato);
 					cambiaPantalla();
+					
+					}else{
+						JOptionPane.showMessageDialog(null, "Error: El candidato ya tiene una entrevista ese dia");
+					}
+						
 				}
 			});
-			btnAgregar.setBounds(264, 281, 89, 23);
+			btnAgregar.setBounds(259, 281, 89, 23);
 		}
 		return btnAgregar;
 	}
@@ -131,7 +140,7 @@ public class VisualEntrevista extends JDialog {
 					cambiaPantalla();
 				}
 			});
-			btnCancelar.setBounds(363, 281, 89, 23);
+			btnCancelar.setBounds(358, 281, 89, 23);
 		}
 		return btnCancelar;
 	}

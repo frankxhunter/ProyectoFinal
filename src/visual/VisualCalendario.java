@@ -60,7 +60,7 @@ public class VisualCalendario extends JDialog {
 	private JPanel panel_5;
 	private JButton btnEliminar;
 	private JPanel panel_6;
-	private JButton button_1;
+	private JButton btnEliminar2;
 
 	/**
 	 * Launch the application.
@@ -117,7 +117,7 @@ public class VisualCalendario extends JDialog {
 			panel_2.setBounds(381, 83, 324, 310);
 			panel_2.setLayout(null);
 			panel_2.add(getPanel_6());
-			panel_2.add(getButton_1());
+			panel_2.add(getBtnEliminar2());
 		}
 		return panel_2;
 	}
@@ -293,10 +293,11 @@ public class VisualCalendario extends JDialog {
 		}
 		return panel_6;
 	}
-	private JButton getButton_1() {
-		if (button_1 == null) {
-			button_1 = new JButton("Eliminar");
-			button_1.addActionListener(new ActionListener() {
+	private JButton getBtnEliminar2() {
+		if (btnEliminar2 == null) {
+			btnEliminar2 = new JButton("Eliminar");
+			btnEliminar2.setEnabled(false);
+			btnEliminar2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					int posEntrevista=table.getSelectedRow();
 					int posCandidato=table2.getSelectedRow();
@@ -306,13 +307,14 @@ public class VisualCalendario extends JDialog {
 						eliminarEntrevista();
 					}
 					tableModel2.refresh(listaEntrevistas.get(table.getSelectedRow()).getListaCandidatos());
+					btnEliminar2.setEnabled(true);
 				}
 			});
-			button_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-			button_1.setFocusable(false);
-			button_1.setBounds(214, 278, 100, 23);
+			btnEliminar2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+			btnEliminar2.setFocusable(false);
+			btnEliminar2.setBounds(214, 278, 100, 23);
 		}
-		return button_1;
+		return btnEliminar2;
 	}
 	public void eliminarEntrevista(){
 		listaEntrevistas.get(table.getSelectedRow()).getOferta().getEmpresaPerteneciente().getListaEntrevistas()

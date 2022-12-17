@@ -31,6 +31,8 @@ import javax.swing.UIManager;
 
 import excepcionesPropias.YaExisteExceptions;
 import javax.swing.JRadioButton;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class ModificarRama extends JDialog {
 	/**
@@ -54,7 +56,6 @@ public class ModificarRama extends JDialog {
 	private JButton btnCancelar;
 	private JButton btnEliminar;
 	private JButton btModificar;
-	private JLabel label;
 	private JButton btnX;
 	private JScrollPane scrollPane_1;
 	private JPanel panel_4;
@@ -125,10 +126,18 @@ public class ModificarRama extends JDialog {
 	private JTextField getTxNombre() {
 		if (txNombre == null) {
 			txNombre = new JTextField();
+			txNombre.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(txNombre.getText().trim().length()==0)
+					txNombre.setBorder(new LineBorder(Color.RED, 2));
+				}
+			});
 			txNombre.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyReleased(KeyEvent arg0) {
 					validar();
+					txNombre.setBorder(null);
 				}
 				@Override
 				public void keyTyped(KeyEvent e) {
@@ -152,7 +161,6 @@ public class ModificarRama extends JDialog {
 			panel_1.add(getBtnAgregar());
 			panel_1.add(getPanel_2());
 			panel_1.add(getBtnEliminar());
-			panel_1.add(getLabel());
 			panel_1.add(getRadioButton());
 		}
 		return panel_1;
@@ -172,14 +180,12 @@ public class ModificarRama extends JDialog {
 			txDocumento.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
-					MetodosUtiles.validacionJTextCharacter(txDocumento.getText().trim().length(), e);}
-			});
-			txDocumento.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent arg0) {
-					label.setVisible(false);
+					MetodosUtiles.validacionJTextCharacter(txDocumento.getText().trim().length(), e);
+					txDocumento.setBorder(null);
 				}
+				
 			});
+		
 			txDocumento.setBounds(215, 29, 206, 20);
 			txDocumento.setColumns(10);
 		}
@@ -199,7 +205,7 @@ public class ModificarRama extends JDialog {
 							txDocumento.setText("");
 						}
 						else{
-							label.setVisible(true);
+							txDocumento.setBorder(new LineBorder(Color.RED, 2));
 						}
 					} catch (YaExisteExceptions e) {
 						MetodosUtiles.mostrarMensaje(e);
@@ -329,16 +335,6 @@ public class ModificarRama extends JDialog {
 			btnAceptar.setEnabled(false);
 			btModificar.setEnabled(false);
 		}
-	}
-	private JLabel getLabel() {
-		if (label == null) {
-			label = new JLabel("->");
-			label.setVisible(true);
-			label.setForeground(Color.RED);
-			label.setFont(new Font("Tahoma", Font.BOLD, 12));
-			label.setBounds(197, 32, 17, 14);
-		}
-		return label;
 	}
 	private JButton getBtnX() {
 		if (btnX == null) {

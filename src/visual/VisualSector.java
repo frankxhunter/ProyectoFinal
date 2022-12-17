@@ -153,6 +153,8 @@ public class VisualSector extends JDialog {
 					Sector sector=AgenciaEmpleadora.getInstancia().getlistaSector().get(pos);
 					AgenciaEmpleadora.getInstancia().getListaEspecialidades().remove(sector);
 					tableModel.refresh(AgenciaEmpleadora.getInstancia().getlistaSector());
+					btnEliminar.setEnabled(false);
+					btnModificar.setEnabled(false);
 				}
 			});
 			btnEliminar.setBounds(152, 408, 89, 23);

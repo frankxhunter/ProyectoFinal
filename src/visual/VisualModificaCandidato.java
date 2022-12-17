@@ -33,6 +33,8 @@ import clase.Candidato;
 import clase.Rama;
 import excepcionesPropias.ElementosInsuficientesException;
 import excepcionesPropias.YaExisteExceptions;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class VisualModificaCandidato extends JDialog {
 	/**
@@ -168,10 +170,18 @@ public class VisualModificaCandidato extends JDialog {
 	private JTextField getTxNombre() {
 		if (txNombre == null) {
 			txNombre = new JTextField();
+			txNombre.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(txNombre.getText().trim().length()==0)
+						txNombre.setBorder(new LineBorder(Color.RED, 2));
+				}
+			});
 			txNombre.setToolTipText("Nombre y Apellidos completos del candidato, solo se admiten letras");
 			txNombre.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
+					txNombre.setBorder(null);
 					MetodosUtiles.validacionJTextLetra(txNombre.getText().length(), e);
 					validar();
 				}
@@ -194,10 +204,18 @@ public class VisualModificaCandidato extends JDialog {
 	private JTextField getTxCarnet() {
 		if (txCarnet == null) {
 			txCarnet = new JTextField();
+			txCarnet.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(txCarnet.getText().trim().length()<11)
+						txCarnet.setBorder(new LineBorder(Color.RED, 2));
+				}
+			});
 			txCarnet.setToolTipText("Numero de carnet del candidato, deben ser 11 digitos");
 			txCarnet.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
+					txCarnet.setBorder(null);
 					MetodosUtiles.validacionJTextNumero(txCarnet.getText().length(), 11, e);
 					
 				}
@@ -246,10 +264,18 @@ public class VisualModificaCandidato extends JDialog {
 	private JTextField getTxDireccion() {
 		if (txDireccion == null) {
 			txDireccion = new JTextField();
+			txDireccion.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(txDireccion.getText().trim().length()==0)
+						txDireccion.setBorder(new LineBorder(Color.RED, 2));
+				}
+			});
 			txDireccion.setToolTipText("Direccion en la que reside el candidato actualmente");
 			txDireccion.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
+					txDireccion.setBorder(null);
 					MetodosUtiles.validacionJTextCharacter(txDireccion.getText().length(), e);
 					validar();
 				}
@@ -262,11 +288,20 @@ public class VisualModificaCandidato extends JDialog {
 	private JTextField getTxTelefono() {
 		if (txTelefono == null) {
 			txTelefono = new JTextField();
+			txTelefono.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(txTelefono.getText().trim().length()<8)
+						txTelefono.setBorder(new LineBorder(Color.RED, 2));
+				
+				}
+			});
 			txTelefono.setToolTipText("Numero de telefono con el que puede ser localizado, deben ser 8 digitos");
 			txTelefono.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
 					MetodosUtiles.validacionJTextNumero(txTelefono.getText().length(), 8, e);
+					txTelefono.setBorder(null);
 				}
 				@Override
 				public void keyReleased(KeyEvent e){
@@ -319,12 +354,20 @@ public class VisualModificaCandidato extends JDialog {
 	private JTextField getTxEspecialidad() {
 		if (txEspecialidad == null) {
 			txEspecialidad = new JTextField();
+			txEspecialidad.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(txEspecialidad.getText().trim().length()==0)
+						txEspecialidad.setBorder(new LineBorder(Color.RED, 2));
+				}
+			});
 			txEspecialidad.setToolTipText("Especializacion del candidato");
 			txEspecialidad.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
 					MetodosUtiles.validacionJTextCharacter(txEspecialidad.getText().length(), e);
 					validar();
+					txEspecialidad.setBorder(null);
 				}
 			});
 			txEspecialidad.setColumns(10);
@@ -355,12 +398,20 @@ public class VisualModificaCandidato extends JDialog {
 	private JTextField getTxNivelEscolar() {
 		if (txNivelEscolar == null) {
 			txNivelEscolar = new JTextField();
+			txNivelEscolar.addFocusListener(new FocusAdapter() {
+				@Override
+				public void focusLost(FocusEvent e) {
+					if(txNivelEscolar.getText().trim().length()==0)
+						txNivelEscolar.setBorder(new LineBorder(Color.RED, 2));
+				}
+			});
 			txNivelEscolar.setToolTipText("Nivel escolar del candidato");
 			txNivelEscolar.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyTyped(KeyEvent e) {
 					MetodosUtiles.validacionJTextCharacter(txNivelEscolar.getText().length(), e);
 					validar();
+					txNivelEscolar.setBorder(null);
 				}
 			});
 			txNivelEscolar.setColumns(10);
@@ -488,7 +539,8 @@ public class VisualModificaCandidato extends JDialog {
 				@Override
 				public void keyTyped(KeyEvent e) {
 					MetodosUtiles.validacionJTextCharacter(txDocumento.getText().length(), e);
-				}
+					txDocumento.setBorder(null);
+					}
 			});
 			txDocumento.setBounds(86, 18, 150, 20);
 			txDocumento.setColumns(10);
@@ -511,7 +563,8 @@ public class VisualModificaCandidato extends JDialog {
 						}catch(YaExisteExceptions y){
 						JOptionPane.showMessageDialog(null, y.getMessage());
 						}
-					}
+					}else
+						txDocumento.setBorder(new LineBorder(Color.RED, 2));
 					
 				}
 			});
