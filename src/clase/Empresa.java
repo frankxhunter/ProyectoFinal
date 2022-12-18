@@ -158,4 +158,12 @@ public class Empresa implements Comparable<Empresa>{
 			else i++;
 		}
 	}
+	public void eliminarOferta(Oferta oferta){
+		listaOfertas.remove(oferta);
+		int i=0;
+		while(i<listaEntrevistas.size())
+			if(listaEntrevistas.get(i).getOferta().equals(oferta))
+				listaEntrevistas.remove(i);
+			else i++;
+	}
 }

@@ -2,7 +2,7 @@ package util;
 
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -276,8 +276,8 @@ public class MetodosUtiles {
 			Entrevista entrevista2 = new Entrevista(new Date(2023-1900, 5, 11), candidato2, oferta7);
 			Entrevista entrevista3 = new Entrevista(new Date(2023-1900, 8, 10), candidato4, oferta1);
 			Entrevista entrevista4 = new Entrevista(new Date(2023-1900, 10, 9), candidato7, oferta9);
-			Entrevista entrevista5 = new Entrevista(new Date(2023-1900, 11, 7), candidato8, oferta5);
-			Entrevista entrevista6 = new Entrevista(new Date(2023-1900, 4, 20), candidato9, oferta12);
+			Entrevista entrevista5 = new Entrevista(new Date(), candidato8, oferta5);
+			Entrevista entrevista6 = new Entrevista(new Date(), candidato9, oferta12);
 			//			Entrevista entrevista7 = new Entrevista(new Date(2023-1900, 6, 21), candidato6, oferta4);
 			//			Entrevista entrevista8 = new Entrevista(new Date(2023-1900, 5, 22), candidato12, oferta3);
 			//			Entrevista entrevista9 = new Entrevista(new Date(2023-1900, 3, 24), candidato14, oferta2);
@@ -311,7 +311,7 @@ public class MetodosUtiles {
 			empresa13.addEntrevista(entrevista2);
 			empresa14.addEntrevista(entrevista1);
 			//			empresa15.addEntrevista(entrevista10);
-			empresa16.addEntrevista(entrevista6);
+			empresa1.addEntrevista(entrevista6);
 
 
 			candidato1.addDocumento(h.getDocumento());

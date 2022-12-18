@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import test.AgenciaEmpleadoraTestCase;
 import util.MetodosUtiles;
 import util.OfertaCandidatoTableModel;
 import util.PersonaTableModel;
@@ -116,9 +117,9 @@ public class VisualCandidato extends JDialog {
 				public void actionPerformed(ActionEvent arg0) {
 					VisualModificaCandidato x=new VisualModificaCandidato(table.getSelectedRow());
 					dispose();
-					x.setVisible(true);
-					x.setModal(true);
 					x.setLocationRelativeTo(null);
+					x.setModal(true);
+					x.setVisible(true);
 				}
 			});
 			btModificar.setBounds(446, 349, 99, 23);
@@ -131,13 +132,21 @@ public class VisualCandidato extends JDialog {
 			btEliminar.setEnabled(false);
 			btEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					int pos=table.getSelectedRow();
-					tableModel.removeRow(pos);
-					AgenciaEmpleadora.getInstancia().getListaCandidatos().remove(pos);
-					btEliminar.setEnabled(false);
-					btModificar.setEnabled(false);
-					tableModel2.setRowCount(0);
-					btnProgramarEntrevista.setEnabled(false);
+					String message="¿Seguro que quieres borrar este(estos) elemento(s), se borrara toda la infomacion"
+							+ "\n asociada";
+					if(MetodosUtiles.mensajeDeBorrar(message)){
+						int[] posiciones=table.getSelectedRows();
+						int pos=0;
+						for(int x: posiciones){
+							Candidato candidato=AgenciaEmpleadora.getInstancia().getListaCandidatos().get(x-pos++);
+							AgenciaEmpleadora.getInstancia().eliminarCandidato(candidato);
+						}
+						tableModel.refresh(AgenciaEmpleadora.getInstancia().getListaCandidatos());
+						btEliminar.setEnabled(false);
+						btModificar.setEnabled(false);
+						tableModel2.setRowCount(0);
+						btnProgramarEntrevista.setEnabled(false);
+					}
 				}
 			});
 			btEliminar.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -192,8 +201,8 @@ public class VisualCandidato extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					VisualModificaCandidato x=new VisualModificaCandidato(-1);
 					dispose();
-					x.setModal(true);
 					x.setLocationRelativeTo(null);
+					x.setModal(true);
 					x.setVisible(true);
 				}
 			});

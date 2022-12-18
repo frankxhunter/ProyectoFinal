@@ -103,8 +103,8 @@ public class VisualOferta extends JDialog {
 		getContentPane().add(getPanel_3());
 		getContentPane().add(getPanel_5());
 		if(AgenciaEmpleadora.getInstancia().getListaEmpresas().get(0)!=null){
-		empresa=AgenciaEmpleadora.getInstancia().getListaEmpresas().get(0);
-		tableModel.refresh(empresa.getListaOfertas());
+			empresa=AgenciaEmpleadora.getInstancia().getListaEmpresas().get(0);
+			tableModel.refresh(empresa.getListaOfertas());
 		}
 
 	}
@@ -213,15 +213,15 @@ public class VisualOferta extends JDialog {
 			btnAgregar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try{
-					Oferta  oferta=new Oferta(txID.getText(), Integer.parseInt(spSalario.getValue().toString()),
-							Integer.parseInt(spCantidad.getValue().toString()), 
-							AgenciaEmpleadora.getInstancia().obtenerRama(coRama.getSelectedItem().toString()),empresa);
-					empresa.addOferta(oferta);;
-					tableModel.refresh(empresa.getListaOfertas());
-					limpiar();		
-					btnAgregar.setEnabled(false);
-					btnModificar.setEnabled(false);
-					tableModel2.setRowCount(0);
+						Oferta  oferta=new Oferta(txID.getText(), Integer.parseInt(spSalario.getValue().toString()),
+								Integer.parseInt(spCantidad.getValue().toString()), 
+								AgenciaEmpleadora.getInstancia().obtenerRama(coRama.getSelectedItem().toString()),empresa);
+						empresa.addOferta(oferta);;
+						tableModel.refresh(empresa.getListaOfertas());
+						limpiar();		
+						btnAgregar.setEnabled(false);
+						btnModificar.setEnabled(false);
+						tableModel2.setRowCount(0);
 					}catch(YaExisteExceptions d){
 						MetodosUtiles.mostrarMensaje(d);
 					}
@@ -287,7 +287,7 @@ public class VisualOferta extends JDialog {
 					if(txID.getText().trim().length()==5){
 						btnAgregar.setEnabled(true);
 						if(table.getSelectedRow()!=-1)
-						btnModificar.setEnabled(true);
+							btnModificar.setEnabled(true);
 					}else{
 						btnAgregar.setEnabled(false);
 						btnModificar.setEnabled(false);
@@ -345,12 +345,20 @@ public class VisualOferta extends JDialog {
 			btnEliminar.setEnabled(false);
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					int pos=table.getSelectedRow();
-					empresa.getListaOfertas().remove(pos);
+					String message="¿Seguro que quieres borrar este(estos) elemento(s), se borrara toda la infomacion"
+							+ "\n asociada";
+					if(MetodosUtiles.mensajeDeBorrar(message)){
+					int[] posiciones=table.getSelectedRows();
+					int pos=0;
+					for(int x: posiciones){
+						Oferta oferta=empresa.getListaOfertas().get(x-pos++);
+						empresa.eliminarOferta(oferta);
+					}
 					tableModel.refresh(empresa.getListaOfertas());
 					btnEliminar.setEnabled(false);
 					btnModificar.setEnabled(false);
 					tableModel2.setRowCount(0);
+					}
 				}
 			});
 			btnEliminar.setBounds(612, 307, 89, 23);
@@ -392,7 +400,7 @@ public class VisualOferta extends JDialog {
 							for(Oferta y: x.getListaOfertas())
 								if(y.getNumeroId().equalsIgnoreCase(id))
 									encontrado=true;
-						
+
 					}while(encontrado);
 					txID.setText(id);
 					btnAgregar.setEnabled(true);
@@ -433,8 +441,8 @@ public class VisualOferta extends JDialog {
 					x.setLocationRelativeTo(null);
 					x.setModal(true);
 					x.setVisible(true);
-					
-					
+
+
 				}
 			});
 			btnProgramarEntrevista.setEnabled(false);
@@ -468,6 +476,7 @@ public class VisualOferta extends JDialog {
 				}
 			});
 			table_1.setModel(tableModel2);
+			table_1.getTableHeader().setReorderingAllowed(false);
 		}
 		return table_1;
 	}

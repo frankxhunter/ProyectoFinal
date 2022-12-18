@@ -580,7 +580,10 @@ public class VisualModificaCandidato extends JDialog {
 			btnEliminar.setEnabled(false);
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					candidato.getDocumentos().remove(table.getSelectedRow());
+					int[] posiciones=table.getSelectedRows();
+					int pos=0;
+					for(int x: posiciones)
+					candidato.getDocumentos().remove(x-pos++);
 					tableModel.refresh(candidato.getDocumentos());
 					btnEliminar.setEnabled(false);
 				}
@@ -677,8 +680,8 @@ public class VisualModificaCandidato extends JDialog {
 	public void siguientePantalla(){
 		VisualCandidato x= new VisualCandidato();
 		dispose();
-		x.setVisible(true);
 		x.setLocationRelativeTo(null);
 		x.setModal(true);
+		x.setVisible(true);
 	}
 }

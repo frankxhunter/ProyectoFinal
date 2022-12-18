@@ -128,6 +128,7 @@ public class VisualReportes extends JDialog {
 			table = new JTable();
 			table.setModel(tableModel);
 			tableModel.refresh(AgenciaEmpleadora.getInstancia().getListaEmpresas());
+			table.getTableHeader().setReorderingAllowed(false);
 		}
 		return table;
 	}
@@ -152,6 +153,7 @@ public class VisualReportes extends JDialog {
 			table_1 = new JTable();
 			table_1.setModel(tableModel2);
 			tableModel2.refresh(AgenciaEmpleadora.getInstancia().getlistaRama());
+			table_1.getTableHeader().setReorderingAllowed(false);
 		}
 		return table_1;
 	}

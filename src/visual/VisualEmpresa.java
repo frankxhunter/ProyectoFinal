@@ -301,10 +301,17 @@ public class VisualEmpresa extends JDialog {
 			btEliminar.setEnabled(false);
 			btEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					int pos=table.getSelectedRow();
-					AgenciaEmpleadora.getInstancia().getListaEmpresas().remove(pos);
+					String message="¿Seguro que quieres borrar este(estos) elemento(s), se borrara toda la infomacion"
+							+ "\n asociada";
+					if(MetodosUtiles.mensajeDeBorrar(message)){
+					int []posiciones=table.getSelectedRows();
+					int pos=0;
+					for(int x: posiciones)
+					AgenciaEmpleadora.getInstancia().getListaEmpresas().remove(x-pos++);
 					tableModel.refresh(AgenciaEmpleadora.getInstancia().getListaEmpresas());
 					btEliminar.setEnabled(false);
+					btModificar.setEnabled(false);
+					}
 
 				}
 			});
@@ -339,7 +346,7 @@ public class VisualEmpresa extends JDialog {
 		if (panel_2 == null) {
 			panel_2 = new JPanel();
 			panel_2.setBackground(new Color(158, 130, 116));
-			panel_2.setBounds(10, 44, 699, 463);
+			panel_2.setBounds(10, 44, 687, 447);
 			panel_2.setLayout(null);
 			panel_2.add(getPanel_1());
 			panel_2.add(getPanel());

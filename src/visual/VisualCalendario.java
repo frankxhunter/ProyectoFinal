@@ -21,12 +21,16 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import util.CandidatoEntrevistaTableModel;
+import util.MetodosUtiles;
 import util.RegistroEntrevistasTableModel;
 import clase.AgenciaEmpleadora;
+import clase.Candidato;
 import clase.Entrevista;
 
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class VisualCalendario extends JDialog {
 	/**
@@ -79,6 +83,7 @@ public class VisualCalendario extends JDialog {
 		getContentPane().setLayout(null);
 		getContentPane().add(getPanel());
 		getContentPane().add(getPanel_4());
+		actualizar();
 	}
 	private JPanel getPanel() {
 		if (panel == null) {
@@ -210,6 +215,12 @@ public class VisualCalendario extends JDialog {
 	private JTable getTable2() {
 		if (table2 == null) {
 			table2 = new JTable();
+			table2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mousePressed(MouseEvent e) {
+					btnEliminar2.setEnabled(true);
+				}
+			});
 			table2.setModel(tableModel2);
 		}
 		return table2;
@@ -219,6 +230,8 @@ public class VisualCalendario extends JDialog {
 		Collections.sort(listaEntrevistas);
 		tableModel.refresh(listaEntrevistas);
 		tableModel2.setRowCount(0);
+		btnEliminar.setEnabled(false);
+		btnEliminar2.setEnabled(false);
 	}
 	private JPanel getPanel_4() {
 		if (panel_4 == null) {
@@ -270,7 +283,10 @@ public class VisualCalendario extends JDialog {
 			btnEliminar.setEnabled(false);
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					eliminarEntrevista();
+					String message="¿Seguro que quieres borrar este(estos) elemento(s), se borrara toda la infomacion"
+							+ "\n asociada";
+					if(MetodosUtiles.mensajeDeBorrar(message))
+						eliminarEntrevista();
 				}
 			});
 			btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -294,15 +310,23 @@ public class VisualCalendario extends JDialog {
 			btnEliminar2.setEnabled(false);
 			btnEliminar2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					int posEntrevista=table.getSelectedRow();
-					int posCandidato=table2.getSelectedRow();
-					listaEntrevistas.get(posEntrevista).getOferta().getListaCandidatos().remove(listaEntrevistas.get(posEntrevista).getListaCandidatos().get(posCandidato));
-					listaEntrevistas.get(posEntrevista).getListaCandidatos().remove(posCandidato);
-					if(listaEntrevistas.get(posEntrevista).getListaCandidatos().size()==0){
-						eliminarEntrevista();
+					String message="¿Seguro que quieres borrar este(estos) elemento(s), se borrara toda la infomacion"
+							+ "\n asociada";
+					if(MetodosUtiles.mensajeDeBorrar(message)){
+						int posEntrevista=table.getSelectedRow();
+						int []posCandidatos=table2.getSelectedRows();
+						int pos=0;
+						for(int x: posCandidatos){
+							Candidato candidato=listaEntrevistas.get(posEntrevista).getListaCandidatos().get(x-pos++);
+							listaEntrevistas.get(posEntrevista).getOferta().getListaCandidatos().remove(candidato);
+							listaEntrevistas.get(posEntrevista).getListaCandidatos().remove(candidato);
+							if(listaEntrevistas.get(posEntrevista).getListaCandidatos().size()==0)
+								eliminarEntrevista();
+							else
+								tableModel2.refresh(listaEntrevistas.get(table.getSelectedRow()).getListaCandidatos());
+						}
+						btnEliminar2.setEnabled(false);
 					}
-					tableModel2.refresh(listaEntrevistas.get(table.getSelectedRow()).getListaCandidatos());
-					btnEliminar2.setEnabled(true);
 				}
 			});
 			btnEliminar2.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -312,9 +336,14 @@ public class VisualCalendario extends JDialog {
 		return btnEliminar2;
 	}
 	public void eliminarEntrevista(){
-		listaEntrevistas.get(table.getSelectedRow()).getOferta().getEmpresaPerteneciente().getListaEntrevistas()
-		.remove(listaEntrevistas.get(table.getSelectedRow()));
-		actualizar();
-		btnEliminar.setEnabled(false);
+		int []posiciones=table.getSelectedRows();
+		int pos=0;
+		for(int x:posiciones){
+			Entrevista entrevista=listaEntrevistas.get(x-pos++);
+			entrevista.getOferta().getEmpresaPerteneciente().getListaEntrevistas().remove(entrevista);
+			listaEntrevistas.remove(entrevista);
+			actualizar();
+			btnEliminar.setEnabled(false);
+		}
 	}
 }
