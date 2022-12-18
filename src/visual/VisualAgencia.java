@@ -1,30 +1,28 @@
 package visual;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-
-import clase.Documento;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Window.Type;
-import java.awt.Font;
-import java.util.ArrayList;
 
 
 
 public class VisualAgencia extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JMenuBar menuBar;
 	private JMenu mnArchivo;
@@ -75,6 +73,11 @@ public class VisualAgencia extends JFrame {
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel(){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public void paintComponent(Graphics g){
 				Image img = Toolkit.getDefaultToolkit().getImage(VisualAgencia.class.getResource("/Imagen/fondo.jpg"));
 				g.drawImage(img,0,0,this.getWidth(),this.getHeight(), this);

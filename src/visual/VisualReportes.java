@@ -1,35 +1,28 @@
 package visual;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTabbedPane;
-
-import util.MetodosUtiles;
-import util.PromedioSalarioTableModel;
-import util.RamasMasSolicitadasTableModel;
-
 import javax.swing.JScrollPane;
-
-import java.awt.CardLayout;
-
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
+import util.PromedioSalarioTableModel;
+import util.RamasMasSolicitadasTableModel;
 import clase.AgenciaEmpleadora;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class VisualReportes extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTabbedPane tabbedPane;
 	private JPanel panel;
 	private JPanel panel_1;

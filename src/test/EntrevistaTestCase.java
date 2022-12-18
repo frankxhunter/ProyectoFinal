@@ -17,6 +17,7 @@ import excepcionesPropias.YaExisteExceptions;
 
 public class EntrevistaTestCase {
 	private Entrevista x;
+	@SuppressWarnings("deprecation")
 	@Before
 	public void setUp() throws Exception {
 		x=new Entrevista(new Date(123, 2, 12), null);

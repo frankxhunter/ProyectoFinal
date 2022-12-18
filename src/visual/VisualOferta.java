@@ -3,6 +3,7 @@ package visual;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -25,6 +26,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -36,13 +38,7 @@ import clase.Candidato;
 import clase.Empresa;
 import clase.Oferta;
 import clase.Rama;
-
-import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
-
 import excepcionesPropias.YaExisteExceptions;
-
-import java.awt.SystemColor;
 
 public class VisualOferta extends JDialog {
 	/**
@@ -191,7 +187,6 @@ public class VisualOferta extends JDialog {
 			btnModificar.setEnabled(false);
 			btnModificar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					int pos=table.getSelectedRow();
 					Oferta oferta1=empresa.getListaOfertas().get(table.getSelectedRow());
 					oferta1.setSalario(Integer.parseInt(spSalario.getValue().toString()));
 					oferta1.setNumeroId(txID.getText());

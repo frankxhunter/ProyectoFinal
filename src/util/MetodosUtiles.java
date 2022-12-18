@@ -68,12 +68,12 @@ public class MetodosUtiles {
 			AgenciaEmpleadora agencia=AgenciaEmpleadora.getInstancia();
 
 			Documento a = new Documento("Pasaporte", true);
-			Documento b = new Documento("Certificado de 9no grado", true);
+//			Documento b = new Documento("Certificado de 9no grado", true);
 			Documento c = new Documento("Certificado de 12 grado", true);
 			Documento d = new Documento("Licencia de camion", false);
 			Documento e = new Documento("licencia de carro", true);
 			Documento f = new Documento("Licencia de guagua", true);
-			//	     	Documento g = new Documento("Certificado de curso de alturas", false);
+//         	Documento g = new Documento("Certificado de curso de alturas", false);
 			Documento h = new Documento("Titulo de ing. civil",true);
 			Documento i = new Documento("Titulo a nivel de especialista en Vias Terrestres", false);
 			Documento j = new Documento("Licenciatura en Fisica", false);

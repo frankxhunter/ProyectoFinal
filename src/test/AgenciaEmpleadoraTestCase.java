@@ -1,17 +1,13 @@
 package test;
 
-import static org.junit.Assert.fail;
 import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
-import util.MetodosUtiles;
 import clase.AgenciaEmpleadora;
 import clase.Candidato;
 import clase.Empresa;
-import clase.Rama;
 import excepcionesPropias.YaExisteExceptions;
 
 public class AgenciaEmpleadoraTestCase extends TestCase {

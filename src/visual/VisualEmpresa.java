@@ -5,13 +5,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -31,9 +32,6 @@ import clase.AgenciaEmpleadora;
 import clase.Empresa;
 import clase.Sector;
 import excepcionesPropias.YaExisteExceptions;
-
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 public class VisualEmpresa extends JDialog {
 
