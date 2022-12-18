@@ -82,9 +82,9 @@ public class VisualAgencia extends JFrame {
 				Image img = Toolkit.getDefaultToolkit().getImage(VisualAgencia.class.getResource("/Imagen/fondo.jpg"));
 				g.drawImage(img,0,0,this.getWidth(),this.getHeight(), this);
 			}
-			
+
 		};
-		
+
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -175,9 +175,9 @@ public class VisualAgencia extends JFrame {
 					v.setLocationRelativeTo(null);
 					v.setModal(true);
 					v.setVisible(true);
-				
-					
-					
+
+
+
 				}
 			});
 			mntmCrearEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -208,7 +208,7 @@ public class VisualAgencia extends JFrame {
 					v.setLocationRelativeTo(null);
 					v.setModal(true);
 					v.setVisible(true);
-				
+
 				}
 			});
 			mntmAgregarCandidatos.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -224,7 +224,7 @@ public class VisualAgencia extends JFrame {
 					v.setLocationRelativeTo(null);
 					v.setModal(true);
 					v.setVisible(true);
-				
+
 				}
 			});
 			mntmComprobarSectores.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -240,7 +240,7 @@ public class VisualAgencia extends JFrame {
 					v.setLocationRelativeTo(null);
 					v.setModal(true);
 					v.setVisible(true);
-				
+
 				}
 			});
 			mntmComprobarRamas.setFont(new Font("Tahoma", Font.PLAIN, 16));

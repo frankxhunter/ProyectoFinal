@@ -54,7 +54,6 @@ public class ModificarRama extends JDialog {
 	private JButton btnEliminar;
 	private JButton btModificar;
 	private JButton btnX;
-	private JScrollPane scrollPane_1;
 	private JPanel panel_4;
 	private JLabel lblCreacinDeRama;
 	private JRadioButton radioButton;
@@ -83,7 +82,6 @@ public class ModificarRama extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 714, 542);
 		getContentPane().setLayout(null);
-		getContentPane().add(getScrollPane_1());
 		getContentPane().add(getPanel_4());
 		getContentPane().add(getPanel());
 		getContentPane().add(getBtModificar());
@@ -127,7 +125,7 @@ public class ModificarRama extends JDialog {
 				@Override
 				public void focusLost(FocusEvent e) {
 					if(txNombre.getText().trim().length()==0)
-					txNombre.setBorder(new LineBorder(Color.RED, 2));
+						txNombre.setBorder(new LineBorder(Color.RED, 2));
 				}
 			});
 			txNombre.addKeyListener(new KeyAdapter() {
@@ -180,9 +178,9 @@ public class ModificarRama extends JDialog {
 					MetodosUtiles.validacionJTextCharacter(txDocumento.getText().trim().length(), e);
 					txDocumento.setBorder(null);
 				}
-				
+
 			});
-		
+
 			txDocumento.setBounds(215, 29, 206, 20);
 			txDocumento.setColumns(10);
 		}
@@ -200,6 +198,7 @@ public class ModificarRama extends JDialog {
 
 							tableModel.refresh(rama.getListaDocumentos());
 							txDocumento.setText("");
+							btnEliminar.setEnabled(false);
 						}
 						else{
 							txDocumento.setBorder(new LineBorder(Color.RED, 2));
@@ -254,14 +253,10 @@ public class ModificarRama extends JDialog {
 				public void actionPerformed(ActionEvent arg0) {
 					rama.setNombre(txNombre.getText());
 					try{
-					AgenciaEmpleadora.getInstancia().addRama(rama);
-					VisualRama x= new VisualRama();
-					dispose();
-					x.setVisible(true);
-					x.setModal(true);
-					x.setLocationRelativeTo(null);
+						AgenciaEmpleadora.getInstancia().addRama(rama);
+						cambiaPantalla();
 					}catch(YaExisteExceptions e){
-					MetodosUtiles.mostrarMensaje(e);
+						MetodosUtiles.mostrarMensaje(e);
 					}
 				}
 			});
@@ -274,11 +269,7 @@ public class ModificarRama extends JDialog {
 			btnCancelar.setBounds(617, 509, 89, 23);
 			btnCancelar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					VisualRama y= new VisualRama();
-					dispose();
-					y.setVisible(true);
-					y.setModal(true);
-					y.setLocationRelativeTo(null);
+					cambiaPantalla();
 				}
 			});
 		}
@@ -290,10 +281,15 @@ public class ModificarRama extends JDialog {
 			btnEliminar.setEnabled(false);
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					int pos=table.getSelectedRow();
-					rama.getListaDocumentos().remove(pos);
-					tableModel.refresh(rama.getListaDocumentos());
-					btnEliminar.setEnabled(false);
+					String message="¿Seguro que quiere borrar este(os) elemento(s)?";
+					if(MetodosUtiles.mensajeDeBorrar(message)){
+						int[] posiciones=table.getSelectedRows();
+						int pos=0;
+						for(int x: posiciones)
+							rama.getListaDocumentos().remove(x-pos++);
+						tableModel.refresh(rama.getListaDocumentos());
+						btnEliminar.setEnabled(false);
+					}
 				}
 			});
 			btnEliminar.setBounds(560, 28, 89, 23);
@@ -302,7 +298,6 @@ public class ModificarRama extends JDialog {
 	}
 	public void establecer(Rama rama){
 		txNombre.setText(rama.getNombre());
-		this.rama.setNombre(rama.getNombre());
 		tableModel.refresh(rama.getListaDocumentos());
 	}
 	private JButton getBtModificar() {
@@ -313,11 +308,7 @@ public class ModificarRama extends JDialog {
 			btModificar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					rama.setNombre(txNombre.getText());
-					VisualRama y= new VisualRama();
-					dispose();
-					y.setVisible(true);
-					y.setModal(true);
-					y.setLocationRelativeTo(null);
+					cambiaPantalla();
 				}
 			});
 		}
@@ -342,23 +333,12 @@ public class ModificarRama extends JDialog {
 			btnX.setBackground(Color.RED);
 			btnX.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					VisualRama y= new VisualRama();
-					dispose();
-					y.setVisible(true);
-					y.setModal(true);
-					y.setLocationRelativeTo(null);
+					cambiaPantalla();
 				}
 			});
 			btnX.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		}
 		return btnX;
-	}
-	private JScrollPane getScrollPane_1() {
-		if (scrollPane_1 == null) {
-			scrollPane_1 = new JScrollPane();
-			scrollPane_1.setBounds(22, 29, 2, 2);
-		}
-		return scrollPane_1;
 	}
 	private JPanel getPanel_4() {
 		if (panel_4 == null) {
@@ -387,5 +367,12 @@ public class ModificarRama extends JDialog {
 			radioButton.setBounds(33, 64, 152, 23);
 		}
 		return radioButton;
+	}
+	public void cambiaPantalla(){
+		VisualRama y= new VisualRama();
+		dispose();
+		y.setLocationRelativeTo(null);
+		y.setModal(true);
+		y.setVisible(true);
 	}
 }

@@ -61,6 +61,13 @@ public class MetodosUtiles {
 		}
 		return out;
 	}
+	public static boolean mensajeDeBorrar(String message){
+		boolean out=true;
+		int valor=JOptionPane.showConfirmDialog(null, message);
+		if(valor!=JOptionPane.OK_OPTION)
+			out=false;
+		return out;
+	}
 
 	@SuppressWarnings("deprecation")
 	public static void RellenoAutomatico(){

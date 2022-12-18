@@ -19,9 +19,12 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import util.EspecialidadTableModel;
+import util.MetodosUtiles;
 import clase.AgenciaEmpleadora;
 import clase.Sector;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
 
 public class VisualSector extends JDialog {
@@ -131,8 +134,8 @@ public class VisualSector extends JDialog {
 				public void actionPerformed(ActionEvent arg0) {
 				ModificarSector creacionSector=new ModificarSector(-1);
 				dispose();
-				creacionSector.setModal(true);
 				creacionSector.setLocationRelativeTo(null);
+				creacionSector.setModal(true);
 				creacionSector.setVisible(true);
 				
 				}
@@ -149,12 +152,19 @@ public class VisualSector extends JDialog {
 			btnEliminar.setEnabled(false);
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					int pos=table.getSelectedRow();
-					Sector sector=AgenciaEmpleadora.getInstancia().getlistaSector().get(pos);
-					AgenciaEmpleadora.getInstancia().getListaEspecialidades().remove(sector);
+					String message="¿Seguro que quieres borrar este(estos) elemento(s), se borrara toda la infomacion"
+							+ "\n asociada";
+					if(MetodosUtiles.mensajeDeBorrar(message)){
+					int[] posiciones=table.getSelectedRows();
+					int pos=0;
+					for(int x:posiciones){
+					Sector sector=AgenciaEmpleadora.getInstancia().getlistaSector().get(x-pos++);
+					AgenciaEmpleadora.getInstancia().eliminarSector(sector);
+					}
 					tableModel.refresh(AgenciaEmpleadora.getInstancia().getlistaSector());
 					btnEliminar.setEnabled(false);
 					btnModificar.setEnabled(false);
+					}
 				}
 			});
 			btnEliminar.setBounds(152, 408, 89, 23);
@@ -172,8 +182,8 @@ public class VisualSector extends JDialog {
 					int pos=table.getSelectedRow();
 					ModificarSector creacionSector= new ModificarSector(pos);
 					dispose();
-					creacionSector.setModal(true);
 					creacionSector.setLocationRelativeTo(null);
+					creacionSector.setModal(true);
 					creacionSector.setVisible(true);
 				}
 			});

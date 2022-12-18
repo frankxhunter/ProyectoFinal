@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -11,6 +12,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,10 +21,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import util.EspecialidadTableModel;
+import util.MetodosUtiles;
 import clase.AgenciaEmpleadora;
 import clase.Rama;
-import javax.swing.JLabel;
-import java.awt.Font;
 
 public class VisualRama extends JDialog {
 
@@ -129,12 +130,11 @@ public class VisualRama extends JDialog {
 			btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-				ModificarRama creacionRama=new ModificarRama(-1);
-				dispose();
-				creacionRama.setVisible(true);
-				creacionRama.setModal(true);
-				creacionRama.setLocationRelativeTo(null);
-			
+					ModificarRama creacionRama=new ModificarRama(-1);
+					dispose();
+					creacionRama.setLocationRelativeTo(null);
+					creacionRama.setModal(true);
+					creacionRama.setVisible(true);
 				}
 			});
 			btnNewButton.setBounds(20, 408, 89, 23);
@@ -148,12 +148,19 @@ public class VisualRama extends JDialog {
 			btnEliminar.setEnabled(false);
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					int pos=table.getSelectedRow();
-					Rama rama=AgenciaEmpleadora.getInstancia().getlistaRama().get(pos);
-					AgenciaEmpleadora.getInstancia().getListaEspecialidades().remove(rama);
-					tableModel.refresh2(AgenciaEmpleadora.getInstancia().getlistaRama());
-					btnEliminar.setEnabled(false);
-					btnModificar.setEnabled(false);
+					String message="¿Seguro que quieres borrar este(estos) elemento(s), se borrara toda la infomacion"
+							+ "\n asociada";
+					if(MetodosUtiles.mensajeDeBorrar(message)){
+						int[] posiciones=table.getSelectedRows();
+						int pos=0;
+						for(int x:posiciones){
+							Rama rama=AgenciaEmpleadora.getInstancia().getlistaRama().get(x-pos++);
+							AgenciaEmpleadora.getInstancia().eliminarRama(rama);
+						}
+						tableModel.refresh2(AgenciaEmpleadora.getInstancia().getlistaRama());
+						btnEliminar.setEnabled(false);
+						btnModificar.setEnabled(false);
+					}
 				}
 			});
 			btnEliminar.setBounds(152, 408, 89, 23);
@@ -170,9 +177,9 @@ public class VisualRama extends JDialog {
 					int pos=table.getSelectedRow();
 					ModificarRama x= new ModificarRama(pos);
 					dispose();
-					x.setVisible(true);
-					x.setModal(true);
 					x.setLocationRelativeTo(null);
+					x.setModal(true);
+					x.setVisible(true);
 				}
 			});
 			btnModificar.setBounds(284, 408, 89, 23);

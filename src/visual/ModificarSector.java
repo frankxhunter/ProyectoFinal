@@ -27,7 +27,9 @@ import clase.AgenciaEmpleadora;
 import clase.Documento;
 import clase.Sector;
 import excepcionesPropias.YaExisteExceptions;
+
 import javax.swing.JRadioButton;
+
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -133,8 +135,8 @@ public class ModificarSector extends JDialog {
 				}
 				@Override
 				public void keyTyped(KeyEvent e) {
-				MetodosUtiles.validacionJTextLetra(txNombre.getText().trim().length(),e);
-				txNombre.setBorder(null);
+					MetodosUtiles.validacionJTextLetra(txNombre.getText().trim().length(),e);
+					txNombre.setBorder(null);
 				}
 			});
 			txNombre.setBounds(189, 32, 106, 20);
@@ -190,15 +192,16 @@ public class ModificarSector extends JDialog {
 				public void actionPerformed(ActionEvent arg0) {
 					if(txDocumento.getText().trim().length()>0){
 						try{
-					sector.addDocumento(new Documento(txDocumento.getText(),rdbtnObligatorio.isSelected()));
-					tableModel.refresh(sector.getListaDocumentos());
-					txDocumento.setText("");
+							sector.addDocumento(new Documento(txDocumento.getText(),rdbtnObligatorio.isSelected()));
+							tableModel.refresh(sector.getListaDocumentos());
+							txDocumento.setText("");
+							btnEliminar.setEnabled(false);
 						}catch(YaExisteExceptions e){
 							MetodosUtiles.mostrarMensaje(e);
 						}
 					}
 					else{
-							txDocumento.setBorder(new LineBorder(Color.RED, 2));
+						txDocumento.setBorder(new LineBorder(Color.RED, 2));
 					}
 				}
 			});
@@ -246,17 +249,13 @@ public class ModificarSector extends JDialog {
 			btnAceptar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try{
-					sector.setNombre(txNombre.getText());
-					AgenciaEmpleadora.getInstancia().addSector(sector);
-					VisualSector x= new VisualSector();
-					dispose();
-					x.setModal(true);
-					x.setLocationRelativeTo(null);
-					x.setVisible(true);
+						sector.setNombre(txNombre.getText());
+						AgenciaEmpleadora.getInstancia().addSector(sector);
+						cambiaPantalla();
 					}catch(YaExisteExceptions e){
 						MetodosUtiles.mostrarMensaje(e);
 					}
-					
+
 				}
 			});
 			btnAceptar.setBounds(492, 509, 89, 23);
@@ -269,12 +268,7 @@ public class ModificarSector extends JDialog {
 			btnCancelar.setFocusable(false);
 			btnCancelar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					VisualSector x= new VisualSector();
-					dispose();
-					x.setModal(true);
-					x.setLocationRelativeTo(null);
-					x.setVisible(true);
-					
+					cambiaPantalla();
 				}
 			});
 			btnCancelar.setBounds(617, 509, 89, 23);
@@ -288,8 +282,10 @@ public class ModificarSector extends JDialog {
 			btnEliminar.setEnabled(false);
 			btnEliminar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					int pos=table.getSelectedRow();
-					sector.getListaDocumentos().remove(pos);
+					int[] posiciones=table.getSelectedRows();
+					int pos=0;
+					for(int x: posiciones)
+						sector.getListaDocumentos().remove(x-pos++);
 					tableModel.refresh(sector.getListaDocumentos());
 					btnEliminar.setEnabled(false);
 				}
@@ -300,7 +296,6 @@ public class ModificarSector extends JDialog {
 	}
 	public void establecer(Sector sector){
 		txNombre.setText(sector.getNombre());
-		this.sector.setNombre(sector.getNombre());
 		tableModel.refresh(sector.getListaDocumentos());
 	}
 	private JButton getBtModificar() {
@@ -311,11 +306,7 @@ public class ModificarSector extends JDialog {
 			btModificar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					sector.setNombre(txNombre.getText());
-					VisualSector x= new VisualSector();
-					dispose();
-					x.setModal(true);
-					x.setLocationRelativeTo(null);
-					x.setVisible(true);
+					cambiaPantalla();
 				}
 			});
 			btModificar.setBounds(507, 509, 89, 23);
@@ -357,11 +348,7 @@ public class ModificarSector extends JDialog {
 			button.setFocusable(false);
 			button.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					VisualSector y = new VisualSector();
-					dispose();
-					y.setVisible(true);
-					y.setModal(true);
-					y.setLocationRelativeTo(null);
+					cambiaPantalla();
 				}
 			});
 			button.setForeground(Color.WHITE);
@@ -379,5 +366,12 @@ public class ModificarSector extends JDialog {
 			rdbtnObligatorio.setBounds(33, 61, 152, 23);
 		}
 		return rdbtnObligatorio;
+	}
+	public void cambiaPantalla(){
+		VisualSector y= new VisualSector();
+		dispose();
+		y.setLocationRelativeTo(null);
+		y.setModal(true);
+		y.setVisible(true);
 	}
 }

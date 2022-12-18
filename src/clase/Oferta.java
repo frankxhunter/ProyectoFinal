@@ -84,8 +84,4 @@ public class Oferta {
 		else
 			throw new YaExisteExceptions("Este Candidato ya esta en esta Oferta");
 	}
-	
-	
-	
-	
 }

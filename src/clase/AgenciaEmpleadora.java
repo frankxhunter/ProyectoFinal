@@ -168,7 +168,7 @@ public class AgenciaEmpleadora {
 		if(cant>0)
 			out/=cant;
 		return out;
-			
+
 	}
 	public boolean verificarSiCandidatoTieneEntrevista(Candidato candidato, Date fecha){
 		boolean out=false;
@@ -179,7 +179,29 @@ public class AgenciaEmpleadora {
 			else
 				i++;
 		return out;
-		
+
+	}
+	public void eliminarSector(Sector sector){
+		listaEspecialidades.remove(sector);
+		int i=0;
+		while(i<listaEmpresas.size()){
+		if(listaEmpresas.get(i).getSector().equals(sector))
+			listaEmpresas.remove(i);
+		else i++;
+		}
+	}
+	public void eliminarRama(Rama rama){
+		listaEspecialidades.remove(rama);
+		int i=0;
+		while(i<listaCandidatos.size())
+			if(listaCandidatos.get(i).getRama().equals(rama))
+				eliminarCandidato(listaCandidatos.get(i));
+			else i++;
+	}
+	public void eliminarCandidato(Candidato candidato){
+		listaCandidatos.remove(candidato);
+		for(Empresa x: listaEmpresas)
+			x.eliminarCandidato(candidato);
 	}
 
 }
