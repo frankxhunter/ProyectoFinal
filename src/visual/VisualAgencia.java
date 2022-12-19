@@ -12,8 +12,12 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
+
+import clase.AgenciaEmpleadora;
 
 
 
@@ -171,13 +175,15 @@ public class VisualAgencia extends JFrame {
 			mntmCrearEmpresas = new JMenuItem("Crear Empresas");
 			mntmCrearEmpresas.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					if(AgenciaEmpleadora.getInstancia().getlistaSector().size()>0){
 					VisualEmpresa v = new VisualEmpresa(); 
 					v.setLocationRelativeTo(null);
 					v.setModal(true);
 					v.setVisible(true);
-
-
-
+					}
+					else
+						JOptionPane.showMessageDialog(null, "Error: esta pantalla no esta disponible porque no existe sectores"
+								+ "\n vaya a la pantalla Crear Sector y agrege uno nuevo sector");
 				}
 			});
 			mntmCrearEmpresas.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -189,10 +195,18 @@ public class VisualAgencia extends JFrame {
 			mntmA = new JMenuItem("A\u00F1adir Oferta");
 			mntmA.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					if(AgenciaEmpleadora.getInstancia().getListaEmpresas().size()>0){
+						if(AgenciaEmpleadora.getInstancia().getlistaRama().size()>0){
 					VisualOferta v = new VisualOferta();
 					v.setLocationRelativeTo(null);
 					v.setModal(true);
 					v.setVisible(true);
+					}else
+						JOptionPane.showMessageDialog(null, "Error: Esta opción no esta disponible ya que no existen Ramas"
+								+ "\n vaya a la pantalla Comprobar Rama y agrege una nueva");
+					}else
+						JOptionPane.showMessageDialog(null, "Error: Esta opción no esta disponible ya que no existen Empresas"
+								+ "\n vaya a la pantalla Crear Empresa y agrege una nueva");
 				}
 			});
 			mntmA.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -204,10 +218,14 @@ public class VisualAgencia extends JFrame {
 			mntmAgregarCandidatos = new JMenuItem("Agregar Candidatos");
 			mntmAgregarCandidatos.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					if(AgenciaEmpleadora.getInstancia().getlistaRama().size()>0){
 					VisualCandidato v = new VisualCandidato();
 					v.setLocationRelativeTo(null);
 					v.setModal(true);
 					v.setVisible(true);
+					}else
+						JOptionPane.showMessageDialog(null, "Error: Esta opcion no esta disponible ya que no existen Ramas"
+								+ "\n vaya a la pantalla Comprobar Rama y agrege una nueva");
 
 				}
 			});

@@ -197,11 +197,16 @@ public class AgenciaEmpleadora {
 			if(listaCandidatos.get(i).getRama().equals(rama))
 				eliminarCandidato(listaCandidatos.get(i));
 			else i++;
+		eliminarOfertaEntrevista(rama);
 	}
 	public void eliminarCandidato(Candidato candidato){
 		listaCandidatos.remove(candidato);
 		for(Empresa x: listaEmpresas)
 			x.eliminarCandidato(candidato);
+	}
+	public void eliminarOfertaEntrevista(Rama rama){
+		for(Empresa x: listaEmpresas)
+			x.eliminarOfertra(rama);
 	}
 
 }
